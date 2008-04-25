@@ -23,12 +23,12 @@ describe Moderatorship do
     forums(:other).moderators(true).should == [users(:default)]
   end
   
-  %w(user_id forum_id).each do |attr|
+  %w(user forum).each do |attr|
     it "requires #{attr}" do
-      mod = Moderatorship.new
+      mod = new_moderatorship(:default)
       mod.send("#{attr}=", nil)
       mod.should_not be_valid
-      mod.errors.on(attr).should_not be_nil
+      mod.errors.on("#{attr}_id".to_sym).should_not be_nil
     end
   end
   
