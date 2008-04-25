@@ -25,7 +25,7 @@ describe Moderatorship do
   
   %w(user_id forum_id).each do |attr|
     it "requires #{attr}" do
-      mod = new_moderatorship(:default)
+      mod = Moderatorship.new
       mod.send("#{attr}=", nil)
       mod.should_not be_valid
       mod.errors.on(attr).should_not be_nil

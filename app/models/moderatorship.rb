@@ -13,7 +13,7 @@ protected
   end
   
   def user_and_forum_in_same_site
-    unless user.site_id == forum.site_id
+    if user && forum && user.site_id != forum.site_id
       errors.add_to_base("User and Forum must be in the same Site.")
     end
   end
