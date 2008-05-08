@@ -1,7 +1,7 @@
 class User
   acts_as_state_machine :initial => :pending
   state :passive
-  state :pending, :enter => :make_activation_code
+  state :pending, :enter => :do_activation
   state :active,  :enter => :do_activate
   state :suspended
   state :deleted, :enter => :do_delete
@@ -34,9 +34,11 @@ class User
     u && u.authenticated?(password) ? u : nil
   end
 
-  def make_activation_code
+  def do_activation
     self.deleted_at = nil
     self.activation_code = Digest::SHA1.hexdigest( Time.now.to_s.split(//).sort_by {rand}.join )
+    
+    UserMailer.deliver_signup_notification(self)
   end
 
 protected
@@ -47,6 +49,8 @@ protected
   def do_activate
     self.activated_at = Time.now.utc
     self.deleted_at = self.activation_code = nil
+    
+    UserMailer.deliver_activation(self)
   end
   
   def remove_moderatorships
