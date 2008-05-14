@@ -37,6 +37,6 @@ protected
   end
   
   def topic_is_not_locked
-    errors.add_to_base("Topic is locked") if topic && topic.locked?
+    errors.add_to_base("Topic is locked") if topic && topic.locked? && topic.posts_count > 0
   end
 end

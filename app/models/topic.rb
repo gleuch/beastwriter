@@ -69,7 +69,7 @@ class Topic < ActiveRecord::Base
 
 protected
   def create_initial_post
-    user.reply self, @body unless locked?
+    user.reply self, @body #unless locked?
     @body = nil
   end
   
