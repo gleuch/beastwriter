@@ -91,7 +91,8 @@ Event.addBehavior({
 	
 	'tr.post': function() {
 		var postId = this.id.match(/^post_(\d+)-/)[1]
-		PostForm.edit.attach(this.down('.edit a'), postId);
+                var anchor = this.down(".edit a")
+                if(anchor) { PostForm.edit.attach(anchor, postId) };
 	},
 	
 	'#reply-link': function() {
