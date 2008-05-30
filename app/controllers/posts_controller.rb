@@ -11,6 +11,7 @@ class PostsController < ApplicationController
     @users = @user ? {@user.id => @user} : User.index_from(@posts)
     respond_to do |format|
       format.html # index.html.erb
+      format.atom # index.atom.builder
       format.xml  { render :xml  => @posts }
     end
   end

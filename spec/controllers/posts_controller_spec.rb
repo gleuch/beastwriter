@@ -35,6 +35,14 @@ describe PostsController, "GET #index" do
     it_assigns :posts, :forum, :topic, :parent => lambda { @topic }
     it_renders :xml, :posts
   end
+  describe PostsController, "(atom)" do
+    define_models :stubbed
+
+    act! { get :index, :forum_id => 1, :topic_id => 1, :user => nil, :q => 'foo', :page => 5, :format => 'atom' }
+
+    it_assigns :posts, :forum, :topic, :parent => lambda { @topic }
+    it_renders :template, :index, :format => :atom
+  end
 end
 
 describe PostsController, "GET #index (for forums)" do
@@ -53,6 +61,15 @@ describe PostsController, "GET #index (for forums)" do
 
   it_assigns :posts, :forum, :topic => nil, :user => nil, :parent => lambda { @forum }
   it_renders :template, :index
+
+  describe PostsController, "(atom)" do
+    define_models :stubbed
+
+    act! { get :index, :forum_id => 1, :page => 5, :q => 'foo', :format => 'atom' }
+    
+    it_assigns :posts, :forum, :topic => nil, :user => nil, :parent => lambda { @forum }
+    it_renders :template, :index, :format => "atom"
+  end
 
   describe PostsController, "(xml)" do
     define_models :stubbed
@@ -112,6 +129,15 @@ describe PostsController, "GET #index (globally)" do
 
     it_assigns :posts, :user => nil, :forum => nil, :topic => nil, :parent => nil
     it_renders :xml, :posts
+  end
+
+  describe PostsController, "(atom)" do
+    define_models :stubbed
+    
+    act! { get :index, :page => 5, :q => 'foo', :format => 'atom' }
+
+    it_assigns :posts, :user => nil, :forum => nil, :topic => nil, :parent => nil
+    it_renders :template, :index, :format => 'atom'
   end
 end
 
