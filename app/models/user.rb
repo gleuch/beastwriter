@@ -38,6 +38,8 @@ class User < ActiveRecord::Base
     n = read_attribute(:display_name)
     n.blank? ? login : n
   end
+
+  alias_method :to_s, :display_name
   
   # this is used to keep track of the last time a user has been seen (reading a topic)
   # it is used to know when topics are new or old and which should have the green

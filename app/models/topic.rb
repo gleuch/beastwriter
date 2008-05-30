@@ -37,6 +37,10 @@ class Topic < ActiveRecord::Base
   
   has_permalink :title
 
+  def to_s
+    title
+  end
+
   def sticky?
     sticky == 1
   end

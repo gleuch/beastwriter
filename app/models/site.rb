@@ -38,4 +38,8 @@ class Site < ActiveRecord::Base
   def default?
     host.blank?
   end
+
+  def to_s
+    name
+  end
 end
