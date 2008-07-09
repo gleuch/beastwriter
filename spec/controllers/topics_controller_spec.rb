@@ -5,7 +5,7 @@ describe TopicsController, "GET #index" do
 
   act! { get :index, :forum_id => 1 }
   
-  it_assigns :topics => :nil, :forum => :nil
+  it_assigns :topics => nil, :forum => @forum
   it_redirects_to { forum_path(@forum) }
 
   describe TopicsController, "(xml)" do
@@ -66,8 +66,9 @@ describe TopicsController, "GET #show" do
     act! { get :show, :forum_id => 1, :id => 1, :page => 5 }
   
     before do
-      controller.stub!(:current_user).and_return(users(:default))
-      controller.current_user.stub!(:seen!)
+      @current_user = users(:default)
+      @current_user.stub!(:seen!)
+      controller.stub!(:current_user).and_return(@current_user)
     end
 
     it_assigns :topic, :forum, :session => {:topics => :not_nil}
@@ -84,7 +85,7 @@ describe TopicsController, "GET #show" do
     end
     
     it "marks User#last_seen_at" do
-      controller.current_user.should_receive(:seen!)
+      @current_user.should_receive(:seen!)
       act!
     end
   end
