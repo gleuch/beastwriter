@@ -4,7 +4,10 @@ class UsersController < ApplicationController
   before_filter :login_required, :only => [:settings, :update]
   
   def index
-    @users = current_site.users.paginate :all, :page => current_page
+    chain = current_site.users
+    chain = chain.named_like(params[:q]) unless params[:q].blank?
+
+    @users = chain.paginate(:page => current_page)
   end
 
   # render new.rhtml
