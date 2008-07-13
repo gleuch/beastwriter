@@ -140,6 +140,16 @@ describe UsersController, "PUT #update" do
     
     it_assigns :user, :flash => { :notice => :not_nil }
     it_redirects_to { settings_path }
+
+    describe "updating from edit form" do
+      define_models :stubbed
+      %w(display_name openid_url website bio).each do |field|
+      it "should update #{field}" do
+        put :update, :id => 1, :user => { field, "test" }
+        assigns(:user).attributes[field].should == "test"
+      end
+      end
+    end
   end
   
   describe UsersController, "(successful save, xml)" do
