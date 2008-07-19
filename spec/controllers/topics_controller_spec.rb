@@ -67,7 +67,7 @@ describe TopicsController, "GET #show" do
   
     before do
       controller.stub!(:current_user).and_return(users(:default))
-      controller.current_user.stub!(:seen!)
+      controller.send(:current_user).stub!(:seen!)
     end
 
     it_assigns :topic, :forum, :session => {:topics => :not_nil}
@@ -84,7 +84,7 @@ describe TopicsController, "GET #show" do
     end
     
     it "marks User#last_seen_at" do
-      controller.current_user.should_receive(:seen!)
+      controller.send(:current_user).should_receive(:seen!)
       act!
     end
   end
