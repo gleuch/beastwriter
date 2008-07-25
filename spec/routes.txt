@@ -1,0 +1,5 @@
+GET /forums
+POST /forums
+GET /forums/1
+PUT /forums/1
+DELETE /forums/1
