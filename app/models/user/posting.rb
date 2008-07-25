@@ -23,8 +23,10 @@ class User
   end
   
   def revise(record, attributes)
+    is_moderator = moderator_of?(record.forum)
+    return unless record.editable_by?(self, is_moderator)
     case record
-      when Topic then revise_topic(record, attributes)
+      when Topic then revise_topic(record, attributes, is_moderator)
       when Post  then post.save
       else raise "Invalid record to revise: #{record.class.name.inspect}"
     end
@@ -32,8 +34,9 @@ class User
   end
 
 protected
-  def revise_topic(topic, attributes)
-    topic.sticky, topic.locked = attributes[:sticky], attributes[:locked] if moderator_of?(topic.forum)
+  def revise_topic(topic, attributes, is_moderator)
+    topic.title = attributes[:title]
+    topic.sticky, topic.locked = attributes[:sticky], attributes[:locked] if is_moderator
     topic.save
   end
 end
