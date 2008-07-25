@@ -9,7 +9,7 @@ class User
     Topic.new(attributes) do |topic|
       topic.forum = forum
       topic.user  = self
-      revise_topic topic, attributes
+      revise_topic topic, attributes, moderator_of?(forum)
     end
   end
 
@@ -35,7 +35,7 @@ class User
 
 protected
   def revise_topic(topic, attributes, is_moderator)
-    topic.title = attributes[:title]
+    topic.title = attributes[:title] if attributes.key?(:title)
     topic.sticky, topic.locked = attributes[:sticky], attributes[:locked] if is_moderator
     topic.save
   end

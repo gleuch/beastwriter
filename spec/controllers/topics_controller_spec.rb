@@ -1,46 +1,35 @@
 require File.dirname(__FILE__) + '/../spec_helper'
 
 describe TopicsController, "GET #index" do
-  define_models :stubbed
+  define_models
 
-  act! { get :index, :forum_id => 1 }
-  
-  it_assigns :topics => :nil, :forum => :nil
+  act! { get :index, :forum_id => @forum.to_param }
+
+  before do
+    @forum  = forums(:default)
+  end
+
+  it_assigns :forum, :topics => nil
   it_redirects_to { forum_path(@forum) }
 
   describe TopicsController, "(xml)" do
-    define_models :stubbed
+    define_models
     
-    act! { get :index, :forum_id => 1, :page => 5, :format => 'xml' }
-
-    before do
-      @forum  = forums(:default)
-      Forum.stub!(:find_by_permalink).with('1').and_return(@forum)
-      @topics = []
-      @forum.stub!(:topics).and_return([])
-      @forum.topics.stub!(:paginate).with(:page => 5).and_return(@topics)
-    end
+    act! { get :index, :forum_id => @forum.to_param, :page => 5, :format => 'xml' }
 
     it_assigns :topics, :forum
-    it_renders :xml, :topics
+    it_renders :xml
   end
 end
 
 describe TopicsController, "GET #show" do
-  define_models :stubbed
+  define_models
 
-  act! { get :show, :forum_id => 1, :id => 1, :page => 5 }
+  act! { get :show, :forum_id => @forum.to_param, :id => @topic.to_param, :page => 5 }
 
   before do
     @forum  = forums(:default)
-    Forum.stub!(:find_by_permalink).with('1').and_return(@forum)
-    @posts = []
     @topic  = topics(:default)
-    @topic.stub!(:hit!)
-    @forum.stub!(:topics).and_return([])
-    @topic.stub!(:posts).and_return([])
-    @topic.posts.stub!(:paginate).with(:page => 5).and_return(@posts)
-    @forum.topics.stub!(:find_by_permalink).with('1').and_return(@topic)
   end
   
   it_assigns :topic, :forum, :posts, :session => {:topics => nil}
@@ -51,6 +40,7 @@ describe TopicsController, "GET #show" do
   end
   
   it "increments topic hit count" do
+    stub_topic!
     @topic.should_receive(:hit!)
     act!
   end
@@ -61,55 +51,62 @@ describe TopicsController, "GET #show" do
   end
   
   describe TopicsController, "(logged in)" do
-    define_models :stubbed
+    define_models
 
-    act! { get :show, :forum_id => 1, :id => 1, :page => 5 }
+    act! { get :show, :forum_id => @forum.to_param, :id => @topic.to_param, :page => 5 }
   
     before do
-      controller.stub!(:current_user).and_return(users(:default))
-      controller.current_user.stub!(:seen!)
+      login_as :default
     end
 
     it_assigns :topic, :forum, :session => {:topics => :not_nil}
   
     it "increments topic hit count" do
+      stub_topic!
       @topic.user_id = 5
       @topic.should_receive(:hit!)
       act!
     end
   
     it "doesn't increment topic hit count for same user" do
+      stub_topic!
       @topic.stub!(:hit!).and_return { raise "Noooooo" }
       act!
     end
     
     it "marks User#last_seen_at" do
-      controller.current_user.should_receive(:seen!)
+      @user.should_receive(:seen!)
       act!
     end
   end
   
   describe TopicsController, "(xml)" do
-    define_models :stubbed
+    define_models
     
-    act! { get :show, :forum_id => 1, :id => 1, :format => 'xml' }
+    act! { get :show, :forum_id => @forum.to_param, :id => @topic.to_param, :format => 'xml' }
 
     it_assigns :topic, :post => nil, :posts => nil
 
     it_renders :xml, :topic
   end
+
+protected
+  def stub_topic!
+    Forum.stub!(:find_by_permalink).with(@forum.to_param).and_return(@forum)
+    @forum.stub!(:topics).and_return([])
+    @forum.topics.should_receive(:find_by_permalink).with(@topic.to_param).and_return(@topic)
+  end
 end
 
 describe TopicsController, "GET #new" do
-  define_models :stubbed
-  act! { get :new, :forum_id => 1 }
+  define_models
+  act! { get :new, :forum_id => @forum.to_param }
   before do
+    login_as :default
     @forum  = forums(:default)
-    Forum.stub!(:find_by_permalink).with('1').and_return(@forum)
-    @topic  = Topic.new
   end
 
-  it_assigns :forum
+  it_assigns :forum, :topic
 
   it "assigns @topic" do
     act!
@@ -119,23 +116,23 @@ describe TopicsController, "GET #new" do
   it_renders :template, :new
   
   describe TopicsController, "(xml)" do
-    define_models :stubbed
-    act! { get :new, :forum_id => 1, :format => 'xml' }
+    define_models
+    act! { get :new, :forum_id => @forum.to_param, :format => 'xml' }
 
-    it_renders :xml, :topic
+    it_assigns :forum, :topic
+
+    it_renders :xml
   end
 end
 
 describe TopicsController, "GET #edit" do
-  define_models :stubbed
-  act! { get :edit, :forum_id => 1, :id => 1 }
+  define_models
+  act! { get :edit, :forum_id => @forum.to_param, :id => @topic.to_param }
   
   before do
+    login_as :default
     @forum  = forums(:default)
-    Forum.stub!(:find_by_permalink).with('1').and_return(@forum)
-    @forum.stub!(:topics).and_return([])
     @topic  = topics(:default)
-    @forum.topics.stub!(:find_by_permalink).with('1').and_return(@topic)
   end
 
   it_assigns :topic, :forum
@@ -146,144 +143,113 @@ describe TopicsController, "POST #create" do
   before do
     login_as :default
     @forum  = forums(:default)
-    Forum.stub!(:find_by_permalink).with('1').and_return(@forum)
-    @attributes = {}
-    @topic = mock_model Topic, :new_record? => false, :errors => []
-    @user.stub!(:post).with(@forum, @attributes).and_return(@topic)
   end
   
   describe TopicsController, "(successful creation)" do
-    define_models :stubbed
-    act! { post :create, :forum_id => 1, :topic => @attributes }
-
-    before do
-      @topic.stub!(:new_record?).and_return(false)
-    end
+    define_models
+    act! { post :create, :forum_id => @forum.to_param, :topic => {:title => 'foo', :body => 'bar'} }
     
-    it_assigns :topic, :flash => { :notice => :not_nil }
-    it_redirects_to { forum_topic_path(@forum, @topic) }
+    it_assigns :forum, :topic, :flash => { :notice => :not_nil }
+    it_redirects_to { forum_topic_path(@forum, assigns(:topic)) }
   end
 
   describe TopicsController, "(unsuccessful creation)" do
-    define_models :stubbed
-    act! { post :create, :forum_id => 1, :topic => @attributes }
+    define_models
+    act! { post :create, :forum_id => @forum.to_param, :topic => @attributes }
 
     before do
-      @topic.stub!(:new_record?).and_return(true)
+      @attributes = {:title => ''}
     end
-    
-    it_assigns :topic
+
+    it_assigns :forum, :topic
     it_renders :template, :new
   end
   
   describe TopicsController, "(successful creation, xml)" do
-    define_models :stubbed
-    act! { post :create, :forum_id => 1, :topic => @attributes, :format => 'xml' }
-
-    before do
-      @topic.stub!(:new_record?).and_return(false)
-      @topic.stub!(:to_xml).and_return("mocked content")
-    end
+    define_models
+    act! { post :create, :forum_id => @forum.to_param, :topic => {:title => 'foo', :body => 'bar'}, :format => 'xml' }
     
-    it_assigns :topic, :headers => { :Location => lambda { forum_topic_url(@forum, @topic) } }
-    it_renders :xml, :topic, :status => :created
+    it_assigns :forum, :topic, :headers => { :Location => lambda { forum_topic_url(@forum, assigns(:topic)) } }
+    it_renders :xml, :status => :created
   end
   
   describe TopicsController, "(unsuccessful creation, xml)" do
-    define_models :stubbed
-    act! { post :create, :forum_id => 1, :topic => @attributes, :format => 'xml' }
+    define_models
+    act! { post :create, :forum_id => @forum.to_param, :topic => {}, :format => 'xml' }
 
-    before do
-      @topic.stub!(:new_record?).and_return(true)
-    end
-    
-    it_assigns :topic
-    it_renders :xml, "topic.errors", :status => :unprocessable_entity
+    it_assigns :forum, :topic
+    it_renders :xml, :status => :unprocessable_entity
   end
 end
 
 describe TopicsController, "PUT #update" do
   before do
     login_as :default
-    @forum  = forums(:default)
-    Forum.stub!(:find_by_permalink).with('1').and_return(@forum)
-    @attributes = {}
+    @forum = forums(:default)
     @topic = topics(:default)
-    @forum.stub!(:topics).and_return([])
-    @forum.topics.stub!(:find_by_permalink).with('1').and_return(@topic)
-    @user.stub!(:revise).with(@topic, @attributes)
   end
   
   describe TopicsController, "(successful save)" do
-    define_models :stubbed
-    act! { put :update, :forum_id => 1, :id => 1, :topic => @attributes }
-
-    before do
-      @topic.stub!(:errors).and_return([])
-    end
+    define_models
+    act! { put :update, :forum_id => @forum.to_param, :id => @topic.to_param, :topic => {} }
     
-    it_assigns :topic, :flash => { :notice => :not_nil }
+    it_assigns :forum, :topic, :flash => { :notice => :not_nil }
     it_redirects_to { forum_topic_path(@forum, @topic) }
   end
 
   describe TopicsController, "(unsuccessful save)" do
-    define_models :stubbed
-    act! { put :update, :forum_id => 1, :id => 1, :topic => @attributes }
+    define_models
+    act! { put :update, :forum_id => @forum.to_param, :id => @topic.to_param, :topic => @attributes }
 
     before do
-      @topic.stub!(:errors).and_return([1])
+      @attributes = {:title => ''}
+      @topic.update_attributes @attributes
     end
     
-    it_assigns :topic
+    it_assigns :topic, :forum
     it_renders :template, :edit
   end
   
   describe TopicsController, "(successful save, xml)" do
-    define_models :stubbed
-    act! { put :update, :forum_id => 1, :id => 1, :topic => @attributes, :format => 'xml' }
-
-    before do
-      @topic.stub!(:errors).and_return([])
-    end
+    define_models
+    act! { put :update, :forum_id => @forum.to_param, :id => @topic.to_param, :topic => {}, :format => 'xml' }
     
-    it_assigns :topic
+    it_assigns :topic, :forum
     it_renders :blank
   end
   
   describe TopicsController, "(unsuccessful save, xml)" do
-    define_models :stubbed
-    act! { put :update, :forum_id => 1, :id => 1, :topic => @attributes, :format => 'xml' }
+    define_models
+    act! { put :update, :forum_id => @forum.to_param, :id => @topic.to_param, :topic => @attributes, :format => 'xml' }
 
     before do
-      @topic.stub!(:errors).and_return([@topic])
+      @attributes = {:title => ''}
+      @topic.update_attributes @attributes
     end
     
-    it_assigns :topic
+    it_assigns :topic, :forum
     it_renders :xml, "topic.errors", :status => :unprocessable_entity
   end
 end
 
 describe TopicsController, "DELETE #destroy" do
-  define_models :stubbed
-  act! { delete :destroy, :forum_id => 1, :id => 1 }
+  define_models
+  act! { delete :destroy, :forum_id => @forum.to_param, :id => @topic.to_param }
   
   before do
-    @forum  = forums(:default)
-    Forum.stub!(:find_by_permalink).with('1').and_return(@forum)
-    @forum.stub!(:topics).and_return([])
+    login_as :default
+    @forum = forums(:default)
     @topic = topics(:default)
-    @topic.stub!(:destroy)
-    @forum.topics.stub!(:find_by_permalink).with('1').and_return(@topic)
   end
 
-  it_assigns :topic
+  it_assigns :topic, :forum
   it_redirects_to { forum_path(@forum) }
   
   describe TopicsController, "(xml)" do
-    define_models :stubbed
-    act! { delete :destroy, :forum_id => 1, :id => 1, :format => 'xml' }
+    define_models
+    act! { delete :destroy, :forum_id => @forum.to_param, :id => @topic.to_param, :format => 'xml' }
 
-    it_assigns :topic
+    it_assigns :topic, :forum
     it_renders :blank
   end
 end
