@@ -1,12 +1,5 @@
 require File.dirname(__FILE__) + '/../spec_helper'
 
-ModelStubbing.define_models :monitorships do
-  model Monitorship do
-    stub :user => all_stubs(:user), :topic => all_stubs(:topic), :active => true
-    stub :inactive, :user => all_stubs(:user), :topic => all_stubs(:other_topic), :active => false
-  end
-end
-
 describe User, "(monitorships)" do
   define_models :monitorships
   

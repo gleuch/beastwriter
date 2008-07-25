@@ -1,11 +1,5 @@
 require File.dirname(__FILE__) + '/../spec_helper'
 
-ModelStubbing.define_models :sites_controller do
-  model Site do
-    stub :other, :name => 'other', :host => 'other.test.host'
-  end
-end
-
 describe SitesController, "GET #index" do
   define_models :sites_controller
 
