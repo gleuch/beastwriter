@@ -170,6 +170,7 @@ describe Topic, "#editable_by?" do
 
   it "allows user" do
     @topic.user_id = @user.id
+    @user.should_receive(:moderator_of?).and_return(false)
     @topic.should be_editable_by(@user)
   end
   

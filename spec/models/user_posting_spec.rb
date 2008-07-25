@@ -6,7 +6,7 @@ module TopicCreatePostHelper
     
     base.before do
       @user  = users(:default)
-      @attributes = {:body => 'booya'}
+      @attributes = {:body => 'booya', :title => 'foo'}
       @creating_topic = lambda { post! }
     end
   
@@ -52,7 +52,7 @@ module TopicCreatePostHelper
   end
 
   def post!
-    @user.post forums(:default), new_topic(:default, @attributes).attributes
+    @user.post forums(:default), new_topic(:default, @attributes).attributes.merge(:body => @attributes[:body])
   end
 end
 
