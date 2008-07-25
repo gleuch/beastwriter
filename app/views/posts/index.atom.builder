@@ -2,7 +2,7 @@ xml.instruct! :xml, :version => "1.0"
 xml.feed(:xmlns => "http://www.w3.org/2005/Atom") do |feed|
   feed.title "Posts for #{[@forum, @topic].compact * ' > '}"
   feed.link :href => request.url
-  feed.updated @posts.first.created_at.to_s(:rfc3339)
+  feed.updated((@posts.first || @topic || current_site).created_at.to_s(:rfc3339))
   feed.id  request.url
   for post in @posts do
     feed.entry do |entry|

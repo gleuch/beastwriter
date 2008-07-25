@@ -2,7 +2,7 @@ ModelStubbing.define_models do
   time 2007, 6, 15
 
   model Site do
-    stub :name => 'default', :host => ''
+    stub :name => 'default', :host => '', :created_at => current_time - 5.years
   end
 
   model User do
@@ -19,7 +19,7 @@ ModelStubbing.define_models do
   
   model Topic do
     stub :forum => all_stubs(:forum), :user => all_stubs(:user), :title => "initial", :hits => 0, :sticky => 0, :posts_count => 1,
-      :last_post_id => 1000, :last_updated_at => current_time - 5.days, :site => all_stubs(:site), :permalink => 'initial'
+      :last_post_id => 1000, :last_updated_at => current_time - 5.days, :site => all_stubs(:site), :permalink => 'initial', :created_at => current_time - 3.years
     stub :other, :title => "Other", :last_updated_at => current_time - 4.days, :permalink => 'other'
     stub :other_forum, :forum => all_stubs(:other_forum)
   end
