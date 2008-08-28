@@ -54,18 +54,6 @@ describe Moderatorship do
   end
 end
 
-ModelStubbing.define_models :moderators do
-  model User do
-    stub :other, :login => 'other-user', :email => '@example.com'
-  end
-
-  model Moderatorship do
-    stub :user => all_stubs(:user), :forum => all_stubs(:forum)
-    stub :default_other, :user => all_stubs(:user), :forum => all_stubs(:other_forum)
-    stub :other_default, :user => all_stubs(:other_user)
-  end
-end
-
 describe Forum, "#moderators" do
   define_models :moderators
 

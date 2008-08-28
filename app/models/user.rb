@@ -14,7 +14,7 @@ class User < ActiveRecord::Base
   has_many :monitorships, :dependent => :delete_all
   has_many :monitored_topics, :through => :monitorships, :source => :topic, :conditions => {"#{Monitorship.table_name}.active" => true}
   
-  has_permalink :login
+  has_permalink :login, :scope => :site_id
   
   attr_readonly :posts_count, :last_seen_at
 
@@ -31,7 +31,7 @@ class User < ActiveRecord::Base
   end
 
   def moderator_of?(forum)
-    admin? || Moderatorship.exists?(:user_id => id, :forum_id => forum.id)
+    !!(admin? || Moderatorship.exists?(:user_id => id, :forum_id => forum.id))
   end
 
   def display_name

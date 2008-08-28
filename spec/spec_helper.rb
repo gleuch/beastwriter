@@ -16,7 +16,7 @@ Spec::Runner.configure do |config|
   config.fixture_path = RAILS_ROOT + '/spec/fixtures/'
 
   def current_site(site)
-    @site = sites(site)
+    @controller.stub!(:current_site).and_return(@site = site ? sites(site) : nil)
   end
 
   # Sets the current user in the session from the user fixtures.

@@ -88,6 +88,6 @@ protected
   end
   
   def authorized?
-    admin? || params[:id].blank? || @user == current_user
+    admin? || params[:id].blank? || params[:id] == current_user.permalink
   end
 end

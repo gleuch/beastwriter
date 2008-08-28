@@ -408,17 +408,19 @@ module RspecOnRailsOnCrack
         options = record
         record  = nil
       end
+
       it "renders #{format}" do
         if record
           pieces = record.to_s.split(".")
           record = instance_variable_get("@#{pieces.shift}")
           record = record.send(pieces.shift) until pieces.empty?
+          block ||= lambda { record.send("to_#{format}") }
         end
-        block ||= lambda { record.send("to_#{format}") }
+
         acting do |response|
           asserts_status options[:status]
           asserts_content_type options[:format] || format
-          response.should have_text(block.call)
+          response.should have_text(instance_eval(&block)) if block
         end
       end
     end

@@ -86,6 +86,7 @@ describe Post, "#editable_by?" do
 
   it "allows user" do
     @post.user_id = @user.id
+    @user.should_receive(:moderator_of?).and_return(false)
     @post.should be_editable_by(@user)
   end
   

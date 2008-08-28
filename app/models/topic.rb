@@ -2,6 +2,8 @@ class Topic < ActiveRecord::Base
   include User::Editable
 
   before_validation_on_create :set_default_attributes
+  validates_presence_of :title
+
   after_create   :create_initial_post
   before_update  :check_for_moved_forum
   after_update   :set_post_forum_id
@@ -35,7 +37,7 @@ class Topic < ActiveRecord::Base
 
   attr_readonly :posts_count, :hits
   
-  has_permalink :title
+  has_permalink :title, :scope => :forum_id
 
   def to_s
     title
