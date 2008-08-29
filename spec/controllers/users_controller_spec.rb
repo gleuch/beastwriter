@@ -103,7 +103,7 @@ describe UsersController, "PUT #update" do
       define_models :stubbed
       %w(display_name openid_url website bio).each do |field|
       it "should update #{field}" do
-        put :update, :id => 1, :user => { field, "test" }
+        put :update, :id => @user.to_param, :user => { field, "test" }
         assigns(:user).attributes[field].should == "test"
       end
       end
