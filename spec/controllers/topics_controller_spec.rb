@@ -74,10 +74,9 @@ describe TopicsController, "GET #show" do
       act!
     end
     
-    # TODO: Not exactly sure what's going on with this one.
     it "marks User#last_seen_at" do
-      #users(:default).should_receive(:seen!)
-     # act!
+      act!
+      assigns(:current_user).last_seen_at.should_not be_nil
     end
   end
   
