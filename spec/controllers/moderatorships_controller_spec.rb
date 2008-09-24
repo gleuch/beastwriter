@@ -22,7 +22,7 @@ describe ModeratorshipsController, "POST #create" do
     it_redirects_to { user_path(users(:default)) }
   end
 
-# Seriously, I could give a crap about XML.
+# TODO: Fix!!! Seriously though, I could give a crap about XML.
 =begin
   describe ModeratorshipsController, "(successful creation, xml)" do
     define_models
