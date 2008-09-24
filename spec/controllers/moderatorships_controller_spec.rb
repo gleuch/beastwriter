@@ -22,16 +22,13 @@ describe ModeratorshipsController, "POST #create" do
     it_redirects_to { user_path(users(:default)) }
   end
 
-# TODO: Fix!!! Seriously though, I could give a crap about XML.
-=begin
+  # These should definitely check the content of XML rendered at some point.
   describe ModeratorshipsController, "(successful creation, xml)" do
     define_models
     act! { post :create, :moderatorship => @attributes, :format => 'xml' }
     
     it_assigns :moderatorship, :headers => { :Location => lambda { moderatorship_url(assigns(:moderatorship)) } }
-    it_renders :xml, :status => :created do
-      assigns(:moderatorship).to_xml
-    end
+    it_renders :xml, :status => :created 
   end
   
   describe ModeratorshipsController, "(unsuccessful creation, xml)" do
@@ -39,11 +36,8 @@ describe ModeratorshipsController, "POST #create" do
     act! { post :create, :moderatorship => @attributes.merge('forum_id' => ''), :format => 'xml' }
     
     it_assigns :moderatorship
-    it_renders :xml, :status => :unprocessable_entity do
-      assigns(:moderatorship).errors.to_xml
-    end
+    it_renders :xml, :status => :unprocessable_entity
   end
-=end
 end
 
 describe ModeratorshipsController, "DELETE #destroy" do
