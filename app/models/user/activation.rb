@@ -1,9 +1,36 @@
 class User
+  include Authentication
+  include Authentication::ByPassword
+  include Authentication::ByCookieToken
+
   after_create :set_first_user_as_activated
   def set_first_user_as_activated
     activate! if site.nil? or site.users.size <= 1
   end
+
+  # Activates the user in the database.
+  def activate!
+    @activated = true
+    self.activated_at = Time.now.utc
+    self.activation_code = nil
+    save(false)
+  end
+
+  # Returns true if the user has just been activated.
+  def recently_activated?
+    @activated
+  end
+
+  def active?
+    # the existence of an activation code means they have not activated yet
+    activation_code.nil?
+  end
+
   
+  
+  
+  
+=begin
   def remember_token?
     active? && remember_token_expires_at && Time.now.utc < remember_token_expires_at 
   end
@@ -28,7 +55,6 @@ class User
     self.remember_token            = nil
     save(false)
   end
-  
   # Activates the user in the database.
   def activate!
     @activated = true
@@ -46,4 +72,6 @@ class User
     # the existence of an activation code means they have not activated yet
     activation_code.nil?
   end
+
+=end
 end
