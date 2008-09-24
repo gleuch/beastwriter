@@ -92,7 +92,7 @@ describe PostsController, "GET #index (globally)" do
 
   it_assigns :posts, :user => nil, :forum => nil, :topic => nil, :parent => nil
   it_renders :template, :index
-
+  
   describe PostsController, "(xml)" do
     define_models
     
