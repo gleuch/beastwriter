@@ -120,15 +120,12 @@ describe UsersController, "PUT #update" do
     it_renders :template, :edit
   end
   
-=begin TODO: Fix XML
+  # Not checking XML content either here.
   describe UsersController, "(unsuccessful save, xml)" do
     define_models
     act! { put :update, :id => users(:default)  .to_param, :user => {:email => ''}, :format => 'xml' }
     
     it_assigns :user
-    it_renders :xml, :status => :unprocessable_entity do
-      assigns(:user).errors.to_xml
-    end
+    it_renders :xml, :status => :unprocessable_entity
   end
-=end
 end
