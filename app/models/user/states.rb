@@ -49,7 +49,8 @@ protected
   def do_activate
     @activated = true
     self.activated_at = Time.now.utc
-    self.deleted_at = self.activation_code = nil
+    self.deleted_at = nil
+    self.activation_code = ""
     
     UserMailer.deliver_activation(self)
   end

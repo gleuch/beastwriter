@@ -15,7 +15,7 @@ class User
 
   def active?
     # the existence of an activation code means they have not activated yet
-    activation_code.nil?
+    activation_code.nil? || activation_code.blank?
   end
 
 end
