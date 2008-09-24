@@ -9,17 +9,17 @@ The popular rails-based Beast forum...
 * spam protection from akismet/viking
 * forum authorization rules (public/private/invitation)
 * email and atom feed support
-* xml/json API
+* xml/json API (not 100% tested yet with 2.1, fixing soon)
 * highline based easy console installer
 
 Help desired via git:
 
-    git clone git://git.caboo.se/altered_beast.git
+    git clone git://github.com/qrush/altered_beast.git
 
 === INSTALLATION
 
     # download altered_beast
-    # install rails 2.0.x
+    # install rails 2.1.1
     $ mkdir log
     $ rake tmp:create
     $ rake db:schema:load
