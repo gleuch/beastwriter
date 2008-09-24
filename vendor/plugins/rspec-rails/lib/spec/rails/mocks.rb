@@ -9,15 +9,21 @@ module Spec
       # methods stubbed out. Additional methods may be easily stubbed (via
       # add_stubs) if +stubs+ is passed.
       def mock_model(model_class, options_and_stubs = {})
-        id = next_id
-        options_and_stubs.reverse_merge!({
+        id = options_and_stubs[:id] || next_id
+        options_and_stubs = options_and_stubs.reverse_merge({
           :id => id,
           :to_param => id.to_s,
           :new_record? => false,
           :errors => stub("errors", :count => 0)
         })
-        m = mock("#{model_class.name}_#{options_and_stubs[:id]}", options_and_stubs)
+        m = mock("#{model_class.name}_#{id}", options_and_stubs)
         m.send(:__mock_proxy).instance_eval <<-CODE
+          def @target.as_new_record
+            self.stub!(:id).and_return nil
+            self.stub!(:to_param).and_return nil
+            self.stub!(:new_record?).and_return true
+            self
+          end
           def @target.is_a?(other)
             #{model_class}.ancestors.include?(other)
           end

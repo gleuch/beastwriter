@@ -1,1 +1,1 @@
-./script/generate authenticated USERMODEL CONTROLLERNAME [--include-activation] [--stateful] [--rspec]
+./script/generate authenticated USERMODEL CONTROLLERNAME

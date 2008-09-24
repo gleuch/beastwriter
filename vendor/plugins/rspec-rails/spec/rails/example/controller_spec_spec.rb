@@ -5,7 +5,7 @@ require 'controller_spec_controller'
   describe "A controller example running in #{mode} mode", :type => :controller do
     controller_name :controller_spec
     integrate_views if mode == 'integration'
-  
+    
     it "should provide controller.session as session" do
       get 'action_with_template'
       session.should equal(controller.session)
@@ -143,11 +143,6 @@ require 'controller_spec_controller'
       assigns[:indirect_assigns_key].should == :indirect_assigns_key_value
     end
     
-    it "should expose the assigns hash directly" do
-      get 'action_setting_the_assigns_hash'
-      assigns[:direct_assigns_key].should == :direct_assigns_key_value
-    end
-    
     it "should complain when calling should_receive(:render) on the controller" do
       lambda {
         controller.should_receive(:render)
@@ -166,6 +161,12 @@ require 'controller_spec_controller'
       lambda {
         controller.rspec_verify
       }.should raise_error(Exception, /expected :anything_besides_render/)
+    end
+    
+    it "should not run a skipped before_filter" do
+      lambda {
+        get 'action_with_skipped_before_filter'
+      }.should_not raise_error
     end
   end
 
@@ -206,6 +207,19 @@ require 'controller_spec_controller'
   end
   
 end
+
+['integration', 'isolation'].each do |mode|
+  describe "A controller example running in #{mode} mode", :type => :controller do
+    controller_name :controller_inheriting_from_application_controller
+    integrate_views if mode == 'integration'
+    
+    it "should only have a before filter inherited from ApplicationController run once..." do
+      controller.should_receive(:i_should_only_be_run_once).once
+      get :action_with_inherited_before_filter
+    end
+  end
+end
+
 
 describe ControllerSpecController, :type => :controller do
   it "should not require naming the controller if describe is passed a type" do

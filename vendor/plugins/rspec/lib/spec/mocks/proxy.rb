@@ -20,10 +20,20 @@ module Spec
       def null_object?
         @options[:null_object]
       end
+      
+      def act_as_null_object
+        @options[:null_object] = true
+        @target
+      end
 
       def add_message_expectation(expected_from, sym, opts={}, &block)
         __add sym
-        @expectations << MessageExpectation.new(@error_generator, @expectation_ordering, expected_from, sym, block_given? ? block : nil, 1, opts)
+        if existing_stub = @stubs.detect {|s| s.sym == sym }
+          expectation = existing_stub.build_child(expected_from, block_given?? block : nil, 1, opts)
+        else
+          expectation = MessageExpectation.new(@error_generator, @expectation_ordering, expected_from, sym, block_given? ? block : nil, 1, opts)
+        end
+        @expectations << expectation
         @expectations.last
       end
 
@@ -61,13 +71,17 @@ module Spec
       end
 
       def message_received(sym, *args, &block)
-        if expectation = find_matching_expectation(sym, *args)
-          expectation.invoke(args, block)
-        elsif (stub = find_matching_method_stub(sym, *args))
+        expectation = find_matching_expectation(sym, *args)
+        stub = find_matching_method_stub(sym, *args)
+
+        if (stub && expectation && expectation.called_max_times?) ||
+            (stub && !expectation)
           if expectation = find_almost_matching_expectation(sym, *args)
             expectation.advise(args, block) unless expectation.expected_messages_received?
           end
           stub.invoke([], block)
+        elsif expectation
+          expectation.invoke(args, block)
         elsif expectation = find_almost_matching_expectation(sym, *args)
           expectation.advise(args, block) if null_object? unless expectation.expected_messages_received?
           raise_unexpected_message_args_error(expectation, *args) unless (has_negative_expectation?(sym) or null_object?)

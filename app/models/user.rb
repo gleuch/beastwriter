@@ -1,4 +1,8 @@
 class User < ActiveRecord::Base
+  #include Authentication
+ # include Authentication::ByPassword
+ # include Authentication::ByCookieToken
+  
   concerned_with :validation, :states, :activation, :posting
   formats_attributes :bio
 

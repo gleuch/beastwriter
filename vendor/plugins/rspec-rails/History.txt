@@ -1,11 +1,25 @@
 === In Development (git clone git://github.com/dchelimsky/rspec-rails.git)
 
+IMPORTANT: use 'script/autospec' (or just 'autospec' if you have the rspec gem
+installed) instead of 'autotest'. We changed the way autotest discovers rspec
+so the autotest executable won't automatically load rspec anymore. This allows
+rspec to live side by side other spec frameworks without always co-opting
+autotest through autotest's discovery mechanism.
+
+ALSO IMPORTANT: Rails v2.1.1 changed assert_select_rjs such that it doesn't
+always fail when it should. Please see
+http://rails.lighthouseapp.com/projects/8994/tickets/982.
+
+* Generated route specs have shorter names, making it less painful to modify their implementation
 * Add conditional so Rails 2.1.0 doesn't warn about cache_template_extensions (patch from James Herdman)
 * Fixed stub_model examples to work with Rails 2.1.0 (the code was fine, just the examples needed patching)
 * use hoe for build/release
 * reworked generated examples for rspec_scaffold - thanks to Mikel Lindsaar and Dan Manges for their feedback
 * bye, bye translator
 * Added proxy to cookies so you can set them in examples the same way you set them in controllers
+* Added script/autospec so you can run autospec without installing the gem
+* Support --skip-fixture in the rspec_model generator (patches from Alex Tomlins and Niels Ganser)
+* Add mock_model#as_new_record (patch from Zach Dennis)
 
 === Version 1.1.4
 

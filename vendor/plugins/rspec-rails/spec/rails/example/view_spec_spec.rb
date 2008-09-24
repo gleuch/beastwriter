@@ -149,36 +149,18 @@ describe "A view that includes a partial using :collection and :spacer_template"
 
 end
 
-describe "A view that includes a partial using an array as partial_path", :type => :view do
-  before(:each) do
-    module ActionView::Partials
-      def render_template_with_partial_with_array_support(partial_path, local_assigns = nil, deprecated_local_assigns = nil)
-        if partial_path.is_a?(Array)
-          "Array Partial"
-        else
-          render_partial_without_array_support(partial_path, local_assigns, deprecated_local_assigns)
-        end
-      end
-
-      alias :render_partial_without_array_support :render_partial
-      alias :render_partial :render_template_with_partial_with_array_support
+if Rails::VERSION::MAJOR >= 2
+  describe "A view that includes a partial using an array as partial_path", :type => :view do
+    before(:each) do
+      renderable_object = Object.new
+      renderable_object.stub!(:name).and_return("Renderable Object")
+      assigns[:array] = [renderable_object]
     end
 
-    @array = ['Alice', 'Bob']
-    assigns[:array] = @array
-  end
-
-  after(:each) do
-    module ActionView::Partials
-      alias :render_template_with_partial_with_array_support :render_partial
-      alias :render_partial :render_partial_without_array_support
-      undef render_template_with_partial_with_array_support
+    it "should render the array passed through to render_partial without modification" do
+      render "view_spec/template_with_partial_with_array" 
+      response.body.should match(/^Renderable Object$/)
     end
-  end
-
-  it "should render have the array passed through to render_partial without modification" do
-    render "view_spec/template_with_partial_with_array" 
-    response.body.should match(/^Array Partial$/)
   end
 end
 
@@ -239,6 +221,20 @@ describe "An instantiated ViewExampleGroupController", :type => :view do
   end
 end
 
+describe "a block helper", :type => :view do
+  it "should not yield when not told to in the example" do
+    template.should_receive(:if_allowed)
+    render "view_spec/block_helper"
+    response.should_not have_tag("div","block helper was rendered")
+  end
+
+  it "should yield when told to in the example" do
+    template.should_receive(:if_allowed).and_yield
+    render "view_spec/block_helper"
+    response.should have_tag("div","block helper was rendered")
+  end
+end
+
 describe "render :inline => ...", :type => :view do
   it "should render ERB right in the spec" do
     render :inline => %|<%= text_field_tag('field_name', 'Value') %>|
@@ -267,6 +263,17 @@ module Spec
           group.run_after_each(example)
         end
       end
+    end
+  end
+end
+
+describe "bug http://rspec.lighthouseapp.com/projects/5645/tickets/510", :type => :view do
+  describe "a view example with should_not_receive" do
+    it "should render the view" do
+      assigns[:model] = mock('model')
+      assigns[:model].should_receive(:render_partial?).and_return false
+      template.should_not_receive(:render).with(:partial => 'some_partial')
+      render "view_spec/should_not_receive"
     end
   end
 end
