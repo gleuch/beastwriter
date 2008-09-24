@@ -14,7 +14,7 @@
 <% end %>
 
 <h1 style="margin-top:0;"><%= 'Sites'[:sites_title] %></h1>
-<%= pagination @sites %>
+<%= will_paginate @sites %>
 
 <table border="0" cellspacing="0" cellpadding="0" class="wide forums">
   <tr>
@@ -42,5 +42,4 @@
 <% end %>
 </table>
 
-<%= next_page @sites %>
-<%= pagination @sites %>
+<%= will_paginate @sites %>

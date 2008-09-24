@@ -64,7 +64,7 @@
 </p>
 
 <% unless @posts.empty? -%>
-<%= pagination @posts %>
+<%= will_paginate @posts %>
 
 <a name="<%= dom_id @posts.first %>" id="<%= dom_id @posts.first %>">&nbsp;</a>
 
@@ -129,8 +129,7 @@
 <% end %>
 </table>
        
-<%= next_page @posts %>
-<%= pagination @posts %>
+<%= will_paginate @posts %>
 <% end -%>
 
 <% if logged_in? %>
