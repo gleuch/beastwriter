@@ -52,7 +52,7 @@
     <%= '{count} topics'[(count=@user.topics.size)==1 ? :topic_count : :topics_count, number_with_delimiter(count)] %>, 
     <%= '{count} posts'[(count=@user.posts.size)==1 ? :post_count : :posts_count, number_with_delimiter(count)] %>
     (<%= 'view'[] %> <%= link_to 'all'[:view_all], user_posts_path(@user) %> | 
-    <%= link_to 'monitored'[], "monitored_posts_path(@user)" %> <%= 'posts'[] %>)<br />
+    <%= link_to 'monitored'[], "#" %> <%= 'posts'[] %>)<br />
   </span>
 </p>
 

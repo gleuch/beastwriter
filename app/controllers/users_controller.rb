@@ -4,7 +4,11 @@ class UsersController < ApplicationController
   before_filter :login_required, :only => [:settings, :update]
   
   def index
-    @users = current_site.users.paginate :all, :page => current_page
+    @users = if admin?
+      current_site.all_users.paginate :all, :page => current_page
+    else
+      current_site.users.paginate :all, :page => current_page
+    end
   end
 
   # render new.rhtml
