@@ -79,6 +79,7 @@ class TopicsController < ApplicationController
 
 protected
   def find_forum
+    current_site
     @forum = Forum.find_by_permalink(params[:forum_id])
   end
   
