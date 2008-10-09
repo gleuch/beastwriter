@@ -18,7 +18,8 @@ module RspecOnRailsOnCrack
         describe @controller, "access for #{user.inspect}", :type => :controller do
           ControllerAccessGroup.new(self, blocks, filters).instance_eval(&block)
           before do
-            controller.stub!(:current_user).and_return(user == :anon ? :false : users(user))
+            controller.stub!(:current_user).and_return(user == :anon ? nil : users(user))
+            controller.stub!(:logged_in?).and_return(user != :anon)
           end
         end
       end
@@ -420,7 +421,7 @@ module RspecOnRailsOnCrack
         acting do |response|
           asserts_status options[:status]
           asserts_content_type options[:format] || format
-          response.should have_text(instance_eval(&block)) if block
+          response.should have_text(block.call) if block
         end
       end
     end
