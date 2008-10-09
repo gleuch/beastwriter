@@ -75,6 +75,7 @@ describe TopicsController, "GET #show" do
     end
     
     it "marks User#last_seen_at" do
+      @controller.stub!(:current_user).and_return(@user)
       @user.should_receive(:seen!)
       act!
     end
