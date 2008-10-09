@@ -18,7 +18,7 @@ class UsersController < ApplicationController
 
   def create
     cookies.delete :auth_token
-    @user = current_site.users.build(params[:user])
+    @user = current_site.users.build(params[:user])    
     @user.register! if @user.valid?
     unless @user.new_record?
       self.current_user = @user
@@ -53,7 +53,8 @@ class UsersController < ApplicationController
   end
 
   def activate
-    self.current_user = params[:activation_code].blank? ? :false : current_site.all_users.find_in_state(:first, :pending, :conditions => {:activation_code => params[:activation_code]})
+    # not sure why this was using a symbol. Let's use the real false.
+    self.current_user = params[:activation_code].blank? ? false : current_site.all_users.find_in_state(:first, :pending, :conditions => {:activation_code => params[:activation_code]})
     if logged_in?
       current_user.activate!
       flash[:notice] = "Signup complete!"

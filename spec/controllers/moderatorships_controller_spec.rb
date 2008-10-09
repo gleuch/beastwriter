@@ -21,13 +21,14 @@ describe ModeratorshipsController, "POST #create" do
     it_assigns :moderatorship, :flash => {:notice => nil, :error => :not_nil}
     it_redirects_to { user_path(users(:default)) }
   end
-  
+
+  # These should definitely check the content of XML rendered at some point.
   describe ModeratorshipsController, "(successful creation, xml)" do
     define_models
     act! { post :create, :moderatorship => @attributes, :format => 'xml' }
     
     it_assigns :moderatorship, :headers => { :Location => lambda { moderatorship_url(assigns(:moderatorship)) } }
-    it_renders :xml, :status => :created do
+    it_renders :xml, :status => :created  do
       assigns(:moderatorship).to_xml
     end
   end

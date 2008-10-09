@@ -127,7 +127,7 @@ describe User do
 
 protected
   def create_user(options = {})
-    returning User.new({ :login => 'quire', :email => 'quire@example.com', :password => 'quire', :password_confirmation => 'quire' }.merge(options)) do |u|
+    returning User.new({ :login => 'quire', :email => 'quire@example.com', :password => 'monkey', :password_confirmation => 'monkey' }.merge(options)) do |u|
       u.site_id = options.key?(:site_id) ? options[:site_id] : sites(:default).id
       u.save
     end
@@ -156,7 +156,7 @@ describe User, "with no created users" do
   end
 
   def make_user(site, login, email)
-    user = User.new :login => login, :email => email, :password => 'quire', :password_confirmation => 'quire'
+    user = User.new :login => login, :email => email, :password => 'monkey', :password_confirmation => 'monkey'
     user.site_id = site.id
     # user.stub!(:site).and_return @site
     user.save!

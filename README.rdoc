@@ -2,14 +2,14 @@
 
 The popular rails-based Beast forum, rewritten from the ground up with the same database and views.
 
-* updated for Rails 2.0
+* updated for Rails 2.1.1
 * using rspec/model_stubbing
 * added a state machine for user logins
 * built-in multi-site support
 * spam protection from akismet/viking
 * forum authorization rules (public/private/invitation)
 * email and atom feed support
-* xml/json API
+* xml/json API (not 100% tested yet, fixing soon)
 * highline based easy console installer
 
 Help desired via git:
@@ -19,7 +19,7 @@ Help desired via git:
 === INSTALLATION
 
     # download altered_beast
-    # gem install rails 2.0.x
+    # gem install rails 2.1.1
     $ mkdir log
     $ rake tmp:create
     $ rake app:bootstrap

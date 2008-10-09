@@ -12,7 +12,7 @@
   <%= user_count %>, <%= active_user_count %>, <%= lurking_user_count %>
 </p>
 
-<%= pagination @users %>
+<%= will_paginate @users %>
 
 <table border="0" cellspacing="0" cellpadding="0" class="wide forums">
   <tr>
@@ -43,5 +43,4 @@
 <% end %>
 </table>
 
-<%= next_page @users %>
-<%= pagination @users %>
+<%= will_paginate @users %>

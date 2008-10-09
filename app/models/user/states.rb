@@ -27,10 +27,10 @@ class User
     transitions :from => :suspended, :to => :pending, :guard => Proc.new {|u| !u.activation_code.blank? }
     transitions :from => :suspended, :to => :passive
   end
-      
-  # Authenticates a user by their login name and unencrypted password.  Returns the user or nil.
+  
   def self.authenticate(login, password)
-    u = find_in_state :first, :active, :conditions => {:login => login} # need to get the salt
+    return nil if login.blank? || password.blank?
+    u = find_in_state :first, :active, :conditions => {:login => login}
     u && u.authenticated?(password) ? u : nil
   end
 
@@ -47,8 +47,10 @@ protected
   end
 
   def do_activate
+    @activated = true
     self.activated_at = Time.now.utc
-    self.deleted_at = self.activation_code = nil
+    self.deleted_at = nil
+    self.activation_code = ""
     
     UserMailer.deliver_activation(self)
   end

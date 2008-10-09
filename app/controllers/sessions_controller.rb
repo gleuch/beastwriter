@@ -9,6 +9,7 @@ class SessionsController < ApplicationController
   def create
     reset_session
     self.current_user = current_site.users.authenticate(params[:login], params[:password])
+    
     if logged_in?
       if params[:remember_me] == "1"
         current_user.remember_me
