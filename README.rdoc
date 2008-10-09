@@ -1,6 +1,6 @@
 == Altered Beast
 
-The popular rails-based Beast forum...
+The popular rails-based Beast forum, rewritten from the ground up with the same database and views.
 
 * updated for Rails 2.0
 * using rspec/model_stubbing
@@ -14,14 +14,14 @@ The popular rails-based Beast forum...
 
 Help desired via git:
 
-    git clone git://git.caboo.se/altered_beast.git
+    git clone git://github.com/courtenay/altered_beast.git
 
 === INSTALLATION
 
     # download altered_beast
-    # install rails 2.0.x
+    # gem install rails 2.0.x
     $ mkdir log
     $ rake tmp:create
-    $ rake db:schema:load
+    $ rake app:bootstrap
 
-First created user will be admin.
+    Follow the instructions to create your database and load users.
