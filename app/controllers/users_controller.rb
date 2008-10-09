@@ -4,10 +4,11 @@ class UsersController < ApplicationController
   before_filter :login_required, :only => [:settings, :update]
   
   def index
-    @users = if admin?
-      current_site.all_users.paginate :all, :page => current_page
+    users_scope = admin? ? :all_users : :users
+    if params[:q]
+      @users = current_site.send(users_scope).named_like(params[:q]).paginate(:page => current_page)
     else
-      current_site.users.paginate :all, :page => current_page
+      @users = current_site.send(users_scope).paginate(:page => current_page)
     end
   end
 

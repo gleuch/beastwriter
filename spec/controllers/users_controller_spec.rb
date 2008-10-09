@@ -81,6 +81,45 @@ describe UsersController do
   end
 end
 
+describe UsersController, "GET #index" do
+  define_models :stubbed
+  before do
+    current_site :default
+    @controller.stub!(:current_site).and_return(@site)
+  end
+
+  act! { get :index, :page => 2 }
+
+  it "should make a paginated list of users available as @users" do
+    @site.users.should_receive(:paginate).with(:page => 2).and_return "users"
+    acting { assigns(:users).should == "users" }
+  end
+
+  describe "with search parameter" do
+    define_models :stubbed
+    act! { get :index, :q => "bob" }
+    define_models do
+      model User do
+        stub :bob, :display_name => "Bob", :login => "robert"
+        stub :rob, :display_name => "Robert", :login => "bob" 
+        stub :robby, :display_name => "Robby", :login => "robby"
+      end
+    end
+    it "should find users by name" do
+      acting
+      assigns(:users).should include(users(:bob))
+    end
+    it "should find users by login" do
+      acting
+      assigns(:users).should include(users(:rob))
+    end
+    it "should not include non-matching users" do
+      acting
+      assigns(:users).should_not include(users(:robby))
+    end
+  end
+end
+
 describe UsersController, "PUT #update" do
   before do
     login_as :default
