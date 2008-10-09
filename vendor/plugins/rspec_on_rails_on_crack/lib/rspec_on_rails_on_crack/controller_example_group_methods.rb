@@ -421,7 +421,7 @@ module RspecOnRailsOnCrack
         acting do |response|
           asserts_status options[:status]
           asserts_content_type options[:format] || format
-          response.should have_text(block.call) if block
+          response.should have_text(instance_eval(&block)) if block
         end
       end
     end
