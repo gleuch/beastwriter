@@ -9,7 +9,11 @@ class User < ActiveRecord::Base
   has_many :topics, :order => "#{Topic.table_name}.created_at desc"
   
   has_many :moderatorships, :dependent => :delete_all
-  has_many :forums, :through => :moderatorships, :source => :forum
+  has_many :forums, :through => :moderatorships, :source => :forum do
+    def moderatable
+      find :all, :select => "#{Forum.table_name}.*, #{Moderatorship.table_name}.id as moderatorship_id"
+    end
+  end
   
   has_many :monitorships, :dependent => :delete_all
   has_many :monitored_topics, :through => :monitorships, :source => :topic, :conditions => {"#{Monitorship.table_name}.active" => true}
