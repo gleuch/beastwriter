@@ -67,6 +67,6 @@ module ApplicationHelper
   end
 
   def for_moderators_of(record, &block)
-    moderator_of?(record) && concat(capture(&block), block.binding)
+    moderator_of?(record) && concat(capture(&block))
   end
 end
