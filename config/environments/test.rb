@@ -21,5 +21,5 @@ config.action_controller.allow_forgery_protection    = false
 # ActionMailer::Base.deliveries array.
 config.action_mailer.delivery_method = :test
 
-config.gem 'rspec', :lib => 'spec', :version => "1.1.8"
-config.gem 'rspec-rails', :lib => 'spec/rails', :version => "1.1.8"
+config.gem 'rspec', :lib => 'spec', :version => "1.1.11"
+config.gem 'rspec-rails', :lib => 'spec/rails', :version => "1.1.11"
