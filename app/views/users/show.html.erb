@@ -2,7 +2,7 @@
 
 <% content_for :right do -%>
 <% if admin? %>
-<% if @user.active? %>
+<% if @user.active? && !@user.suspended? %>
   <% form_for @user.moderatorships.build do |f| -%>
     <h6><%= 'Admin &amp; Moderation'[:admin_and_moderation] %></h6>
 
