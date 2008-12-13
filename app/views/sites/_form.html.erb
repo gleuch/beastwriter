@@ -8,6 +8,12 @@
 	</tr>
 	<tr>
 	  <td>
+	    <label for="site_description"><%= 'Description'[:site_description] %></label><br />
+	    <%= form.text_area :description, :class => "primary", :size => "52x5" %>
+	  </td>
+	</tr>
+	<tr>
+	  <td>
 	    <label for="site_host"><%= 'Host'[:site_host] %></label><br />
 	    http://<%= form.text_field :host %>
 	  </td>

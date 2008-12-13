@@ -1,5 +1,6 @@
 class Site < ActiveRecord::Base
   class UndefinedError < StandardError; end
+  formats_attributes :description
 
   has_many :users, :conditions => {:state => 'active'}
   has_many :all_users, :class_name => 'User'
