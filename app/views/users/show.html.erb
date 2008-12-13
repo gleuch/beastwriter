@@ -24,15 +24,13 @@
   	<label><%= 'Add as moderator'[] %></label><br />
   	<%= f.select :forum_id, @user.available_forums.collect { |forum| [forum.name, forum.id] }, :include_blank => " - " %>
   	</p>
-  	<% end -%>
-
-    <p><label><%= check_box_tag :admin, @user.admin? %> <%= 'User is an administrator'[] %></label></p>
-
     <p>
   		<%= f.submit 'Save'[:save_title] %>
   		<%= f.hidden_field :user_id %>
   	</p>
+  	<% end -%>
   <% end -%>
+  <p><label><%= 'User is an administrator'[] %></label></p>
   <p><%= link_to "Suspend user account", suspend_user_path(@user), :method => :put %></p>
 <% else %>
   <p><%= "User account is suspended."[] %> <%= link_to "Unsuspend user account", unsuspend_user_path(@user), :method => :put %></p>
