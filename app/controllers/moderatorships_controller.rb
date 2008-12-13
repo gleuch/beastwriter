@@ -8,7 +8,7 @@ class ModeratorshipsController < ApplicationController
         format.html { redirect_to(@moderatorship.user) }
         format.xml  { render :xml  => @moderatorship, :status => :created, :location => @moderatorship }
       else
-        flash[:error] = "Moderatorship could not be created: #{@moderatorship.errors.full_messages.to_sentence}"
+        flash[:error] = "Moderatorship could not be created: #{@moderatorship.errors.full_messages.to_sentence}" unless @moderatorship.forum_id.blank?
         format.html { redirect_to(@moderatorship.user) }
         format.xml  { render :xml  => @moderatorship.errors, :status => :unprocessable_entity }
       end

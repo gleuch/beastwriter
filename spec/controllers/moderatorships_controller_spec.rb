@@ -18,7 +18,7 @@ describe ModeratorshipsController, "POST #create" do
     define_models
     act! { post :create, :moderatorship => @attributes.merge('forum_id' => '') }
     
-    it_assigns :moderatorship, :flash => {:notice => nil, :error => :not_nil}
+    it_assigns :moderatorship, :flash => {:notice => nil, :error => nil}
     it_redirects_to { user_path(users(:default)) }
   end
 
