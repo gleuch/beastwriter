@@ -25,12 +25,10 @@
 </p>
 -->
 <p class="disclaim">
-<strong>
-  <%
-  footers=["Two's company. Three's a forum. More's a Beast."[:footer_message]
-  ]
-  %>
-  <%= footers[rand(footers.size)]%>
+  <strong>
+  <% if @current_site && !current_site.tagline_html.blank? %>
+  <%= current_site.tagline_html %>
+  <% end %>
   </strong>
 </p>
 <p class="credit">

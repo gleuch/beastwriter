@@ -66,6 +66,8 @@ ActiveRecord::Schema.define(:version => 20081213180202) do
     t.integer  "posts_count",  :default => 0
     t.text     "description"
     t.text     "description_html"
+    t.text     "tagline"
+    t.text     "tagline_html"
   end
 
   create_table "topics", :force => true do |t|
