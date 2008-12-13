@@ -35,5 +35,9 @@
     <li><%= link_to 'Login'[:login_action], login_path(:to => CGI.escape(request.request_uri)) %></li>
     <% end -%>
   </ul>
-  <h1><%= link_to 'Altered Beast'[:beast_title], root_path %></h1>
+  <% if @current_site && current_site.name %>
+    <h1><%= link_to current_site.name, root_path %></h1>
+  <% else %>
+    <h1><%= link_to 'Altered Beast'[:beast_title], root_path %></h1>
+  <% end %>
 </div>
