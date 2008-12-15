@@ -26,8 +26,10 @@
 -->
 <p class="disclaim">
   <strong>
-  <% if @current_site && !current_site.tagline.blank? %>
-  <%= current_site.tagline %>
+  <% if @current_site %>
+    <%= @current_site.tagline %>
+  <% else main_site %>
+    <%= main_site_tagline %>
   <% end %>
   </strong>
 </p>

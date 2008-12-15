@@ -69,4 +69,24 @@ module ApplicationHelper
   def for_moderators_of(record, &block)
     moderator_of?(record) && concat(capture(&block))
   end
+
+  def main_site
+    @main_site ||= Site.find(:first)
+  end
+  
+  def main_site_name
+    @main_site_name ||= main_site ? @main_site.name :
+      "Altered Beast"
+  end
+
+  def main_site_description
+    @main_site_description ||= main_site ? @main_site.description :
+      "<h5>What is Beast?</h5><p>A small, light-weight forum in Rails with a scary name and a goal of around 500 lines of code when we're done.</p>"
+  end
+
+  def main_site_tagline
+    @main_site_tagline ||= main_site ? @main_site.tagline :
+      "Two's company. Three's a forum. More's a Beast."
+  end
+
 end

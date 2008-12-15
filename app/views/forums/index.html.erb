@@ -1,6 +1,10 @@
 <% content_for :right do %>
 
-<%= current_site.description %>
+<% if @current_site %>
+<%= @current_site.description %>
+<% else %>
+<%= main_site_description %>
+<% end %>
 
 <% if admin? %>
 <h6><%= 'Admin'[:admin_title] %></h6>

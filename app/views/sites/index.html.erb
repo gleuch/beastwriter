@@ -1,10 +1,10 @@
 <% content_for :right do %>
 
-<h5><%= 'What is Beast?'[:beast_sidebar_title] %></h5>
-
-<p>
-  <%= 'A small, light-weight forum in Rails with a scary name and a goal of around 500 lines of code when we\'re done.'[:beast_sidebar_body] %>
-</p>
+<% if @current_site %>
+<%= @current_site.description %>
+<% else %>
+<%= main_site_description %>
+<% end %>
 
 <% if admin? %>
 <h6><%= 'Admin'[:admin_title] %></h6>

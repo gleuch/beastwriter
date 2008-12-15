@@ -38,6 +38,6 @@
   <% if @current_site && current_site.name %>
     <h1><%= link_to current_site.name, root_path %></h1>
   <% else %>
-    <h1><%= link_to 'Altered Beast'[:beast_title], root_path %></h1>
+    <h1><%= link_to main_site_name, root_path %></h1>
   <% end %>
 </div>
