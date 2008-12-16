@@ -7,7 +7,6 @@ class SessionsController < ApplicationController
   end
 
   def create
-    reset_session
     self.current_user = current_site.users.authenticate(params[:login], params[:password])
     
     if logged_in?
