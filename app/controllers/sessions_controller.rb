@@ -7,6 +7,7 @@ class SessionsController < ApplicationController
   end
 
   def create
+    params[:login] = params[:login].downcase
     self.current_user = current_site.users.authenticate(params[:login], params[:password])
     
     if logged_in?
