@@ -18,10 +18,10 @@ class UsersController < ApplicationController
 
   def create
     cookies.delete :auth_token
-    @user = current_site.users.build(params[:user])    
-    @user.register! if @user.valid?
+    @user = current_site.users.build(params[:user])
+    @user.save if @user.valid?
     unless @user.new_record?
-      self.current_user = @user
+      @user.register!
       redirect_back_or_default('/')
       flash[:notice] = "Thanks for signing up!"
     else

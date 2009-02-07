@@ -1,5 +1,5 @@
 class User
-  acts_as_state_machine :initial => :pending
+  acts_as_state_machine :initial => :passive
   state :passive
   state :pending, :enter => :do_activation
   state :active,  :enter => :do_activate

@@ -60,14 +60,14 @@ describe UsersController do
     flash[:notice].should be_nil
   end
   
-  it 'logs in the first user and activates as admin' do
+  it 'activates the first user as admin' do
     User.delete_all
     create_user
     user = User.find_by_login('quire')
-    assigns[:current_user].site.should == sites(:default)
-    assigns[:current_user].should == user
-    assigns[:current_user].should be_admin
-    assigns[:current_user].should be_active
+    user.register!
+    user.activate!
+    user.active?.should == true
+    user.admin?.should == true
   end
   
   it "sends an email to the user on create" do
