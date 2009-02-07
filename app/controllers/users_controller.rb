@@ -31,6 +31,7 @@ class UsersController < ApplicationController
 
   def settings
     @user = current_user
+    current_site
     render :action => "edit"
   end
   
