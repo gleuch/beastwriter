@@ -8,6 +8,7 @@ class SessionsController < ApplicationController
 
   def create
     reset_session
+    params[:login] = sanitized_login_name(params[:login])
     self.current_user = current_site.users.authenticate(params[:login], params[:password])
     
     if logged_in?

@@ -21,4 +21,8 @@ class ApplicationController < ActionController::Base
   def current_page
     @page ||= params[:page].blank? ? 1 : params[:page].to_i
   end
+
+  def sanitized_login_name(name)
+    name.strip.downcase
+  end
 end

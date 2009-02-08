@@ -22,6 +22,7 @@ class UsersController < ApplicationController
 
   def create
     cookies.delete :auth_token
+    params[:user][:login] = sanitized_login_name(params[:user][:login])
     @user = current_site.users.build(params[:user])
     @user.save if @user.valid?
     unless @user.new_record?
