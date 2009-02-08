@@ -1,14 +1,14 @@
 module UsersHelper
   def user_count
-    pluralize current_site.users.size, 'user'[:user]
+    pluralize current_site.users.find(:all).size, 'valid user'[:valid_user]
   end
   
   def active_user_count
-    pluralize current_site.users.count('users.posts_count > 0'), 'active user'[:active_user]
+    pluralize current_site.users.find(:all, :conditions => "posts_count > 0").size, 'active user'[:active_user]
   end
   
   def lurking_user_count
-    pluralize current_site.users.count('users.posts_count = 0'), 'lurking user'[:lurking_user]
+    pluralize current_site.users.find(:all, :conditions => "posts_count = 0").size, 'lurking user'[:lurking_user]
   end
 
   #
