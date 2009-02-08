@@ -9,7 +9,12 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 1) do
+ActiveRecord::Schema.define(:version => 20081213180202) do
+
+  create_table "brain_busters", :force => true do |t|
+    t.string "question"
+    t.string "answer"
+  end
 
   create_table "forums", :force => true do |t|
     t.integer "site_id"
@@ -64,6 +69,8 @@ ActiveRecord::Schema.define(:version => 1) do
     t.integer  "topics_count", :default => 0
     t.integer  "users_count",  :default => 0
     t.integer  "posts_count",  :default => 0
+    t.text     "description"
+    t.text     "tagline"
   end
 
   create_table "topics", :force => true do |t|

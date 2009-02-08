@@ -2,7 +2,11 @@ class UsersController < ApplicationController
   before_filter :admin_required, :only => [:suspend, :unsuspend, :destroy, :purge, :edit]
   before_filter :find_user, :only => [:update, :show, :edit, :suspend, :unsuspend, :destroy, :purge]
   before_filter :login_required, :only => [:settings, :update]
-  
+
+  # Brainbuster Captcha
+  before_filter :create_brain_buster, :only => [:new]
+  before_filter :validate_brain_buster, :only => [:create]
+
   def index
     users_scope = admin? ? :all_users : :users
     if params[:q]
@@ -93,8 +97,12 @@ protected
       current_site.users.find_by_permalink(params[:id])
     end or raise ActiveRecord::RecordNotFound
   end
-  
+
   def authorized?
     admin? || params[:id].blank? || params[:id] == current_user.permalink
+  end
+
+  def render_or_redirect_for_captcha_failure
+    render :action => 'new'
   end
 end

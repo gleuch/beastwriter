@@ -5,6 +5,7 @@
   <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
   <title><%=h @current_site && current_site.name || 'Altered Beast'[:beast_title] %><%= " - #{h @page_title}" if @page_title %></title>
   <%= stylesheet_link_tag 'display' %>
+  <%= stylesheet_link_tag 'captcha' %>
   <%= javascript_include_tag "prototype", "effects", "lowpro", "time", "application", :cache => 'beast' %>
 <% unless @feed_icons.blank? -%>
   <% @feed_icons.each do |feed| -%>
