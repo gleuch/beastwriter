@@ -45,6 +45,7 @@ class UsersController < ApplicationController
   end
 
   def update
+    params[:user][:login] = sanitized_login_name(params[:user][:login])
     @user = admin? ? find_user : current_user
     respond_to do |format|
       if @user.update_attributes(params[:user])
