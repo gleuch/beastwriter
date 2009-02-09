@@ -1,3 +1,6 @@
 [submodule "vendor/plugins/brain_buster"]
 	path = vendor/plugins/brain_buster
 	url = git://github.com/rsanheim/brain_buster.git
+[submodule "vendor/plugins/rails-dev-boost"]
+	path = vendor/plugins/rails-dev-boost
+	url = git://github.com/thedarkone/rails-dev-boost.git
