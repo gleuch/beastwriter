@@ -4,6 +4,7 @@ class ApplicationController < ActionController::Base
   include AuthenticatedSystem
   helper :all
   helper_method :current_page
+  around_filter :set_language
   before_filter :login_required, :only => [:new, :edit, :create, :update, :destroy]
   
   # See ActionController::RequestForgeryProtection for details
@@ -24,5 +25,11 @@ class ApplicationController < ActionController::Base
 
   def sanitized_login_name(name)
     name.strip.downcase
+  end
+
+  private
+
+  def set_language
+    Gibberish.use_language(:de) { yield }
   end
 end
