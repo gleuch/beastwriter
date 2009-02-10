@@ -7,22 +7,22 @@ module ApplicationHelper
 
   def pagination(collection)
     if collection.total_entries > 1
-      "<p class='pages'>" + 'Pages'[:pages_title] + ": <strong>" + 
-      will_paginate(collection, :inner_window => 10, :next_label => "next"[], :prev_label => "previous"[]) +
+      "<p class='pages'>" + I18n.t('txt.pages', :default => 'Pages') + ": <strong>" + 
+      will_paginate(collection, :inner_window => 10, :next_label => I18n.t('txt.page_next', :default => 'next'), :prev_label => I18n.t('txt.page_prev', :default => 'previous')) +
       "</strong></p>"
     end
   end
   
   def next_page(collection)
     unless collection.current_page == collection.total_entries or collection.total_entries == 0
-      "<p style='float:right;'>" + link_to("Next page"[], { :page => collection.current_page.next }.merge(params.reject{|k,v| k=="page"})) + "</p>"
+      "<p style='float:right;'>" + link_to(I18n.t('txt.next_page', :default => 'next page'), { :page => collection.current_page.next }.merge(params.reject{|k,v| k=="page"})) + "</p>"
     end
   end
 
   def search_posts_title
-    returning(params[:q].blank? ? 'Recent Posts'[] : "Searching for"[] + " '#{h params[:q]}'") do |title|
-      title << " "+'by {user}'[:by_user,h(@user.display_name)] if @user
-      title << " "+'in {forum}'[:in_forum,h(@forum.name)] if @forum
+    returning(params[:q].blank? ? I18n.t('txt.recent_posts', :default => 'Recent Posts') : I18n.t('txt.searching_for', :default => 'Searching for') + " '#{h params[:q]}'") do |title|
+      title << " " + I18n.t('txt.by_user', :default => 'by {{user}}', :user => h(@user.display_name)) if @user
+      title << " " + I18n.t('txt.in_forum', :default => 'in {{forum}}', :forum => h(@forum.name)) if @forum
     end
   end
 
@@ -59,11 +59,6 @@ module ApplicationHelper
         :search
       end
     atom ? send("formatted_#{prefix}_posts_path", options.update(:format => :atom)) : send("#{prefix}_posts_path", options)
-  end
-
-  @@default_jstime_format = "%d %b, %Y %I:%M %p"
-  def jstime(time, format = nil)
-    content_tag 'span', time.strftime(format || @@default_jstime_format), :class => 'time'
   end
 
   def for_moderators_of(record, &block)

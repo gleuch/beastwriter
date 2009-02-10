@@ -1,14 +1,14 @@
 <% content_for :right do %>
 
-<h5><%= 'Avatars'[:avatars_title] %></h5>
+<h5><%=  I18n.t 'txt.views_users.avatars_title', :default => 'Avatars' %></h5>
 
-<p><%= 'To have your very own avatar displayed on this forum visit {gravatar} and sign up for a free gravatar.'[:gravatar_notice, %(<a href="http://www.gravatar.com/">gravatar.com</a>)] %></p>
+<p><%= I18n.t 'txt.views_users.gravatar_notice', :default => 'To have your very own avatar displayed on this forum visit {{gravatar}} and sign up for a free gravatar.', :gravatar => '<a href="http://www.gravatar.com/" title="Gravatar - Globally Recognized Avatars">Gravatar</a>' %></p>
 
 <% end %>
 
-<h1><%= 'Settings'[:settings_title] %></h1>
+<h1><%= I18n.t 'txt.views_users.settings', :default => 'Settings' %></h1>
 
-<p class="subtitle"><%= 'for {user}'[:for_user, @user.display_name] %>
+<p class="subtitle"><%= I18n.t 'txt.views_users.for_user', :default => 'for {{user}}', :user => @user.display_name %>
 	<% if @user.login!=@user.display_name %>
 	(<%= @user.login %>)
 	<% end %>
@@ -18,12 +18,12 @@
 
 <% form_for :user, :url => user_path(@user), :html => { :method => :put } do |f| -%>
   <%= render :partial => "settings", :object => f %>
-  <p><%= submit_tag 'Change e-mail or password'[:change_email_or_password], :or => link_to( "cancel"[], "/") %></p>
+  <p><%= submit_tag I18n.t('txt.views_users.change_email_or_password', :default => 'Change e-mail or password') %></p>
 <% end -%>
 
 <br />
 
 <% form_for :user, :url => user_path(@user), :html => { :method => :put } do |f| -%>
   <%= render :partial => "contact_info", :locals => { :settings => f } %>
-  <p><%= submit_tag 'Update Profile'[], :or => link_to( "cancel"[], "/") %></p>
+  <%= submit_tag I18n.t('txt.views_users.update_profile', :default => 'Update profile') %> <%= I18n.t 'txt.or', :default => 'or' %> <%= link_to(I18n.t('txt.cancel', :default => 'Cancel'), user_path) %>
 <% end -%>

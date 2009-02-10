@@ -10,14 +10,6 @@ module ForumsHelper
     return false unless logged_in? && forum.recent_topic
     return forum.recent_topic.last_updated_at > ((session[:forums] ||= {})[forum.id] || last_active)
   end
-
-  def topic_count
-    pluralize current_site.topics.size, 'topic'
-  end
-  
-  def post_count
-    pluralize current_site.posts.size, 'post'
-  end
   
   def last_active
     session[:last_active] ||= Time.now.utc

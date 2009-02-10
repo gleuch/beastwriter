@@ -81,7 +81,6 @@ var PostForm = {
 }
 
 Event.addBehavior({
-	'span.time': toTimeAgoInWords,
 	'#search, #reply': function() { this.hide() },
 	'#search-link:click': function() {
 		$('search').toggle();
@@ -92,7 +91,7 @@ Event.addBehavior({
 	'tr.post': function() {
 		var postId = this.id.match(/^post_(\d+)-/)[1]
                 var anchor = this.down(".edit a")
-                if(anchor) { PostForm.edit.attach(anchor, postId) };
+                if(anchor) { PostForm.edit.attach(anchor, postId) }
 	},
 	
 	'#reply-link': function() {

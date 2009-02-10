@@ -4,7 +4,7 @@ class ApplicationController < ActionController::Base
   include AuthenticatedSystem
   helper :all
   helper_method :current_page
-  around_filter :set_language
+  before_filter :set_language
   before_filter :login_required, :only => [:new, :edit, :create, :update, :destroy]
   
   # See ActionController::RequestForgeryProtection for details
@@ -30,6 +30,7 @@ class ApplicationController < ActionController::Base
   private
 
   def set_language
-    Gibberish.use_language(:de) { yield }
+    I18n.locale = :en || I18n.default_locale
   end
+
 end
