@@ -25,5 +25,5 @@
 
 <% form_for :user, :url => user_path(@user), :html => { :method => :put } do |f| -%>
   <%= render :partial => "contact_info", :locals => { :settings => f } %>
-  <%= submit_tag I18n.t('txt.views_users.update_profile', :default => 'Update profile') %> <%= I18n.t 'txt.or', :default => 'or' %> <%= link_to(I18n.t('txt.cancel', :default => 'Cancel'), user_path) %>
+  <%= submit_tag I18n.t('txt.views_users.update_profile', :default => 'Update profile') %> <%= I18n.t 'txt.or', :default => 'or' %> <%= link_to(I18n.t('txt.cancel', :default => 'Cancel'), user_path(@user)) %>
 <% end -%>

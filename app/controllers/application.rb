@@ -23,10 +23,6 @@ class ApplicationController < ActionController::Base
     @page ||= params[:page].blank? ? 1 : params[:page].to_i
   end
 
-  def sanitized_login_name(name)
-    name.strip.downcase
-  end
-
   private
 
   def set_language

@@ -22,13 +22,13 @@ class UsersController < ApplicationController
 
   def create
     cookies.delete :auth_token
-    params[:user][:login] = sanitized_login_name(params[:user][:login])
     @user = current_site.users.build(params[:user])
     @user.save if @user.valid?
+    @user.register! if @user.valid?
     unless @user.new_record?
-      @user.register!
+      # self.current_user = @user
       redirect_back_or_default('/')
-      flash[:notice] = "Thanks for signing up!"
+      flash[:notice] = "Thanks for signing up! Please check your Email. You may login as soon, as you activated your account."
     else
       render :action => 'new'
     end
@@ -45,7 +45,6 @@ class UsersController < ApplicationController
   end
 
   def update
-    params[:user][:login] = sanitized_login_name(params[:user][:login])
     @user = admin? ? find_user : current_user
     respond_to do |format|
       if @user.update_attributes(params[:user])
