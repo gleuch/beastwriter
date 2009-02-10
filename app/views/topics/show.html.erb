@@ -115,9 +115,9 @@
 
   </td>
   <td class="body entry-content" id="post-body-<%= post.id %>">
-<!--
-    <%= link_to_function image_tag('clearbits/comment.gif', :class => 'icon reply'), "$('reply').toggle()" if logged_in? %>
--->
+
+    <%= link_to_function image_tag('clearbits/comment.gif', :class => 'icon reply'), "$('reply').toggle()" if logged_in? && @posts.first == post %>
+
       <% if post.user.active? %>
         <%= post.body_html %>
       <% else %>
