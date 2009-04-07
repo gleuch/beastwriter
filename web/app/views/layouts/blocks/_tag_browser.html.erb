@@ -1,0 +1,4 @@
+<div class="sidebarbox">
+  <h2>Browse by tags</h2>
+  <%= tags.collect {|t| link_to t.name, tag_path(t)}.to_sentence %>
+</div>

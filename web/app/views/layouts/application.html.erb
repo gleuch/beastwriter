@@ -1,0 +1,72 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+  <%= render :partial => "layouts/head" %>
+  <body>
+
+    <div id="wrapper">
+      <div id="header">
+        <div id="logo">
+          <h1><%= link_to "Limi's Sphere of Influence", root_path %></h1>
+          <span>dabbling, frivolling, idling, loafing, loitering, playing and procrastinating</span>
+        </div>
+        <div id="topright">
+          <ul>
+            <li><a href="#searchform">search</a></li>
+            <li><a href="#main">skip to content &darr;</a></li>
+          </ul>
+        </div>
+      </div> <!-- Closes header -->
+
+      <div id="catnav">
+        <div id="toprss">
+          <a href="#">
+            <%= image_tag("rss-trans.png", :width => 65, :height => 24) %>
+          </a>
+        </div> <!-- Closes toprss -->
+        <ul id="nav">
+          <li><%= link_to "Home", root_path %></li>
+        </ul>
+      </div> <!-- Closes catnav -->
+      <div class="cleared"></div>
+      <div id="main">
+        <%= @content_for_layout %>
+      </div><!-- Closes Main -->
+      <div id="morefoot">
+        <div class="col1">
+          <h3>Looking for something?</h3>
+          <p>Use the form below to search the site:</p>
+          <p>Still not finding what you're looking for? Drop a comment on a post or contact us so we can take care of it!</p>
+        </div>
+        <div class="col2">
+          <h3>Visit our friends!</h3>
+          <p>A few highly recommended friends...</p>
+          <ul>
+            <li>Bookmark #1</li>
+          </ul>
+        </div>
+        <div class="col3">
+          <h3>Archives</h3>
+          <p>All entries, chronologically...</p>
+          <ul>
+            <% months = Post.active.group_by { |t| t.publish_at.beginning_of_month } %>
+            <% months.each do |month, post| %>
+              <li><%= link_to month.strftime('%B %Y'), archive_month_path(:year => month.strftime('%Y'), :month => month.strftime('%m')) %></li>
+            <% end %>
+          </ul>
+        </div>
+        <div class="cleared"></div>
+      </div><!-- Closes morefoot -->
+      <div id="footer">
+        <div id="footerleft">
+          <p>Powered by <a href="http://rubyonrails.org" title="Ruby on Rails">Ruby on Rails</a> and <a href="http://samk.ca/freebies/" title="WordPress theme">pixeled</a>. Sweet icons by <a href="http://famfamfam.com/">famfamfam</a>. <a href="#main">Back to top &uarr;</a></p>
+          <!-- Please don't remove my credits! I worked hard to create this theme and distribute it freely. Thanks! -->
+        </div>
+        <div id="footerright">
+          <a href="http://rubyonrails.org" title="Ruby on Rails" ><%= image_tag("rails.png") %></a>
+        </div>
+        <div class="cleared"></div>
+      </div><!-- Closes footer -->
+    </div><!-- Closes wrapper -->
+  </body>
+</html>

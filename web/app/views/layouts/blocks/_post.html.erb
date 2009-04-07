@@ -1,0 +1,10 @@
+<div id="sidebars">
+  <div id="sidebar_full">
+    <ul>
+      <li>
+        <%= render :partial => "layouts/blocks/comments", :locals => { :comments => @post.comments.active } %>
+      </li>
+    </ul>
+  </div>
+  <div class="cleared"></div>
+</div>

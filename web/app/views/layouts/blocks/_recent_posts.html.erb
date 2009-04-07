@@ -1,0 +1,8 @@
+<div class="sidebarbox">
+  <h2>Recent Posts</h2>
+    <ul>
+      <% posts.each do |post| %>
+      <li><%= link_to(post.title, post_path(post.permalink)) %></li>
+      <% end %>
+    </ul>
+</div>

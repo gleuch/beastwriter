@@ -1,0 +1,11 @@
+<div class="sidebarbox">
+  <h2>Categories</h2>
+  <% categories.each do |category| %>
+    <% if category.children.size.zero? %>
+      <%= link_to category.name, category_path(category) %><br />
+    <% else %>
+      <b><%= link_to category.name, category_path(category) %></b><br />
+      <%= category.children.collect {|c| link_to c.name, category_path(c)}.to_sentence %><br />
+    <% end %>
+  <% end %>
+</div>

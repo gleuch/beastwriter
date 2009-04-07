@@ -1,0 +1,30 @@
+<div class="sidebarbox">
+  <h2>Comments</h2>
+  <p><a href="#" onclick="Effect.BlindDown('comment_form'); return false;">Post a comment of your own...</a></p>
+  <div id="comment_form" style="display: none">
+    <br />
+    <% remote_form_for [@post, Comment.new] do |f| %>
+      <p>
+        <%= f.label :alias, "Nickname" %><br />
+        <%= f.text_field :alias %>
+      </p>
+      <p>
+        <%= f.label :website, "Website" %><br />
+        <%= f.text_field :website %>
+      </p>
+      <p>
+        <%= f.label :email, "E-mail Address (private)" %><br />
+        <%= f.text_field :email %>
+      </p>
+      <p>
+        <%= f.label :comment, "New Comment" %><br />
+        <%= f.text_area :comment, :rows => 5 %>
+      </p>
+      <p><%= f.submit "Add Comment" %></p>
+    <% end %>
+  </div>
+  <br />
+  <div id="comments">
+    <%= render :partial => @post.comments.active.order %>
+  </div>
+</div>

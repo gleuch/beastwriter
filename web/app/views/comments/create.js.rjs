@@ -1,0 +1,4 @@
+page.insert_html :top, :comments, :partial => @comment
+page[@comment].visual_effect :pulsate
+page[:comment_form].visual_effect :fade
+page[:new_comment].reset
