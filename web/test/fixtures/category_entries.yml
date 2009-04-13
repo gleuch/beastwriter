@@ -1,7 +1,15 @@
-# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
+category_entry1:
+   post_id: 1
+   category_id: 1
 
-# one:
-#   column: value
-#
-# two:
-#   column: value
+category_entry2:
+   post_id: 1
+   category_id: 2
+
+category_entry3:
+   post_id: 2
+   category_id: 1
+
+category_entry4:
+   post_id: 2
+   category_id: 3

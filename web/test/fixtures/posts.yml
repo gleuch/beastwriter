@@ -1,7 +1,20 @@
-# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
+post1:
+   title: My First Post
+   permalink: my-first-post
+   publish_at: <%= 10.days.ago.to_s(:db) %>
+   content: This is my first blog post :D
+   content_parsed: This is my first blog post :D
 
-# one:
-#   column: value
-#
-# two:
-#   column: value
+post2:
+   title: My Second Post
+   permalink: my-second-post
+   publish_at: <%= 2.days.ago.to_s(:db) %>
+   content: This is my second blog post :o
+   content_parsed: This is my second blog post :o
+
+post3:
+   title: My Third Post
+   permalink: my-third-post
+   publish_at: <%= 200.days.from_now.to_s(:db) %>
+   content: This is my third blog post, but it's in the future! :o
+   content_parsed: This is my third blog post, but it's in the future! :o

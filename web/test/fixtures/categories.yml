@@ -1,7 +1,17 @@
-# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
+category1:
+   parent_id: 0
+   name: Programming
+   permalink: programming
+   description: Posts talking about Programming
 
-# one:
-#   column: value
-#
-# two:
-#   column: value
+category2:
+   parent_id: 1
+   name: Ruby on Rails
+   permalink: ruby-on-rails
+   description: Posts talking about Ruby on Rails
+
+category3:
+   parent_id: 1
+   name: PHP
+   permalink: php
+   description: Posts talking about PHP

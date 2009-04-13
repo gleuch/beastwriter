@@ -1,15 +1,23 @@
-# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
+comment1:
+   post_id: 1
+   alias: Limi
+   ip: 127.0.0.1
+   website: http://blogs.gerbilsofwar.com/limi
+   email: lloydpick@gmail.com
+   comment: Great first post!
 
-one:
-  post_id: 1
-  user_id: 1
-  username: MyString
-  ip: MyString
-  comment: MyString
+comment2:
+   post_id: 2
+   alias: Limi
+   ip: 127.0.0.1
+   website: http://blogs.gerbilsofwar.com/limi
+   email: lloydpick@gmail.com
+   comment: Great second post!
 
-two:
-  post_id: 1
-  user_id: 1
-  username: MyString
-  ip: MyString
-  comment: MyString
+comment3:
+   post_id: 2
+   alias: Riffage
+   ip: 127.0.0.1
+   website: http://blogs.gerbilsofwar.com/limi
+   email: lloydpick@gmail.com
+   comment: Alter ego's for the win!
