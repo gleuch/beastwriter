@@ -2,7 +2,7 @@
   <div id="sidebar_full">
     <ul>
       <li>
-        <%= render :partial => "layouts/blocks/comments", :locals => { :comments => @post.comments.active } %>
+        <%= render :partial => "comments", :locals => { :comments => @post.comments.active } %>
       </li>
     </ul>
   </div>

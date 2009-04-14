@@ -1,0 +1,28 @@
+<div id="sidebars">
+  <div id="sidebar_full">
+    <ul>
+      <li>Welcome to the blog of a gamer based web programmer!</li>
+      <li>
+        <%= render :partial => "layouts/public/blocks/recent_posts", :locals => { :posts => Post.active.limit(10) } %>
+      </li>
+      <li>
+        <%= render :partial => "layouts/public/blocks/tag_browser", :locals => { :tags => Tag.all } %>
+      </li>
+    </ul>
+  </div>
+  <div id="sidebar_left">
+    <ul>
+      <li>
+        <%= render :partial => "layouts/public/blocks/categories", :locals => { :categories => Category.root } %>
+      </li>
+    </ul>
+  </div>
+  <div id="sidebar_right">
+    <ul>
+      <li>
+        <%= render :partial => "layouts/public/blocks/meta" %>
+      </li>
+    </ul>
+  </div>
+  <div class="cleared"></div>
+</div>
