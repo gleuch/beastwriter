@@ -1,0 +1,53 @@
+/* ================================================= */
+/* This file created by Aivah                        */
+/* Dated: 30th Nov 2008	                             */
+/* Copyright : 2008 Aivah.com                        */
+/* Stylesheet: tables.css                            */
+/* ================================================= */
+table {
+		border-collapse:collapse;
+		background:#fff;
+		font:normal 10px Tahoma, Verdana, Arial, Helvetica, sans-serif;
+		border-width:1px 0px 1px 0px;
+		color: #838383;
+}
+td, th 	{padding:15px;border: 1px solid #d9e8ee;text-align:center;vertical-align:top;}
+td.left	{padding: 5px 10px 0 0;	border: 1px solid #d9e8ee;text-align:left; vertical-align:top;}
+th.left	{padding:20px;border: 1px solid #d9e8ee;text-align:left; vertical-align:top;}
+tr.row2 { background:#d9e8ee;}
+caption 	{
+		padding: 10px 10px;
+		text-align: left;
+		font-size:14px;
+		font-family:"Trebuchet MS", Georgia, "Times New Roman", Times, serif;
+		font-weight: bold;
+		text-transform: uppercase;
+		background:#5b95b9;
+		color: #ececec;
+}
+
+/* ================================================= */
+/* Menu Link                                         */
+/* ================================================= */
+
+table a {text-decoration:none;}
+table a:link {color:#000000;}
+table a:visited {}
+
+/* ================================================= */
+/* Heads Footer                                      */
+/* ================================================= */
+
+thead th, tfoot th, tfoot td 	{background:#a3d2f0;font:bold 10px Arial, Helvetica, sans-serif; color:#000;text-transform:uppercase;}
+tfoot td 				{text-align:right;}
+
+/* ================================================= */
+/* Table Body                                        */
+/* ================================================= */
+
+tbody th, tbody td 	{}
+tbody th 			{white-space: nowrap;}
+tbody th a 			{color:#444;}
+.odd 				{}
+tbody tr:hover 		{background:#e4f2fb;}
+td img 			{padding:0 15px;}

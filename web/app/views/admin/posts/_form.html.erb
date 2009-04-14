@@ -1,0 +1,15 @@
+<%= f.label :title %>
+<%= f.text_field :title, :class => :medium %>
+<br/>
+<%= f.label :permalink %>
+<%= f.text_field :permalink, :class => :medium %>
+<br/>
+<%= f.label :publish_at %>
+<%= f.datetime_select :publish_at %>
+<br /><br />
+<%= f.label :content %>
+<%= f.text_area :content, :style => "width: 50%", :class => "mceEditor" %>
+<br />
+<label>
+  <%= f.submit "Submit" %>
+</label>

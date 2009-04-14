@@ -1,0 +1,178 @@
+/* ================================================= */
+/* This file created by Aivah                        */
+/* Dated: 30th Nov 2008	                             */
+/* Copyright : 2008 Aivah.com                        */
+/* Stylesheet: menu.css                              */
+/* ================================================= */
+
+/* ================================================= */
+/* Root = Horizontal, Secondary = Vertical           */
+/* ================================================= */
+
+
+ul#navmenu {
+	margin: 1px 40px 1px 40px;
+	border: 0 none;
+	padding: 0;
+	width: 800px; /*For KHTML*/
+	list-style: none;
+	height: 24px;
+	text-transform:uppercase;
+	}
+
+ul#navmenu li {
+	margin: 0;
+	border: 0 none;
+	padding: 0;
+	float: left; /*For Gecko*/
+	display: inline;
+	list-style: none;
+	position: relative;
+	height: 32px;
+	}
+
+ul#navmenu ul {
+	margin: 0;
+	border: 0 none;
+	padding: 5px;
+	border-raidus:10px;
+	-moz-border-radius-bottomleft:5px;
+	-moz-border-radius-bottomright:5px;
+	width: 160px;
+	background:#9ed0f0;
+	list-style: none;
+	display: none;
+	position: absolute;
+	top: 32px;
+	left: 0;
+	}
+
+ul#navmenu ul:after /*From IE 7 lack of compliance*/{
+	clear: both;
+	display: block;
+	font: 1px/0px serif;
+	content: ".";
+	height: 0;
+	visibility: hidden;
+	}
+
+ul#navmenu ul li {
+	width: 160px;
+	float: left; /*For IE 7 lack of compliance*/
+	display: block !important;
+	display: inline; /*For IE*/
+	}
+
+/* ================================================= */
+/* Root Menu                                         */
+/* ================================================= */
+
+ul#navmenu a {
+	padding: 5px 20px;
+	float: none !important; /*For Opera*/
+	float: left; /*For IE*/
+	display: block;
+	color: #7e7e7e;
+	font: bold 10px/22px Tahoma, Arial, Helvetica, sans-serif;
+	text-decoration: none;
+	height: auto !important;
+	height: 1%; /*For IE*/
+	}
+
+/* ================================================= */
+/* Root Menu Hover Persistence                       */
+/* ================================================= */
+ul#navmenu a:hover,
+ul#navmenu li:hover a,
+ul#navmenu li.iehover a {
+	background:#FFF url(/images/admin/legend.gif) bottom left repeat-x;
+	color: #484848;
+	}
+
+/* ================================================= */
+/* 2nd Menu                                          */
+/* ================================================= */
+ul#navmenu li:hover li a,
+ul#navmenu li.iehover li a {
+	float: none;
+	background: #9ed0f0;
+	color: #fff;
+	}
+
+/* ================================================= */
+/* 2nd Menu Hover Persistence                        */
+/* ================================================= */
+ul#navmenu li:hover li a:hover,
+ul#navmenu li:hover li:hover a,
+ul#navmenu li.iehover li a:hover,
+ul#navmenu li.iehover li.iehover a {
+	background:#FFF url(/images/admin/legend.gif) bottom left repeat-x;
+	color: #7ca2bb;
+	}
+
+/* ================================================= */
+/* 3rd Menu                                          */
+/* ================================================= */
+ul#navmenu li:hover li:hover li a,
+ul#navmenu li.iehover li.iehover li a {
+	background: #9ed0f0;
+	color: #fff;
+	}
+
+/* ================================================= */
+/* 3rd Menu Hover Persistence                        */
+/* ================================================= */
+ul#navmenu li:hover li:hover li a:hover,
+ul#navmenu li:hover li:hover li:hover a,
+ul#navmenu li.iehover li.iehover li a:hover,
+ul#navmenu li.iehover li.iehover li.iehover a {
+	background:#FFF url(/images/admin/legend.gif) bottom left repeat-x;
+	color: #7ca2bb;
+	}
+
+/* ================================================= */
+/* 4th Menu                                          */
+/* ================================================= */
+ul#navmenu li:hover li:hover li:hover li a,
+ul#navmenu li.iehover li.iehover li.iehover li a {
+	background: #9ed0f0;
+	color: #fff;
+	}
+
+/* ================================================= */
+/* 4th Menu Hover                                    */
+/* ================================================= */
+ul#navmenu li:hover li:hover li:hover li a:hover,
+ul#navmenu li.iehover li.iehover li.iehover li a:hover {
+	background:#FFF url(/images/admin/legend.gif) bottom left repeat-x;
+	color: #7ca2bb;
+	}
+
+ul#navmenu ul ul,
+ul#navmenu ul ul ul {
+	display: none;
+	position: absolute;
+	top: 0;
+	left: 160px;
+	}
+
+/* ================================================= */
+/* Do Not Move - Must Come Before display:block for Gecko */
+/* ================================================= */
+
+ul#navmenu li:hover ul ul,
+ul#navmenu li:hover ul ul ul,
+ul#navmenu li.iehover ul ul,
+ul#navmenu li.iehover ul ul ul {
+	display: none;
+	}
+
+ul#navmenu li:hover ul,
+ul#navmenu ul li:hover ul,
+ul#navmenu ul ul li:hover ul,
+ul#navmenu li.iehover ul,
+ul#navmenu ul li.iehover ul,
+ul#navmenu ul ul li.iehover ul {
+	display: block;
+	}
+

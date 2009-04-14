@@ -1,0 +1,159 @@
+/* ================================================= */
+/* This file created by Aivah                        */
+/* Dated: 30th Nov 2008	                             */
+/* Copyright : 2008 Aivah.com                        */
+/* Stylesheet: common.css                            */
+/* ================================================= */
+
+html, body, div, span, small, object, iframe, h1, h2, h3, h4, h5, h6, pre, a, abbr, blockquote, acronym, address, code, del, dfn, dl, dt, dd, em, img, q, ol, ul, li, fieldset, form, label, legend, table, caption, tbody, tfoot, thead, tr, th, td, b, p { border: 0; font-weight: inherit; font-style: inherit; font-size: 100%; font-family: inherit;  }
+
+body		{background:#cfe2eb; font:normal 10px/18px Tahoma, Arial, Helvetica, sans-serif;color: #7e7e7e;margin:0;}
+
+.clearfix:after 		{content: ".";display: block;clear: both;visibility: hidden;line-height: 0;height: 0;}
+.clearfix 				{display: inline-block;}
+html[xmlns] .clearfix 	{display: block;}
+* html .clearfix 		{height: 1%;}
+
+img { behavior: url(js/iepngfix.htc) !important; }
+d9e7ee
+
+/* ================================================= */
+/* 	 LAYOUT COLUMNS CSS                              */
+/* ================================================= */
+#wrapper	{width:100%;height:auto;margin:auto;}
+#toppart	{width:100%;height:auto;margin:auto;}
+#footer	{width:100%; height:100px;margin:auto;background:#24669e; }
+	p.copyright
+		{color:#a3d2f0;margin:auto; padding:10px 20px; }
+
+#header	{background:#24669e url(/images/admin/header.jpg) repeat-x;width:100%; overflow:auto;height:100px;}
+.logo 	{width:90%;margin:auto;}
+	.logo img 	
+		{position:absolute;top:0px;}
+	.logo span 	
+		{float:right;padding:20px 10px;color:#fff;}
+	.logo span small 
+		{color:#a3d2f0;}
+.logo a:link, .logo a:visited, .logo a:active {color:#a3d2f0;}
+.logo a:hover {color:#FFFFFF;}
+
+#middlepart	{height:100%; background:#cfe2eb; margin:auto;padding:20px;}
+#leftcolumn	{width:68%;padding: 20px 20px; background:#ffffff;-moz-border-radius: 5px;-khtml-border-radius: 5px;-webkit-border-radius: 5px;border-radius: 5px;
+float:left;}
+#rightcolumn{width:25%;padding: 10px 10px;background:#ffffff;-moz-border-radius: 5px;-khtml-border-radius: 5px;-webkit-border-radius: 5px;border-radius: 5px;float:right;}
+
+
+#menu				{background:#a3d2f0 url(/images/admin/menu.gif) repeat-x;height:35px;width:100%;}
+	#menu .topmenu	{width:900px;margin:auto;}
+
+/* ================================================= */
+/* 					LOGIN BOX CSS 					 */
+/* ================================================= */
+.loginform 	{background:#ffffff;padding:10px 10px 50px 10px;-moz-border-radius: 5px;-khtml-border-radius: 5px;-webkit-border-radius: 5px;border-radius: 5px;}
+#login form .remember {float: left; }
+#login .forgot { clear:both;float: left; }
+#login form .submit input {padding: 3px 8px;border: none;background:#3f8ec0;text-transform:uppercase;text-decoration: none; color:#FFFFFF;}
+#login form .submit input:hover {padding: 3px 8px;border: none;color:#ffffff;background:#3f8ec0;text-decoration: none;text-transform:uppercase;}
+form .submit 	{ float: right; }
+#login 		{ width: 292px; margin: 7em auto; }
+#loginerror, .message {margin: 10px 0px;	border: 1px solid #ebc7c7; color:#cf4343;	background: #ffeeee;padding: 12px;}
+#userpass, #userlogin, #useremail {font-size: 12px;	width: 97%;	padding: 3px;}
+
+
+/* ================================================= */
+/* 					LINKS CSS	 					 */
+/* ================================================= */
+
+a:link, a:visited, a:active	{color:#8bb0cb;}
+a:hover						{color:#ef5400;}
+
+/* ================================================= */
+/* 					HEADINGS CSS 					 */
+/* ================================================= */
+h1 		{ font-size: 250%;margin:10px 0;}
+h2		{ font-size: 210%;margin:8px 0;}
+h3 		{ font-size: 180%;margin:7px 0;}
+h4 		{ font-size: 140%;margin:5px 0;}
+h5 		{ font-size: 110%;margin:5px 0;}
+h6 		{ font-size: 92.5%;margin:5px 0;}
+
+/* ================================================= */
+/* 					PRE,CODE CSS 					 */
+/* ================================================= */
+pre,code	{font: 1em/1.4em  "Courier News", monospace;color: #484848;line-height: 1.5em; }
+
+
+/* ================================================= */
+/*                            NOTICES CSS            */
+/* ================================================= */
+.success 	{background: #dde6ba url(/images/admin/success.gif) 12px 50% no-repeat;border: 1px solid #60a400;-moz-border-radius:5px;border-radius:5px;}
+.error	{background: #FFEEEE url(/images/admin/error.gif) 12px 50% no-repeat;	border: 1px solid #f14545;-moz-border-radius:5px;border-radius:5px;}
+.notice 	{background: #fefedc url(/images/admin/warning.gif) 12px 50% no-repeat;border: 1px solid #ecc735;-moz-border-radius:5px;border-radius:5px;}
+	.notice, .success, .error 
+		{font-size: 100%;color:#484848;padding:10px;width:auto;margin: 0 0 20px 0px; text-align:left}
+	.notice span, .success span, .error span 
+		{font-weight: bold;font-size: 1.2em;padding: 2px 40px;}
+	.success p, .error p, .notice p 
+		{margin: 0px;padding: 0px 40px;}
+
+/* ================================================= */
+/* 					TABLE LISTS CSS 				 */
+/* ================================================= */
+
+.nums ul 	{margin:0px;padding:0 10px;}
+.nums li	{list-style:decimal;}
+
+.squares ul {margin:0px;padding:0 10px;}
+.squares li	{list-style:square;padding:0;}
+
+.circles ul {margin:0px 10px;padding:0 10px; float:right; }
+.circles li	{list-style:circle;vertical-align:top;}
+
+
+/* ================================================= */
+/* 					NOTE BOX CSS 					 */
+/* ================================================= */
+.notes 		{background: #ffffff;border: 1px solid #d8d8d8;}
+.notes		{font-size: 100%;color:#484848;padding:20px;width:auto;margin: 0 0 20px 0px; text-align:left; }
+.notes p	{margin: 0px;padding: 0px;clear:both;}
+.notes span	{font-weight: bold;font-size: 1.2em;padding-bottom: 2px; margin-bottom:10px; }
+
+
+	  /* ================================================= */
+/*               PAGINATION CSS                      */
+/* ================================================= */
+.pagelink {
+width:10px;
+font-size:9px;
+color:#435d82;
+border:1px solid #435d82;
+clear:both;
+line-height:35px;
+text-decoration:none;
+}
+
+a.pagelink:active,a.pagelink:visited,a.pagelink:link {
+width:10px;
+border:1px solid #c8dcf1;
+background:#fff url(/images/admin/pagination.gif) bottom left repeat-x;color:#435d82;
+padding:8px;
+}
+
+a.pagelink:hover {
+width:10px;
+background-color:#dae6f3;
+background:#fff url(/images/admin/pagination.gif) bottom left repeat-x;
+border:1px solid #b8d1eb;
+color:#ef5400;
+padding:8px;
+}
+
+.pagecurrent {
+width:10px;
+background-color:#dae6f3;
+background:#fff url(/images/admin/pagination.gif) bottom left repeat-x;
+border:1px solid #b8d1eb;
+color:#ef5400;
+padding:8px;
+font-size:9px;
+}

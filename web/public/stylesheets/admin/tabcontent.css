@@ -1,0 +1,37 @@
+/* ================================================= */
+/* This file created by Aivah                        */
+/* Dated: 30th Nov 2008	                             */
+/* Copyright : 2008 Aivah.com                        */
+/* Stylesheet: tabcontent.css                        */
+/* ================================================= */
+
+/* ######### CSS for Shade Tabs. Remove if not using ######### */
+
+.shadetabs{
+padding: 3px 0;
+margin-left: 0;
+margin-top: 1px;
+margin-bottom: 0;
+list-style-type: none;
+text-align: left; /*set to left, center, or right to align the menu as desired*/
+}
+
+.shadetabs li	{display: inline;margin: 0;}
+.shadetabs li a	{text-decoration: none;position: relative;z-index: 1;padding: 4px 10px;margin-right: 3px; font-weight:bold; border:1px solid #d9e7ee; text-transform:uppercase;}
+.shadetabs li a:visited	{color: #484848;}
+.shadetabs li a:hover	{text-decoration: underline;color: #484848;}
+
+.shadetabs li a.selected{ /*selected main tab style */
+		position: relative;top: 1px;}
+
+.shadetabs li a.selected{ /*selected main tab style */
+		border-bottom:0;background:#d9e7ee;}
+
+.shadetabs li a.selected:hover{ /*selected main tab style */
+		text-decoration: none;}
+
+.tabcontent		{display:none;}
+
+@media print {.tabcontent {display:block !important;}}
+
+.tabspanel	{border:1px solid #d9e7ee; width:auto; margin-bottom: 1em; padding: 10px;border-width:1px; background:#fffefc;}

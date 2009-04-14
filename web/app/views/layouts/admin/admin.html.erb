@@ -1,0 +1,138 @@
+<html>
+  <head>
+    <%= stylesheet_link_tag "admin/menu" %>
+    <%= stylesheet_link_tag "admin/common" %>
+    <%= stylesheet_link_tag "admin/form" %>
+    <%= stylesheet_link_tag "admin/tables" %>
+    <%= stylesheet_link_tag "admin/tabcontent" %>
+    <%= javascript_include_tag "admin/tabcontent" %>
+    <%= include_tiny_mce_if_needed %>
+    <title>Blog Admin</title>
+  </head>
+<body>
+<div id="wrapper">
+  <div id="header">
+    <div class="logo">
+      
+      <span>
+        Welcome [Admin] / <a href="#">Logout</a> / <a href="#">settings</a> / <a href="#">visit site</a><br/>
+        <small>Last logged in at <strong>09:30 AM </strong> ( EST ) </small>
+      </span>
+    </div>
+  </div>
+  <div id="menu">
+    <ul id="navmenu">
+      <li><a title="Free CSS Menus" href="#">Dashboard</a></li>
+      <li><a href="#">Setting</a></li>
+      <li><a href="#">Articles</a></li>
+      <li><a href="#">Manage</a>
+        <ul>
+          <li><a href="#">Template</a></li>
+          <li><a href="#">Setting</a>
+            <ul>
+              <li><a href="#">2nd Sub Menu</a></li>
+              <li><a href="#">2nd Sub Menu</a></li>
+              <li><a href="#">2nd Sub Menu</a></li>
+            </ul>
+          </li>
+          <li><a href="#">Edit CSS</a></li>
+        </ul>
+      </li>
+      <li><a href="#" target="_blank" rel="nofollow">Users</a></li>
+      <li><a href="#" target="_blank" rel="nofollow">Pages</a></li>
+      <li><a href="#" target="_blank" rel="nofollow">Settings</a></li>
+    </ul>
+  </div>
+<!-- Menu -->
+
+<div style="clear: both;"/>
+
+<!-- Content Area -->
+
+<div id="middlepart">
+
+
+<!-- Left column -->
+	<div id="leftcolumn">
+
+        <% if flash[:success] %>
+		<div class="success"><span>Congratulations!</span>
+          <p><%= flash[:success] %></p>
+		</div>
+        <% end %>
+
+        <% if flash[:error] %>
+		<div class="error"><span>Error!</span>
+          <p><%= flash[:error] %></p>
+		</div>
+        <% end %>
+
+        <% if flash[:notice] %>
+		<div class="notice"><span>This is a Warning Notice!</span>
+          <p><%= flash[:notice] %></p>
+		</div>
+        <% end %>
+        
+        <%= yield %>
+
+		<p> Lorem ipsum dolor sit amet, this is the test of code within paragraph consectetuer adipiscing elit. Dapibus velit. Nunc id purus. Proin lacus. Pellentesque mollis risus. Donec pulvinar ut, lobortis elit. Ut pretium. Vestibulum tempus. Pellentesque habitant morbi tristique senectus et metus feugiat ultrices ut, ligula. Sed sit amet dui. Morbi accumsan sit amet, ante. Sed ultricies dolor massa imperdiet id, adipiscing mauris. Nam tempor scelerisque, </p>
+
+	</div>
+<!-- Left Column -->
+
+<!-- Right Column -->
+	<div id="rightcolumn">
+
+
+		<h3>Tabs Column / Notes / Articles </h3>
+
+<!-- Tab Content Box -->
+		<ul class="shadetabs" id="countrytabs">
+			<li><a class="selected" rel="country1" href="#">Tab 1</a></li>
+			<li><a rel="country2" href="#" class="">Tab 2</a></li>
+			<li><a rel="country3" href="#" class="">Tab 3</a></li>
+			<li><a rel="country4" href="#" class="">Tab 4</a></li>
+		</ul>
+		<div class="tabspanel">
+			<div class="tabcontent" id="country1" style="display: block;"> Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Duis dignissim vulputate leo. Donec mauris. Suspendisse potenti. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos.
+				<p> Aliquam molestie, erat non ultricies elementum, ante nulla hendrerit erat, sed laoreet augue pede eget leo. Nunc iaculis, urna quis eleifend euismod </p>
+			</div>
+			<div class="tabcontent" id="country2" style="display: none;">
+				<div class="required">
+					<form name="f" method="post" action="#">
+						<fieldset>
+						<legend>Availability:</legend>
+						<input type="checkbox" value="Part-time" class="inputCheckbox" id="availability1" name="availability"/>
+						Part-time<br/>
+						<input type="checkbox" value="Part-time" class="inputCheckbox" id="availability2" name="availability"/>
+						Part-time<br/>
+						<input type="checkbox" value="Part-time" class="inputCheckbox" id="availability3" name="availability"/>
+						Part-time<br/>
+										<input type="submit" tabindex="5" id="submit4" value="submit"/>
+						<input type="reset" tabindex="6" id="reset4" value="reset"/>
+						</fieldset>
+					</form>
+				</div>
+			</div>
+			<div class="tabcontent" id="country3" style="display: none;"> Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Duis dignissim vulputate leo. Donec mauris. Suspendisse potenti. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. </div>
+			<div class="tabcontent" id="country4" style="display: none;"> Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Duis dignissim vulputate leo. Donec mauris. Suspendisse potenti. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. </div>
+		</div>
+
+<!-- Tab Content Box -->
+
+
+<!-- Notes / Articles Box -->
+		<div class="notes"><span>This is a Notice?</span>
+			<p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Duis dignissim vulputate leo. Donec mauris. Suspendisse potenti. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Aliquam molestie, erat non ultricies elementum, ante nulla hendrerit erat, sed laoreet augue pede eget leo. Nunc iaculis, urna quis eleifend euismod, metus metus dapibus diam, sed ultrices quam dui vitae ligula. Donec eget enim sit amet risus imperdiet feugiat. Sed volutpat, ante at pharetra euismod, est mauris elementum ante, rutrum dictum diam metus sit amet sapien. Sed tristique faucibus felis. Mauris ultrices laoreet tortor. Nulla vehicula, diam ornare ullamcorper convallis, est turpis feugiat eros, et venenatis arcu ipsum at erat. Mauris volutpat tincidunt nulla. Praesent ante lacus, volutpat eu, convallis vel, vulputate ut, nibh. </p>
+		</div>
+<!-- Notes / Articles Box -->
+
+	</div>
+<!-- Content -->
+
+</div>
+<!-- Wrapper -->
+
+</div>
+</body>
+</html>

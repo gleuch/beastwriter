@@ -1,0 +1,330 @@
+<html>
+  <head>
+    <%= stylesheet_link_tag "admin/menu" %>
+    <%= stylesheet_link_tag "admin/common" %>
+    <%= stylesheet_link_tag "admin/form" %>
+    <%= stylesheet_link_tag "admin/tables" %>
+    <%= stylesheet_link_tag "admin/tabcontent" %>
+    <%= javascript_include_tag "admin/tabcontent" %>
+    <%= include_tiny_mce_if_needed %>
+    <title>Blog Admin</title>
+  </head>
+<body>
+<div id="wrapper">
+  <div id="header">
+    <div class="logo">
+
+      <span>
+        Welcome [Admin] / <a href="#">Logout</a> / <a href="#">settings</a> / <a href="#">visit site</a><br/>
+        <small>Last logged in at <strong>09:30 AM </strong> ( EST ) </small>
+      </span>
+    </div>
+  </div>
+  <div id="menu">
+    <ul id="navmenu">
+      <li><a title="Free CSS Menus" href="#">Dashboard</a></li>
+      <li><a href="#">Setting</a></li>
+      <li><a href="#">Articles</a></li>
+      <li><a href="#">Manage</a>
+        <ul>
+          <li><a href="#">Template</a></li>
+          <li><a href="#">Setting</a>
+            <ul>
+              <li><a href="#">2nd Sub Menu</a></li>
+              <li><a href="#">2nd Sub Menu</a></li>
+              <li><a href="#">2nd Sub Menu</a></li>
+            </ul>
+          </li>
+          <li><a href="#">Edit CSS</a></li>
+        </ul>
+      </li>
+      <li><a href="#" target="_blank" rel="nofollow">Users</a></li>
+      <li><a href="#" target="_blank" rel="nofollow">Pages</a></li>
+      <li><a href="#" target="_blank" rel="nofollow">Settings</a></li>
+    </ul>
+  </div>
+<!-- Menu -->
+
+<div style="clear: both;"/>
+
+<!-- Content Area -->
+
+<div id="middlepart">
+
+
+<!-- Left column -->
+	<div id="leftcolumn">
+
+        <%= yield %>
+
+		<p> Lorem ipsum dolor sit amet, this is the test of code within paragraph consectetuer adipiscing elit. Dapibus velit. Nunc id purus. Proin lacus. Pellentesque mollis risus. Donec pulvinar ut, lobortis elit. Ut pretium. Vestibulum tempus. Pellentesque habitant morbi tristique senectus et metus feugiat ultrices ut, ligula. Sed sit amet dui. Morbi accumsan sit amet, ante. Sed ultricies dolor massa imperdiet id, adipiscing mauris. Nam tempor scelerisque, </p>
+
+<!-- Form Box 1 -->
+		<form name="f" method="post" action="#">
+			<fieldset>
+			<legend>Input Fields without defination </legend>
+			<label accesskey="f" for="firstname">Input Field: </label>
+			<input type="text" title="first name" value="class=tiny" tabindex="2" name="firstname" class="tiny"/>
+			<br/>
+			<label accesskey="f" for="firstname">Input Field: </label>
+			<input type="text" title="first name" value="class=narrow" tabindex="2" name="firstname" class="narrow"/>
+			<br/>
+			<label accesskey="f" for="firstname">Input Field: </label>
+			<input type="text" title="first name" value="class=medium" tabindex="2" name="firstname" class="medium"/>
+			<br/>
+			<label accesskey="f" for="firstname">Input Field: </label>
+			<input type="text" title="first name" value="class=large" tabindex="2" name="firstname" class="large"/>
+			<br/>
+			<label accesskey="c">Text Area Field: </label>
+			<textarea title="comments" tabindex="4" cols="50" rows="4" class="textbox" name="comments"></textarea>
+			<br/>
+			<label/>
+			<input type="submit" tabindex="5" id="submit1" value="submit"/>
+			<input type="reset" tabindex="6" id="reset1" value="reset"/>
+			</fieldset>
+<!-- Form Box 1 -->
+
+<!-- Form Box 2 -->
+			<fieldset>
+			<legend>Input Fields With defination </legend>
+			<label accesskey="f" for="firstname">Input Field: </label>
+			<input type="text" title="first name" value="" tabindex="2" name="firstname"/>
+			<small>Length must be between 3 and 20 characters.</small> <br/>
+			<label accesskey="f" for="firstname">Input Field: </label>
+			<input type="text" title="first name" value="" tabindex="2" name="firstname"/>
+			<small>Length must be between 3 and 20 characters.</small> <br/>
+			<label accesskey="e" class="required" for="email">Bold Small Field: </label>
+			<input type="text" title="email" tabindex="3" name="email" id="email"/>
+			<small>Your email address is safe with us, until we're acquired.</small> <br/>
+			<label accesskey="c">Text Area Field Full: </label>
+			<textarea title="comments" tabindex="4" cols="50" rows="4" name="comments"></textarea>
+			<br/>
+			<label/>
+			<input type="submit" tabindex="5" id="submit2" value="submit"/>
+			<input type="reset" tabindex="6" id="reset2" value="reset"/>
+			</fieldset>
+<!-- Form Box 2 -->
+
+<!-- Form Box 3 -->
+			<fieldset>
+			<legend>Preferences</legend>
+			<label for="type">Select Option<em>*</em></label>
+			<select id="type">
+				<option>option value 1</option>
+				<option>option value 2</option>
+			</select>
+			<br/>
+			<label for="viewemail0">Radio Boxes:</label>
+			<dl class="clearfix">
+				<dt>
+					<label for="viewemail1">
+					<input type="radio" checked="checked" value="1" id="viewemail1" name="viewemail"/>
+					Yes</label>
+					<label for="viewemail0">
+					<input type="radio" value="0" id="viewemail0" name="viewemail"/>
+					No</label>
+				</dt>
+			</dl>
+			</fieldset>
+<!-- Form Box 3 -->
+		</form>
+
+<!-- Mini Icons -->
+		<img height="16" width="16" alt="" src="images/icon-sticky.gif"/>
+		<img height="16" width="16" alt="" src="images/icon-success.gif"/>
+		<img height="16" width="16" alt="" src="images/icon-sound.gif"/>
+		<img height="16" width="16" alt="" src="images/icon-refresh.gif"/>
+		<img height="16" width="16" alt="" src="images/icon-refresh.gif"/>
+		<img height="16" width="16" alt="" src="images/icon-open.gif"/>
+		<img height="16" width="16" alt="" src="images/icon-locked.gif"/>
+		<img height="16" width="16" alt="" src="images/icon-edit.gif"/>
+		<img height="16" width="16" alt="" src="images/icon-delete.gif"/>
+		<img height="16" width="16" alt="" src="images/icon-delete.gif"/>
+		<img height="16" width="16" alt="" src="images/icon-cut.gif"/>
+		<img height="16" width="16" alt="" src="images/icon-add.gif"/>
+<!-- Mini Icons -->
+
+		<br/>
+	<br/>
+<!-- Success Box -->
+		<div class="success"><span>Congratulations!</span>
+			<p> This is the style of fonts your can use...</p>
+		</div>
+<!-- Success Box -->
+
+<!-- Error Box -->
+		<div class="error"><span>Error!</span>
+			<p> This is the style of fonts your can use...</p>
+		</div>
+<!-- Error Box -->
+
+<!-- Warning Box -->
+		<div class="notice"><span>This is a Warning Notice!</span>
+			<p> This is the style of fonts your can use...</p>
+		</div>
+<!-- Warning Box -->
+
+		<br/>
+
+<!-- Tables 1 -->
+		<table width="100%" cellspacing="0" cellpadding="0" border="0">
+		<caption>Common Usenet Abbreviations</caption>
+			<thead>
+				<tr>
+					<th>Title</th>
+					<th>User</th>
+					<th>Description</th>
+					<th>Views</th>
+					<th>Status</th>
+					<th>Action</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr>
+					<td>Lorem Ipsum</td>
+					<td><a href="#">Username</a></td>
+					<td>username@domain.com</td>
+					<td>10</td>
+					<td>Enabled</td>
+					<td><a href="#" class="edit">edit</a><a href="#" class="add">add</a><a href="#" class="publish">publish</a><a href="#" class="delete">delete</a></td>
+				</tr>
+				<tr class="row2">
+					<td>Lorem Ipsum</td>
+					<td><a href="#">Username</a></td>
+					<td>username@domain.com</td>
+					<td>10</td>
+					<td>Enabled</td>
+					<td><a href="#" class="edit">edit</a><a href="#" class="add">add</a><a href="#" class="publish">publish</a><a href="#" class="delete">delete</a></td>
+				</tr>
+				<tr>
+					<td>Lorem Ipsum</td>
+					<td><a href="#">Username</a></td>
+					<td>username@domain.com</td>
+					<td>100</td>
+					<td>Enabled</td>
+					<td><a href="#" class="edit">edit</a><a href="#" class="add">add</a><a href="#" class="publish">publish</a><a href="#" class="delete">delete</a></td>
+				</tr>
+			</tbody>
+		</table>
+<!-- Tables 1 -->
+		<br/>
+
+<!-- Tables 2 -->
+		<form method="post" action="#">
+			<table width="100%" cellspacing="0" cellpadding="0">
+				<caption>
+				<input type="checkbox"/>
+				Select / <input type="submit" tabindex="5" id="submit3" value="delete"/>
+				</caption>
+				<thead>
+				<tr>
+					<th class="left">User Details </th>
+					<th>Views</th>
+					<th>Details</th>
+					<th width="120">Action</th>
+				</tr>
+				</thead>
+
+				<tbody>
+					<tr class="alt">
+						<td class="left"><ul class="nums">
+								<li>Nulla ut nisi cursus ligula porta elementum.</li>
+								<li>Duis vitae pede vestibulum augue euismod varius.</li>
+								<li>Suspendisse eu quam sed metus tristique rhoncus.</li>
+							</ul></td>
+						<td>10</td>
+						<td>Enabled</td>
+						<td><a class="iconsmini" href="#"> <img src="images/icon-edit.gif" alt=""/> </a> <a class="iconsmini" href="#"> <img src="images/icon-add.gif" alt=""/> </a> <a class="iconsmini" href="#"> <img src="images/icon-success.gif" alt=""/> </a> <a class="iconsmini" href="#"> <img src="images/icon-delete.gif" alt=""/> </a></td>
+					</tr>
+					<tr>
+						<td class="left"><ul class="squares">
+								<li>Nulla ut nisi cursus ligula porta elementum.</li>
+								<li>Duis vitae pede vestibulum augue euismod varius.</li>
+								<li>Suspendisse eu quam sed metus tristique rhoncus.</li>
+							</ul></td>
+						<td>10</td>
+						<td>Enabled</td>
+						<td><a class="iconsmini" href="#"> <img src="images/icon-edit.gif" alt=""/> </a> <a class="iconsmini" href="#"> <img src="images/icon-add.gif" alt=""/> </a> <a class="iconsmini" href="#"> <img src="images/icon-success.gif" alt=""/> </a> <a class="iconsmini" href="#"> <img src="images/icon-delete.gif" alt=""/> </a> </td>
+					</tr>
+					<tr>
+						<td class="left"><img hspace="5" height="80" width="80" style="float: left;" alt="" src="images/avatar.jpg"/>
+							<ul class="circles">
+								<li>Mame : Linda Rosy</li>
+								<li>Age : 22 </li>
+								<li>Location : California (USA)</li>
+								<li>Description : Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Ut semper nunc id magna. Cras auctor quam non dui. Maecenas diam mauris, hendrerit quis, consectetuer ut, laoreet eu, felis</li>
+							</ul></td>
+						<td>10</td>
+						<td>Enabled</td>
+						<td><a class="iconsmini" href="#"> <img src="images/icon-edit.gif" alt=""/> </a> <a class="iconsmini" href="#"> <img src="images/icon-add.gif" alt=""/> </a> <a class="iconsmini" href="#"> <img src="images/icon-success.gif" alt=""/> </a> <a class="iconsmini" href="#"> <img src="images/icon-delete.gif" alt=""/> </a> </td>
+					</tr>
+				</tbody>
+			</table>
+		</form>
+<!-- Tables 2 -->
+		<br/>
+
+<!-- Pagination -->
+		<a class="pagelink" href="#">Previous</a> <a class="pagelink" href="#">1</a> <a class="pagelink" href="#">2</a> <a class="pagecurrent" href="#">3</a> <a class="pagelink" href="#">4</a> <a class="pagelink" href="#">5</a> <a class="pagelink" href="#">Next</a>
+<!-- Pagination -->
+
+		<br/>
+	</div>
+<!-- Left Column -->
+
+<!-- Right Column -->
+	<div id="rightcolumn">
+
+
+		<h3>Tabs Column / Notes / Articles </h3>
+
+<!-- Tab Content Box -->
+		<ul class="shadetabs" id="countrytabs">
+			<li><a class="selected" rel="country1" href="#">Tab 1</a></li>
+			<li><a rel="country2" href="#" class="">Tab 2</a></li>
+			<li><a rel="country3" href="#" class="">Tab 3</a></li>
+			<li><a rel="country4" href="#" class="">Tab 4</a></li>
+		</ul>
+		<div class="tabspanel">
+			<div class="tabcontent" id="country1" style="display: block;"> Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Duis dignissim vulputate leo. Donec mauris. Suspendisse potenti. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos.
+				<p> Aliquam molestie, erat non ultricies elementum, ante nulla hendrerit erat, sed laoreet augue pede eget leo. Nunc iaculis, urna quis eleifend euismod </p>
+			</div>
+			<div class="tabcontent" id="country2" style="display: none;">
+				<div class="required">
+					<form name="f" method="post" action="#">
+						<fieldset>
+						<legend>Availability:</legend>
+						<input type="checkbox" value="Part-time" class="inputCheckbox" id="availability1" name="availability"/>
+						Part-time<br/>
+						<input type="checkbox" value="Part-time" class="inputCheckbox" id="availability2" name="availability"/>
+						Part-time<br/>
+						<input type="checkbox" value="Part-time" class="inputCheckbox" id="availability3" name="availability"/>
+						Part-time<br/>
+										<input type="submit" tabindex="5" id="submit4" value="submit"/>
+						<input type="reset" tabindex="6" id="reset4" value="reset"/>
+						</fieldset>
+					</form>
+				</div>
+			</div>
+			<div class="tabcontent" id="country3" style="display: none;"> Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Duis dignissim vulputate leo. Donec mauris. Suspendisse potenti. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. </div>
+			<div class="tabcontent" id="country4" style="display: none;"> Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Duis dignissim vulputate leo. Donec mauris. Suspendisse potenti. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. </div>
+		</div>
+
+<!-- Tab Content Box -->
+
+
+<!-- Notes / Articles Box -->
+		<div class="notes"><span>This is a Notice?</span>
+			<p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Duis dignissim vulputate leo. Donec mauris. Suspendisse potenti. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Aliquam molestie, erat non ultricies elementum, ante nulla hendrerit erat, sed laoreet augue pede eget leo. Nunc iaculis, urna quis eleifend euismod, metus metus dapibus diam, sed ultrices quam dui vitae ligula. Donec eget enim sit amet risus imperdiet feugiat. Sed volutpat, ante at pharetra euismod, est mauris elementum ante, rutrum dictum diam metus sit amet sapien. Sed tristique faucibus felis. Mauris ultrices laoreet tortor. Nulla vehicula, diam ornare ullamcorper convallis, est turpis feugiat eros, et venenatis arcu ipsum at erat. Mauris volutpat tincidunt nulla. Praesent ante lacus, volutpat eu, convallis vel, vulputate ut, nibh. </p>
+		</div>
+<!-- Notes / Articles Box -->
+
+	</div>
+<!-- Content -->
+
+</div>
+<!-- Wrapper -->
+
+</div>
+</body>
+</html>

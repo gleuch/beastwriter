@@ -1,0 +1,6 @@
+<% form_for(@post, :url => admin_post_path, :method => :put) do |f| %>
+  <fieldset>
+    <legend>Edit Post</legend>
+    <%= render :partial => 'form', :locals => {:f => f} %>
+  </fieldset>
+<% end %>
