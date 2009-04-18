@@ -1,3 +1,19 @@
+# == Schema Information
+# Schema version: 20090404170416
+#
+# Table name: posts
+#
+#  id             :integer         not null, primary key
+#  user_id        :string(255)
+#  title          :string(250)
+#  permalink      :string(250)
+#  publish_at     :datetime
+#  content        :string(255)
+#  content_parsed :string(255)
+#  created_at     :datetime
+#  updated_at     :datetime
+#
+
 class Post < ActiveRecord::Base
 
   # Associations

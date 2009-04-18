@@ -1,3 +1,20 @@
+# == Schema Information
+# Schema version: 20090404170416
+#
+# Table name: comments
+#
+#  id         :integer         not null, primary key
+#  post_id    :integer
+#  alias      :string(255)
+#  ip         :string(255)
+#  website    :string(255)
+#  email      :string(255)
+#  comment    :string(255)
+#  created_at :datetime
+#  updated_at :datetime
+#  deleted_at :datetime
+#
+
 comment1:
    post_id: 1
    alias: Limi

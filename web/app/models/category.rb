@@ -1,3 +1,17 @@
+# == Schema Information
+# Schema version: 20090404170416
+#
+# Table name: categories
+#
+#  id          :integer         not null, primary key
+#  parent_id   :integer         default(0)
+#  name        :string(50)
+#  permalink   :string(50)
+#  description :string(300)
+#  created_at  :datetime
+#  updated_at  :datetime
+#
+
 class Category < ActiveRecord::Base
 
   # Associations
