@@ -55,4 +55,21 @@ class Post < ActiveRecord::Base
     find(:all, :conditions => ["YEAR(publish_at) = ?", params[:year]])
   end
 
+  # Methods
+
+  # Sets the publish_at time to the current UTC time
+  def publish_now
+    self.publish_at = Time.now.utc
+    self.save!
+  end
+
+  # Boolean on wether the post is published or not
+  def published?
+    if self.publish_at < Time.now.utc
+      true
+    else
+      false
+    end
+  end
+
 end

@@ -17,8 +17,8 @@
         <td><%= post.permalink %></td>
         <td><%= post.publish_at %></td>
         <td>
+          <% unless post.published? %><a href="#" class="publish">publish</a><% end %>
           <%= link_to "edit", edit_admin_post_path(post), :class => :edit %>
-          <a href="#" class="publish">publish</a>
           <%= link_to "delete", admin_post_path(post), :method => :delete, :class => :delete %>
         </td>
       </tr>

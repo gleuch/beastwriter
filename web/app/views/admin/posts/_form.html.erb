@@ -6,6 +6,12 @@
 <br/>
 <%= f.label :publish_at %>
 <%= f.datetime_select :publish_at %>
+<br />
+<%= f.label :categories %>
+<% for category in Category.find(:all) %>
+  <%= check_box_tag "post[category_ids][]", category.id, @post.categories.include?(category) %>
+  <%= category.name %>
+<% end %>
 <br /><br />
 <%= f.label :content %>
 <%= f.text_area :content, :style => "width: 50%", :class => "mceEditor" %>

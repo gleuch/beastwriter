@@ -1,0 +1,32 @@
+<%= link_to "new category", new_admin_category_path, :class => :add %>
+<br /><br />
+<table width="100%" cellspacing="0" cellpadding="0" border="0">
+  <caption>Categories</caption>
+  <thead>
+    <tr>
+      <th>ID</th>
+      <th>Parent</th>
+      <th>Name</th>
+      <th>Permalink</th>
+      <th>Description</th>
+      <th>Action</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @categories.each do |category| %>
+      <tr <%= cycle("", "class=\"row2\"") %>>
+        <td><%= category.id %></td>
+        <td><%= category.parent_id %></td>
+        <td><%= category.name %></td>
+        <td><%= category.permalink %></td>
+        <td><%= category.description %></td>
+        <td>
+          <%= link_to "edit", edit_admin_category_path(category), :class => :edit %>
+          <%= link_to "delete", admin_category_path(category), :method => :delete, :class => :delete %>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+<br />
+<%= link_to "new category", new_admin_category_path, :class => :add %>

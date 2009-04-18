@@ -1,0 +1,16 @@
+<%= f.label :parent_id %>
+<%= tree_select(Category.find(:all, :conditions => "parent_id = 0"), 'category', 'parent_id', @category) %>
+
+<br/>
+<%= f.label :name %>
+<%= f.text_field :name, :class => :medium %>
+<br/>
+<%= f.label :permalink %>
+<%= f.text_field :permalink, :class => :medium %>
+<br /><br />
+<%= f.label :description %>
+<%= f.text_area :description, :style => "width: 50%", :class => "mceEditor" %>
+<br />
+<label>
+  <%= f.submit "Submit" %>
+</label>
