@@ -22,25 +22,11 @@
   </div>
   <div id="menu">
     <ul id="navmenu">
-      <li><a title="Free CSS Menus" href="#">Dashboard</a></li>
-      <li><a href="#">Setting</a></li>
-      <li><a href="#">Articles</a></li>
-      <li><a href="#">Manage</a>
-        <ul>
-          <li><a href="#">Template</a></li>
-          <li><a href="#">Setting</a>
-            <ul>
-              <li><a href="#">2nd Sub Menu</a></li>
-              <li><a href="#">2nd Sub Menu</a></li>
-              <li><a href="#">2nd Sub Menu</a></li>
-            </ul>
-          </li>
-          <li><a href="#">Edit CSS</a></li>
-        </ul>
-      </li>
-      <li><a href="#" target="_blank" rel="nofollow">Users</a></li>
-      <li><a href="#" target="_blank" rel="nofollow">Pages</a></li>
-      <li><a href="#" target="_blank" rel="nofollow">Settings</a></li>
+      <li><a href="#">Dashboard</a></li>
+      <li><%= link_to "Categories", admin_categories_path %></li>
+      <li><%= link_to "Comments", admin_comments_path %></li>
+      <li><%= link_to "Links", admin_links_path %></li>
+      <li><%= link_to "Posts", admin_posts_path %></li>
     </ul>
   </div>
 <!-- Menu -->

@@ -1,0 +1,30 @@
+<%= link_to "new comment", new_admin_comment_path, :class => :add %>
+<br /><br />
+<table width="100%" cellspacing="0" cellpadding="0" border="0">
+  <caption>Comments</caption>
+  <thead>
+    <tr>
+      <th>ID</th>
+      <th>Alias</th>
+      <th>Post</th>
+      <th>Comment</th>
+      <th>Action</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @comments.each do |comment| %>
+      <tr <%= cycle("", "class=\"row2\"") %>>
+        <td><%= comment.id %></td>
+        <td><%= comment.alias %></td>
+        <td><%= link_to comment.post.title, admin_post_path(comment.post) %></td>
+        <td><%= comment.comment %></td>
+        <td>
+          <%= link_to "edit", edit_admin_comment_path(comment), :class => :edit %>
+          <%= link_to "delete", admin_comment_path(comment), :method => :delete, :class => :delete %>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+<br />
+<%= link_to "new comment", new_admin_comment_path, :class => :add %>

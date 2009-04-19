@@ -13,9 +13,10 @@ ActionController::Routing::Routes.draw do |map|
 
   # Admin Routes
   map.namespace(:admin) do |admin|
-    admin.resources :posts
     admin.resources :categories
+    admin.resources :comments
     admin.resources :links
+    admin.resources :posts
   end
   
 end

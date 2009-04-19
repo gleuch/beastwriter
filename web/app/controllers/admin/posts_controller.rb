@@ -4,7 +4,7 @@ class Admin::PostsController < Admin::ApplicationController
   uses_tiny_mce
 
   def index
-    @posts = Post.all
+    @posts = Post.find(:all, :order => "id desc")
 
     respond_to do |format|
       format.html

@@ -1,0 +1,22 @@
+<%= f.label :post %>
+<%= collection_select(:comment, :post_id, Post.find(:all), :id, :title, :class =>"medium") %>
+<br />
+<%= f.label :alias %>
+<%= f.text_field :alias, :class => :medium %>
+<br/>
+<%= f.label :ip %>
+<%= f.text_field :ip, :class => :medium %>
+<br/>
+<%= f.label :email %>
+<%= f.text_field :email, :class => :medium %>
+<br/>
+<%= f.label :website %>
+<%= f.text_field :website, :class => :medium %>
+<br />
+<%= f.label :comment %>
+<%= f.text_area :comment, :class => :medium %>
+<br/>
+<br />
+<label>
+  <%= f.submit "Submit" %>
+</label>
