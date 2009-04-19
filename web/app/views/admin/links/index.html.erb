@@ -1,0 +1,28 @@
+<%= link_to "new link", new_admin_link_path, :class => :add %>
+<br /><br />
+<table width="100%" cellspacing="0" cellpadding="0" border="0">
+  <caption>Links</caption>
+  <thead>
+    <tr>
+      <th>ID</th>
+      <th>Name</th>
+      <th>URL</th>
+      <th>Action</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @links.each do |link| %>
+      <tr <%= cycle("", "class=\"row2\"") %>>
+        <td><%= link.id %></td>
+        <td><%= link.name %></td>
+        <td><%= link.url %></td>
+        <td>
+          <%= link_to "edit", edit_admin_link_path(link), :class => :edit %>
+          <%= link_to "delete", admin_link_path(link), :method => :delete, :class => :delete %>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+<br />
+<%= link_to "new link", new_admin_link_path, :class => :add %>

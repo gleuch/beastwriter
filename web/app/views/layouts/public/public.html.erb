@@ -34,15 +34,17 @@
       </div><!-- Closes Main -->
       <div id="morefoot">
         <div class="col1">
-          <h3>Looking for something?</h3>
-          <p>Use the form below to search the site:</p>
-          <p>Still not finding what you're looking for? Drop a comment on a post or contact us so we can take care of it!</p>
+          <h3>So who are you then?</h3>
+          <p>I'm a Ruby on Rails web developer and I tend to work in the online PC gaming market.</p>
+          <p>However with the current economic climate I'm currently looking for a new job in the London area.</p>
         </div>
         <div class="col2">
-          <h3>Visit our friends!</h3>
+          <h3>Visit my friends!</h3>
           <p>A few highly recommended friends...</p>
           <ul>
-            <li>Bookmark #1</li>
+            <% Link.find(:all, :order => :name).each do |link| %>
+              <li><%= link_to link.name, link.url %></li>
+            <% end %>
           </ul>
         </div>
         <div class="col3">
@@ -59,8 +61,7 @@
       </div><!-- Closes morefoot -->
       <div id="footer">
         <div id="footerleft">
-          <p>Powered by <a href="http://rubyonrails.org" title="Ruby on Rails">Ruby on Rails</a> and <a href="http://samk.ca/freebies/" title="WordPress theme">pixeled</a>. Sweet icons by <a href="http://famfamfam.com/">famfamfam</a>. <a href="#main">Back to top &uarr;</a></p>
-          <!-- Please don't remove my credits! I worked hard to create this theme and distribute it freely. Thanks! -->
+          <p>Powered by <a href="http://rubyonrails.org" title="Ruby on Rails">Ruby on Rails</a>. Theme by <a href="http://samk.ca/freebies/" title="WordPress theme">pixeled</a>. Icons by <a href="http://famfamfam.com/">famfamfam</a>. <a href="#main">Back to top &uarr;</a></p>
         </div>
         <div id="footerright">
           <a href="http://rubyonrails.org" title="Ruby on Rails" ><%= image_tag("rails.png") %></a>

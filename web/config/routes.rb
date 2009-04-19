@@ -15,6 +15,7 @@ ActionController::Routing::Routes.draw do |map|
   map.namespace(:admin) do |admin|
     admin.resources :posts
     admin.resources :categories
+    admin.resources :links
   end
   
 end

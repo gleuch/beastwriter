@@ -46,6 +46,19 @@ class Admin::CategoriesController < Admin::ApplicationController
     end
   end
 
+  def update
+    respond_to do |format|
+      if @category.update_attributes(params[:category])
+        flash[:success] = 'Category was successfully updated'
+        format.html { redirect_to(admin_category_path(@category)) }
+        format.xml  { head :ok }
+      else
+        format.html { render :action => "edit" }
+        format.xml  { render :xml => @category.errors, :status => :unprocessable_entity }
+      end
+    end
+  end
+
 
   private
 
