@@ -1,3 +1,6 @@
 [submodule "web/vendor/plugins/tiny_mce"]
 	path = web/vendor/plugins/tiny_mce
 	url = git://github.com/kete/tiny_mce.git
+[submodule "web/vendor/plugins/rakismet"]
+	path = web/vendor/plugins/rakismet
+	url = git://github.com/jfrench/rakismet.git
