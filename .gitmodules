@@ -4,3 +4,6 @@
 [submodule "web/vendor/plugins/rakismet"]
 	path = web/vendor/plugins/rakismet
 	url = git://github.com/jfrench/rakismet.git
+[submodule "web/vendor/plugins/pingback_engine"]
+	path = web/vendor/plugins/pingback_engine
+	url = git://github.com/apotonick/pingback_engine.git
