@@ -7,3 +7,6 @@
 [submodule "web/vendor/plugins/pingback_engine"]
 	path = web/vendor/plugins/pingback_engine
 	url = git://github.com/apotonick/pingback_engine.git
+[submodule "web/vendor/plugins/permalink_fu"]
+	path = web/vendor/plugins/permalink_fu
+	url = git://github.com/technoweenie/permalink_fu.git
