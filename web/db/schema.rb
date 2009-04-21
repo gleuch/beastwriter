@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20090404170416) do
+ActiveRecord::Schema.define(:version => 20090419215729) do
 
   create_table "categories", :force => true do |t|
     t.integer  "parent_id",                  :default => 0
@@ -37,6 +37,14 @@ ActiveRecord::Schema.define(:version => 20090404170416) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.datetime "deleted_at"
+  end
+
+  create_table "links", :force => true do |t|
+    t.string   "name",       :limit => 50
+    t.string   "url",        :limit => 100
+    t.datetime "deleted_at"
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   create_table "posts", :force => true do |t|
