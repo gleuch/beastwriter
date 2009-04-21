@@ -39,3 +39,24 @@ Rails::Initializer.run do |config|
   # config.i18n.load_path += Dir[Rails.root.join('my', 'locales', '*.{rb,yml}')]
   # config.i18n.default_locale = :de
 end
+
+Pingback.save_callback do |ping|
+    comment = Comment.new
+    comment.alias      = ping.title
+    comment.website    = ping.source_uri
+    comment.comment    = ping.content
+    comment.created_at = ping.time
+
+    referenced_post = Post.find_by_url(ping.target_uri)
+
+    if referenced_post
+      comment.post_id = referenced_post.id
+      comment.save
+
+      ping.reply_ok # report success.
+    else
+      # report error:
+      ping.reply_target_uri_does_not_accept_posts
+    end
+  end
+  

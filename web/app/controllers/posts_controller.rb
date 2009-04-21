@@ -1,5 +1,8 @@
 class PostsController < ApplicationController
 
+  include PingbackHelper
+  helper :pingback
+
   def index
     @posts = Post.active.limit(5)
 
@@ -12,6 +15,7 @@ class PostsController < ApplicationController
   end
 
   def show
+    set_xpingback_header
     @post = Post.active.find_by_permalink(params[:id]) if params[:id]
     @post = Post.active.find_by_permalink(params[:post_id]) if params[:post_id]
     set_title(@post.title)

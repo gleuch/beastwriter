@@ -18,5 +18,8 @@ ActionController::Routing::Routes.draw do |map|
     admin.resources :links
     admin.resources :posts
   end
+
+  # Needed for pingbacks
+  map.connect ':controller/:action/:id.:format'
   
 end
