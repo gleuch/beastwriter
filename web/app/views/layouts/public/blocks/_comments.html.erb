@@ -5,20 +5,20 @@
     <br />
     <% remote_form_for [@post, Comment.new] do |f| %>
       <p>
-        <%= f.label :alias, "Nickname" %><br />
-        <%= f.text_field :alias %>
+        <%= f.label :author, "Nickname" %><br />
+        <%= f.text_field :author %>
       </p>
       <p>
-        <%= f.label :website, "Website" %><br />
-        <%= f.text_field :website %>
+        <%= f.label :author_url, "Website" %><br />
+        <%= f.text_field :author_url %>
       </p>
       <p>
-        <%= f.label :email, "E-mail Address (private)" %><br />
-        <%= f.text_field :email %>
+        <%= f.label :author_email, "E-mail Address (private)" %><br />
+        <%= f.text_field :author_email %>
       </p>
       <p>
-        <%= f.label :comment, "New Comment" %><br />
-        <%= f.text_area :comment, :rows => 5 %>
+        <%= f.label :content, "New Comment" %><br />
+        <%= f.text_area :content, :rows => 5 %>
       </p>
       <p><%= f.submit "Add Comment" %></p>
     <% end %>

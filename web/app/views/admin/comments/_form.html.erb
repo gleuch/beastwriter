@@ -1,20 +1,20 @@
 <%= f.label :post %>
 <%= collection_select(:comment, :post_id, Post.find(:all), :id, :title, :class =>"medium") %>
 <br />
-<%= f.label :alias %>
-<%= f.text_field :alias, :class => :medium %>
+<%= f.label :author %>
+<%= f.text_field :author, :class => :medium %>
 <br/>
-<%= f.label :ip %>
-<%= f.text_field :ip, :class => :medium %>
+<%= f.label :user_ip %>
+<%= f.text_field :user_ip, :class => :medium %>
 <br/>
-<%= f.label :email %>
-<%= f.text_field :email, :class => :medium %>
+<%= f.label :author_email %>
+<%= f.text_field :author_email, :class => :medium %>
 <br/>
-<%= f.label :website %>
-<%= f.text_field :website, :class => :medium %>
+<%= f.label :author_url %>
+<%= f.text_field :author_url, :class => :medium %>
 <br />
-<%= f.label :comment %>
-<%= f.text_area :comment, :class => :medium %>
+<%= f.label :content %>
+<%= f.text_area :content, :class => :medium %>
 <br/>
 <br />
 <label>

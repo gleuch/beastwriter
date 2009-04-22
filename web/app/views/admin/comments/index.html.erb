@@ -5,7 +5,7 @@
   <thead>
     <tr>
       <th>ID</th>
-      <th>Alias</th>
+      <th>Author</th>
       <th>Post</th>
       <th>Comment</th>
       <th>Action</th>
@@ -15,9 +15,9 @@
     <% @comments.each do |comment| %>
       <tr <%= cycle("", "class=\"row2\"") %>>
         <td><%= comment.id %></td>
-        <td><%= comment.alias %></td>
+        <td><%= comment.author %></td>
         <td><%= link_to comment.post.title, admin_post_path(comment.post) %></td>
-        <td><%= comment.comment %></td>
+        <td><%= comment.content %></td>
         <td>
           <%= link_to "edit", edit_admin_comment_path(comment), :class => :edit %>
           <%= link_to "delete", admin_comment_path(comment), :method => :delete, :class => :delete %>
