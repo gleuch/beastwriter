@@ -1,18 +1,19 @@
 # == Schema Information
-# Schema version: 20090404170416
+# Schema version: 20090422233019
 #
 # Table name: comments
 #
-#  id         :integer         not null, primary key
-#  post_id    :integer
-#  alias      :string(255)
-#  ip         :string(255)
-#  website    :string(255)
-#  email      :string(255)
-#  comment    :string(255)
-#  created_at :datetime
-#  updated_at :datetime
-#  deleted_at :datetime
+#  id           :integer         not null, primary key
+#  post_id      :integer
+#  author       :string(255)
+#  user_ip      :string(255)
+#  author_url   :string(255)
+#  author_email :string(255)
+#  content      :string(255)
+#  created_at   :datetime
+#  updated_at   :datetime
+#  deleted_at   :datetime
+#  user_agent   :string(500)
 #
 
 class Comment < ActiveRecord::Base
