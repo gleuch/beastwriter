@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20090419215729) do
+ActiveRecord::Schema.define(:version => 20090422233019) do
 
   create_table "categories", :force => true do |t|
     t.integer  "parent_id",                  :default => 0
@@ -29,14 +29,15 @@ ActiveRecord::Schema.define(:version => 20090419215729) do
 
   create_table "comments", :force => true do |t|
     t.integer  "post_id"
-    t.string   "alias"
-    t.string   "ip"
-    t.string   "website"
-    t.string   "email"
-    t.string   "comment"
+    t.string   "author"
+    t.string   "user_ip"
+    t.string   "author_url"
+    t.string   "author_email"
+    t.string   "content"
     t.datetime "created_at"
     t.datetime "updated_at"
     t.datetime "deleted_at"
+    t.string   "user_agent",   :limit => 500
   end
 
   create_table "links", :force => true do |t|
