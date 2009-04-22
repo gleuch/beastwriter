@@ -1,5 +1,7 @@
 class CommentsController < ApplicationController
 
+  has_rakismet
+
   def create
     @post = Post.find_by_permalink(params[:post_id])
     @comment = @post.comments.create!(params[:comment])
