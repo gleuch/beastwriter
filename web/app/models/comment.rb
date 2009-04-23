@@ -18,7 +18,7 @@
 
 class Comment < ActiveRecord::Base
 
-  has_rakismet
+  has_rakismet :user_ip => :user_ip
   belongs_to :post
 
   named_scope :active, :conditions => [ "deleted_at IS NULL" ]
