@@ -8,7 +8,7 @@
       <div id="header">
         <div id="logo">
           <h1><%= link_to "Limi's Sphere of Influence", root_path %></h1>
-          <span>dabbling, frivolling, idling, loafing, loitering, playing and procrastinating</span>
+          <span>dabbling, frivolling, idling, loitering, playing and procrastinating</span>
         </div>
         <div id="topright">
           <ul>
@@ -21,7 +21,7 @@
       <div id="catnav">
         <div id="toprss">
           <a href="#">
-            <%= image_tag("rss-trans.png", :width => 65, :height => 24) %>
+            <%= link_to image_tag("rss-trans.png", :width => 65, :height => 24), posts_path(:atom) %>
           </a>
         </div> <!-- Closes toprss -->
         <ul id="nav">
