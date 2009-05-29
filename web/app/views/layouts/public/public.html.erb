@@ -12,7 +12,6 @@
         </div>
         <div id="topright">
           <ul>
-            <li><a href="#searchform">search</a></li>
             <li><a href="#main">skip to content &darr;</a></li>
           </ul>
         </div>
@@ -20,9 +19,7 @@
 
       <div id="catnav">
         <div id="toprss">
-          <a href="#">
-            <%= link_to image_tag("rss-trans.png", :width => 65, :height => 24), posts_path(:atom) %>
-          </a>
+          <%= link_to image_tag("rss-trans.png", :width => 65, :height => 24), posts_path(:atom) %>
         </div> <!-- Closes toprss -->
         <ul id="nav">
           <li><%= link_to "Home", root_path %></li>
