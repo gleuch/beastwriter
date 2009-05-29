@@ -1,1 +1,3 @@
 web/nbproject/
+web/config/database.yml
+web/log/*.log
