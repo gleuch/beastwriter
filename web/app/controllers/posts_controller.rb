@@ -1,8 +1,5 @@
 class PostsController < ApplicationController
 
-  include PingbackHelper
-  helper :pingback
-
   def index
     @posts = Post.active.limit(5)
 
