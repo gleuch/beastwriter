@@ -59,16 +59,17 @@ class Post < ActiveRecord::Base
     end
   end
 
+  # Yes yes, it won't use the indexes, but if i'm writing that much then somethings very wrong with my life
   def self.find_by_day(params)
-    find(:all, :conditions => ["YEAR(publish_at) = ? and MONTH(publish_at) = ? and DAY(publish_at) = ?", params[:year], params[:month], params[:day]])
+    find(:all, :conditions => ["extract(year from publish_at) = ? and extract(month from publish_at) = ? and extract(day from publish_at) = ?", params[:year], params[:month], params[:day]])
   end
 
   def self.find_by_month(params)
-    find(:all, :conditions => ["YEAR(publish_at) = ? and MONTH(publish_at) = ?", params[:year], params[:month]])
+    find(:all, :conditions => ["extract(year from publish_at) = ? and extract(month from publish_at) = ?", params[:year], params[:month]])
   end
 
   def self.find_by_year(params)
-    find(:all, :conditions => ["YEAR(publish_at) = ?", params[:year]])
+    find(:all, :conditions => ["extract(year from publish_at) = ?", params[:year]])
   end
 
   # Methods
