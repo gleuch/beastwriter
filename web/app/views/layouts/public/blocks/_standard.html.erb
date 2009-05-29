@@ -5,9 +5,6 @@
       <li>
         <%= render :partial => "layouts/public/blocks/recent_posts", :locals => { :posts => Post.active.limit(10) } %>
       </li>
-      <li>
-        <%= render :partial => "layouts/public/blocks/tag_browser", :locals => { :tags => Tag.all } %>
-      </li>
     </ul>
   </div>
   <div id="sidebar_left">
