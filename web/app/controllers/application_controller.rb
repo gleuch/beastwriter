@@ -15,4 +15,11 @@ class ApplicationController < ActionController::Base
   def set_title(title)
     @title = title
   end
+
+  def month_name_from_number(num)
+    if num
+      Date::MONTHNAMES[num.to_i]
+    end
+  end
+
 end
