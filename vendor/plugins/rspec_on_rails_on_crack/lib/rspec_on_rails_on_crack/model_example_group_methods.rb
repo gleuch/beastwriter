@@ -1,4 +1,4 @@
-module Spec::Extensions::Main
+module Spec::DSL::Main
   def describe_validations_for(model, attributes, &block)
     describe model, "(validations)", :type => :model do
       before :all do
