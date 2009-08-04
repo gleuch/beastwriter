@@ -14,7 +14,7 @@ The popular rails-based Beast forum, rewritten from the ground up with the same 
 
 Help desired via git:
 
-    git clone git://github.com/jxl/altered_beast.git
+    git clone git://github.com/courtenay/altered_beast.git
 
 === INSTALLATION
 
