@@ -13,6 +13,12 @@ describe User do
       end
     end
   
+    it 'logs in with openid' do
+      u = User.new(:openid_url => 'http://foo', :email => 'zoe@girl.com')
+      u.login = 'zoegirl'
+      assert_valid u
+    end
+
     it 'increments User.count' do
       @creating_user.should change(User, :count).by(1)
     end

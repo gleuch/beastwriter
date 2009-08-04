@@ -25,7 +25,7 @@
     <th class="la" width="30%" colspan="1"><%= 'Last Post'[:last_post] %></th>
   </tr>
 <% for forum in @forums do %>  
-  <tr>
+  <tr class="forum" id="forum_<%= forum.id %>_row">
     <td class="vat c1">
     
       <% if recent_forum_activity(forum) %>

@@ -14,6 +14,8 @@ class User
   before_save :downcase_email_and_login
   before_save :encrypt_password
   before_create :set_first_user_as_admin
+  # validates_email_format_of :email, :message=>"is invalid"  
+  validates_uniqueness_of :openid_url, :case_sensitive => false, :allow_nil => true
 
   # prevents a user from submitting a crafted form that bypasses activation
   # anything else you want your user to change should be added here.
@@ -42,7 +44,12 @@ protected
     self.crypted_password = encrypt(password)
   end
     
-  def password_required?
+  def using_openid
+    self.openid_url.blank? ? false : true
+  end
+    
+  def password_required?    
+    return false if using_openid
     crypted_password.blank? || !password.blank?
   end
   

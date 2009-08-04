@@ -65,6 +65,21 @@ class User < ActiveRecord::Base
   end
   
   def to_param
-    permalink
+    id.to_s # permalink || login
   end
+
+  def openid_url=(value)
+    write_attribute :openid_url, value.blank? ? nil : OpenIdAuthentication.normalize_identifier(value)
+  end
+
+  def using_openid
+    self.openid_url.blank? ? false : true
+  end
+  
+  def to_xml(options = {})
+    options[:except] ||= []
+    options[:except] << :email << :login_key << :login_key_expires_at << :password_hash << :openid_url << :activated << :admin
+    super
+  end
+
 end
