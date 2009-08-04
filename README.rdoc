@@ -11,6 +11,7 @@ The popular rails-based Beast forum, rewritten from the ground up with the same 
 * email and atom feed support
 * xml/json API (not 100% tested yet, fixing soon)
 * highline based easy console installer
+* internationalization via the I18n framework
 
 Help desired via git:
 

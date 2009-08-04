@@ -1,17 +1,20 @@
 module UsersHelper
   # todo: make this use "size" instead of "count" and maybe cache it
   def user_count
-    pluralize current_site.users.count, 'user'[:user]
+    count = current_site.users.count
+    I18n.t 'txt.count_users', :count => count, :num => number_with_delimiter(count)
   end
 
   # todo: cache this?
   def active_user_count
-    pluralize current_site.users.count(:conditions => "users.posts_count > 0"), 'active user'[:active_user]
+    count = current_site.users.count(:conditions => "posts_count > 0")
+    I18n.t 'txt.count_users_active', :count => count, :num => number_with_delimiter(count)
   end
   
   # todo: cache this?
   def lurking_user_count
-    pluralize current_site.users.count(:conditions => "users.posts_count < 1"), 'lurking user'[:lurking_user]
+    count = current_site.users.count(:conditions => "posts_count = 0")
+    I18n.t 'txt.count_users_lurking', :count => count, :num => number_with_delimiter(count)
   end
 
   #

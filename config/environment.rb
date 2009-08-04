@@ -19,6 +19,9 @@ Rails::Initializer.run do |config|
   config.gem 'mislav-will_paginate', :lib => "will_paginate", 
     :source => "http://gems.github.com"
 
+  config.gem 'RedCloth', :lib => "redcloth",
+    :source => "http://code.whytheluckystiff.net"
+
   # Skip frameworks you're not going to use (only works if using vendor/rails).
   # To use Rails without a database, you must remove the Active Record framework
   # config.frameworks -= [ :active_record, :active_resource, :action_mailer ]
@@ -59,4 +62,11 @@ Rails::Initializer.run do |config|
 
   # Make Active Record use UTC-base instead of local time
   config.active_record.default_timezone = :utc
+
+  # The internationalization framework can be changed 
+  # to have another default locale (standard is :en) or more load paths.
+  # All files from config/locales/*.rb,yml are added automatically.
+  # config.i18n.load_path << Dir[File.join(RAILS_ROOT, 'my', 'locales', '*.{rb,yml}')]
+  # config.i18n.default_locale = :en
+
 end
