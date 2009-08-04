@@ -44,7 +44,7 @@ module ModelStubbing
 
   define_models :users do 
     model User do
-      stub :admin,     :login => 'admin-user',     :email => 'admin-user@example.com', :remember_token => 'blah'
+      stub :admin,     :login => 'admin-user',     :email => 'admin-user@example.com', :remember_token => 'blah', :admin => true
       stub :pending,   :login => 'pending-user',   :email => 'pending-user@example.com',   :state => 'pending', :activated_at => nil, :remember_token => 'asdf'
       stub :suspended, :login => 'suspended-user', :email => 'suspended-user@example.com', :state => 'suspended', :remember_token => 'dfdfd'
     end

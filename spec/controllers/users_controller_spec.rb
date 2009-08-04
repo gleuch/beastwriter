@@ -120,6 +120,33 @@ describe UsersController, "GET #index" do
   end
 end
 
+describe UsersController, "PUT #make_admin" do
+  before do
+    login_as :admin
+    current_site :default
+    @attributes = {'login' => "Default"}
+  end
+  
+  describe UsersController, "(as admin, successful)" do
+    define_models :users
+
+    it "sets admin" do
+      user = users(:default)
+      user.admin.should be_false
+      put :make_admin, :id => users(:default).to_param, :user => { :admin => "1" }
+      user.reload.admin.should be_true
+    end
+    
+    it "unsets admin" do
+      user = users(:default)
+      user.update_attribute :admin, true
+      user.admin.should be_true
+      put :make_admin, :id => users(:default).to_param, :user => { }
+      user.reload.admin.should be_false
+    end
+  end
+end
+
 describe UsersController, "PUT #update" do
   before do
     login_as :default

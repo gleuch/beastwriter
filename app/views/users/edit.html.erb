@@ -1,8 +1,20 @@
 <% content_for :right do %>
 
-<h5><%= 'Avatars'[:avatars_title] %></h5>
+  <h5><%= 'Avatars'[:avatars_title] %></h5>
+  <p><%= 'To have your very own avatar displayed on this forum visit {gravatar} and sign up for a free gravatar.'[:gravatar_notice, %(<a href="http://www.gravatar.com/">gravatar.com</a>)] %></p>
 
-<p><%= 'To have your very own avatar displayed on this forum visit {gravatar} and sign up for a free gravatar.'[:gravatar_notice, %(<a href="http://www.gravatar.com/">gravatar.com</a>)] %></p>
+  <% if current_user.admin? %>
+    <% form_for @user, :url => make_admin_user_path(@user) do |f| %>
+      <h5>Admin</h5>
+      <p>
+        <%= f.check_box :admin %>
+        <label for="user_admin"><%= 'User is an administrator'[] %></label>
+      </p>
+      <p>
+        <%= submit_tag 'Save'[:save] %>
+      </p>
+    <% end %>
+  <% end %>
 
 <% end %>
 

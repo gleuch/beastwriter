@@ -83,6 +83,14 @@ class UsersController < ApplicationController
     @user.destroy
     redirect_to users_path
   end
+  
+  def make_admin
+    redirect_back_or_default('/') and return unless admin?
+    @user = find_user
+    @user.admin = (params[:user][:admin] == "1")
+    @user.save
+    redirect_to @user
+  end
 
 protected
   def find_user
