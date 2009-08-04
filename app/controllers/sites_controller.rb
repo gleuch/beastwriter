@@ -1,5 +1,5 @@
 class SitesController < ApplicationController
-  before_filter :admin_required, :only => [ :destroy, :update, :edit ]
+  before_filter :admin_required
 
   def index
     @sites = Site.paginate(:all, :page => current_page, :order => 'host ASC')
