@@ -1,14 +1,17 @@
 module UsersHelper
+  # todo: make this use "size" instead of "count" and maybe cache it
   def user_count
-    pluralize current_site.users.size, 'user'[:user]
+    pluralize current_site.users.count, 'user'[:user]
   end
-  
+
+  # todo: cache this?
   def active_user_count
-    pluralize current_site.users.find(:all, :conditions => "posts_count > 0").size, 'active user'[:active_user]
+    pluralize current_site.users.count(:conditions => "users.posts_count > 0"), 'active user'[:active_user]
   end
   
+  # todo: cache this?
   def lurking_user_count
-    pluralize current_site.users.find(:all, :conditions => "posts_count = 0").size, 'lurking user'[:lurking_user]
+    pluralize current_site.users.count(:conditions => "users.posts_count < 1"), 'lurking user'[:lurking_user]
   end
 
   #
