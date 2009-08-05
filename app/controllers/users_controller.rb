@@ -22,7 +22,6 @@ class UsersController < ApplicationController
     @user.save if @user.valid?
     @user.register! if @user.valid?
     unless @user.new_record?
-      
       redirect_back_or_default('/login')
       flash[:notice] = "Thanks for signing up! Please click the link in your email to activate your account"
     else
@@ -97,7 +96,7 @@ protected
   def find_user
     @user = if admin?
       current_site.all_users.find params[:id]
-    elsif params[:id] == current_user.id?
+    elsif params[:id] == current_user.id
       current_user
     else
       current_site.users.find params[:id]
@@ -105,6 +104,6 @@ protected
   end
   
   def authorized?
-    admin? || params[:id].blank? || params[:id] == current_user.permalink
+    admin? || params[:id].blank? || params[:id] == current_user.id.to_s
   end
 end

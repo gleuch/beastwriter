@@ -72,7 +72,7 @@ describe UsersController do
   
   it "sends an email to the user on create" do
     create_user :login => "admin", :email => "admin@example.com"
-    puts "sending emails"
+    response.should be_redirect
     lambda{ create_user }.should change(ActionMailer::Base.deliveries, :size).by(1)
   end
   
@@ -149,6 +149,7 @@ describe UsersController, "PUT #make_admin" do
 end
 
 describe UsersController, "PUT #update" do
+  define_models :users
   before do
     login_as :default
     current_site :default
@@ -157,7 +158,7 @@ describe UsersController, "PUT #update" do
   
   describe UsersController, "(successful save)" do
     define_models
-    act! { put :update, :id => @user.id, :user => @attributes }
+    act! { put :update,{ :id => @user.id, :user => @attributes }}
 
     before do
       @user.stub!(:save).and_return(true)
@@ -168,11 +169,15 @@ describe UsersController, "PUT #update" do
 
     describe "updating from edit form" do
       define_models :stubbed
-      %w(display_name openid_url website bio).each do |field|
-      it "should update #{field}" do
-        put :update, :id => @user.id, :user => { field, "test" }
-        assigns(:user).attributes[field].should == "test"
+      %w(display_name website bio).each do |field|
+        it "should update #{field}" do
+          put :update, :id => @user.id, :user => { field => "test" }
+          assigns(:user).attributes[field].should == "test"
+        end
       end
+      it "should update openid_url" do
+        put :update, :id => @user.id, :user => { 'openid_url' => 'test' }
+        assigns(:user).attributes['openid_url'].should == 'http://test/'
       end
     end
   end
