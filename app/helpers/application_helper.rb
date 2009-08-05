@@ -58,7 +58,7 @@ module ApplicationHelper
       else
         :search
       end
-    atom ? send("formatted_#{prefix}_posts_path", options.update(:format => :atom)) : send("#{prefix}_posts_path", options)
+    atom ? send("#{prefix}_posts_path", options.update(:format => :atom)) : send("#{prefix}_posts_path", options)
   end
 
   @@default_jstime_format = "%d %b, %Y %I:%M %p"

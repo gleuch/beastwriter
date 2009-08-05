@@ -15,7 +15,7 @@
 
 <h1 style="margin-top:0;"><%= 'Forums'[:forums_title] %></h1>
 <p class="subtitle">
-<%= feed_icon_tag "Recent Posts"[:recent_posts], formatted_posts_path(:format => 'atom') %>
+<%= feed_icon_tag "Recent Posts"[:recent_posts], posts_path(:format => 'atom') %>
 <%= topic_count %>, <%= post_count %> <%# OPTIMIZE ME voice_count %>
 </p>
 
