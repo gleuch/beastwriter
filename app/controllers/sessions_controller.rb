@@ -7,28 +7,7 @@ class SessionsController < ApplicationController
   end
 
   def create
-    params[:login] = params[:login].downcase
-    self.current_user = current_site.users.authenticate(params[:login], params[:password])
-    
-    if logged_in?
-      if params[:remember_me] == "1"
-        current_user.remember_me
-        cookies[:auth_token] = { :value => current_user.remember_token , :expires => current_user.remember_token_expires_at }
-      end
-      redirect_back_or_default('/')
-      flash[:notice] = "Logged in successfully"
-    else
-      if using_open_id?
-        cookies[:use_open_id] = {:value => '1', :expires => 1.year.from_now.utc}
-        open_id_authentication(params[:openid_url])
-      else
-        cookies[:use_open_id] = {:value => '0', :expires => 1.year.ago.utc}
-        password_authentication params[:login], params[:password]
-      end
-    end
-  end
-  
-  def create
+    reset_session
     if using_open_id?
       cookies[:use_open_id] = {:value => '1', :expires => 1.year.from_now.utc}
       open_id_authentication(params[:openid_url])
@@ -50,7 +29,7 @@ class SessionsController < ApplicationController
   protected
   
   def password_authentication(name, password)
-    if @current_user = current_site.users.authenticate(params[:name], params[:password])
+    if @current_user = current_site.users.authenticate(name, password)
       successful_login
     else
       failed_login "Sorry, that username/password doesn't work"
@@ -85,13 +64,16 @@ class SessionsController < ApplicationController
   private
   def successful_login
     flash[:notice] = 'You are now logged in! Welcome.'
+    new_cookie_flag = (params[:remember_me] == "1")
+    handle_remember_cookie! new_cookie_flag
     session[:user_id] = @current_user.id
     redirect_back_or_default('/')
   end
 
   def failed_login(message)
+    @remember_me = params[:remember_me]
     flash[:error] = message
-    redirect_to(new_session_url)
+    render :action => "new"
   end
 
 end

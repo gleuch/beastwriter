@@ -57,7 +57,7 @@ describe SessionsController, "DELETE /destroy" do
   it_redirects_to { '/' }
 
   it 'deletes token on logout' do
-    acting.cookies["auth_token"].should == []
+    acting.cookies["auth_token"].should be_nil
   end
 end
 
