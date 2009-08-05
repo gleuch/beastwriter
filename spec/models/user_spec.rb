@@ -14,9 +14,9 @@ describe User do
     end
   
     it 'logs in with openid' do
-      u = User.new(:openid_url => 'http://foo', :email => 'zoe@girl.com')
+      u = sites(:default).users.new(:openid_url => 'http://foo', :email => 'zoe@girl.com')
       u.login = 'zoegirl'
-      assert_valid u
+      assert u.valid?, u.errors.inspect
     end
 
     it 'increments User.count' do

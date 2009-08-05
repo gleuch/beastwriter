@@ -26,15 +26,6 @@ class PostsController < ApplicationController
     end
   end
 
-  def new
-    @post = Post.new
-
-    respond_to do |format|
-      format.html # new.html.erb
-      format.xml  { render :xml  => @post }
-    end
-  end
-
   def edit
     respond_to do |format|
       format.html # edit.html.erb
@@ -47,7 +38,7 @@ class PostsController < ApplicationController
 
     respond_to do |format|
       if @post.new_record?
-        format.html { render :action => "new" }
+        format.html { redirect_to forum_topic_path(@forum, @topic) }
         format.xml  { render :xml  => @post.errors, :status => :unprocessable_entity }
       else
         flash[:notice] = 'Post was successfully created.'
@@ -82,14 +73,19 @@ class PostsController < ApplicationController
 protected
   def find_parents
     if params[:user_id]
-      @parent = @user = User.find_by_permalink(params[:user_id])
+      @parent = @user = User.find(params[:user_id])
     elsif params[:forum_id]
       @parent = @forum = Forum.find_by_permalink(params[:forum_id])
       @parent = @topic = @forum.topics.find_by_permalink(params[:topic_id]) if params[:topic_id]
     end
   end
-  
+
   def find_post
-    @post = @topic.posts.find(params[:id])
+    post = @topic.posts.find(params[:id])
+    if post.user == current_user || current_user.admin?
+      @post = post
+    else
+      raise ActiveRecord::RecordNotFound
+    end
   end
 end

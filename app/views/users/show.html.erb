@@ -45,7 +45,7 @@
 <h1><%=h @user.display_name %> </h1>
 
 <p class="subtitle">
-  <%= feed_icon_tag @user.display_name, formatted_user_posts_path(:user_id => @user, :format => :rss) %>
+  <%= feed_icon_tag @user.display_name, user_posts_path(:user_id => @user, :format => :rss) %>
   <span>
     <%= '{count} topics'[(count=@user.topics.size)==1 ? :topic_count : :topics_count, number_with_delimiter(count)] %>, 
     <%= '{count} posts'[(count=@user.posts.size)==1 ? :post_count : :posts_count, number_with_delimiter(count)] %>

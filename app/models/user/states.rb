@@ -35,6 +35,7 @@ class User
   end
 
   def do_activation
+    puts "do activation"
     self.deleted_at = nil
     self.activation_code = Digest::SHA1.hexdigest( Time.now.to_s.split(//).sort_by {rand}.join )
     
@@ -47,6 +48,7 @@ protected
   end
 
   def do_activate
+    puts "do activate"
     @activated = true
     self.activated_at = Time.now.utc
     self.deleted_at = nil

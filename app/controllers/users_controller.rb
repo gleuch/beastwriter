@@ -20,8 +20,9 @@ class UsersController < ApplicationController
     cookies.delete :auth_token
     @user = current_site.users.build(params[:user])    
     @user.save if @user.valid?
+    @user.register! if @user.valid?
     unless @user.new_record?
-      @user.register!
+      
       redirect_back_or_default('/login')
       flash[:notice] = "Thanks for signing up! Please click the link in your email to activate your account"
     else

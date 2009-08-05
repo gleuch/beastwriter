@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20081213180202) do
+ActiveRecord::Schema.define(:version => 20090317123901) do
 
   create_table "forums", :force => true do |t|
     t.integer "site_id"
@@ -39,6 +39,25 @@ ActiveRecord::Schema.define(:version => 20081213180202) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.boolean  "active",     :default => true
+  end
+
+  create_table "open_id_authentication_associations", :force => true do |t|
+    t.binary  "server_url"
+    t.string  "handle"
+    t.binary  "secret"
+    t.integer "issued"
+    t.integer "lifetime"
+    t.string  "assoc_type"
+  end
+
+  create_table "open_id_authentication_nonces", :force => true do |t|
+    t.string  "nonce"
+    t.integer "created"
+  end
+
+  create_table "open_id_authentication_settings", :force => true do |t|
+    t.string "setting"
+    t.binary "value"
   end
 
   create_table "posts", :force => true do |t|

@@ -71,7 +71,8 @@ describe UsersController do
   end
   
   it "sends an email to the user on create" do
-    pending "Email functionality has not been written"
+    create_user :login => "admin", :email => "admin@example.com"
+    puts "sending emails"
     lambda{ create_user }.should change(ActionMailer::Base.deliveries, :size).by(1)
   end
   
@@ -133,7 +134,7 @@ describe UsersController, "PUT #make_admin" do
     it "sets admin" do
       user = users(:default)
       user.admin.should be_false
-      put :make_admin, :id => users(:default).to_param, :user => { :admin => "1" }
+      put :make_admin, :id => users(:default).id, :user => { :admin => "1" }
       user.reload.admin.should be_true
     end
     
@@ -141,7 +142,7 @@ describe UsersController, "PUT #make_admin" do
       user = users(:default)
       user.update_attribute :admin, true
       user.admin.should be_true
-      put :make_admin, :id => users(:default).to_param, :user => { }
+      put :make_admin, :id => users(:default).id, :user => { }
       user.reload.admin.should be_false
     end
   end
@@ -156,7 +157,7 @@ describe UsersController, "PUT #update" do
   
   describe UsersController, "(successful save)" do
     define_models
-    act! { put :update, :id => @user.to_param, :user => @attributes }
+    act! { put :update, :id => @user.id, :user => @attributes }
 
     before do
       @user.stub!(:save).and_return(true)
@@ -169,7 +170,7 @@ describe UsersController, "PUT #update" do
       define_models :stubbed
       %w(display_name openid_url website bio).each do |field|
       it "should update #{field}" do
-        put :update, :id => @user.to_param, :user => { field, "test" }
+        put :update, :id => @user.id, :user => { field, "test" }
         assigns(:user).attributes[field].should == "test"
       end
       end
@@ -178,7 +179,7 @@ describe UsersController, "PUT #update" do
   
   describe UsersController, "(successful save, xml)" do
     define_models
-    act! { put :update, :id => @user.to_param, :user => @attributes, :format => 'xml' }
+    act! { put :update, :id => @user.id, :user => @attributes, :format => 'xml' }
 
     before do
       @user.stub!(:save).and_return(true)
@@ -190,7 +191,7 @@ describe UsersController, "PUT #update" do
 
   describe UsersController, "(unsuccessful save)" do
     define_models
-    act! { put :update, :id => @user.to_param, :user => {:email => ''} }
+    act! { put :update, :id => @user.id, :user => {:email => ''} }
     
     it_assigns :user
     it_renders :template, :edit
@@ -198,7 +199,7 @@ describe UsersController, "PUT #update" do
   
   describe UsersController, "(unsuccessful save, xml)" do
     define_models
-    act! { put :update, :id => @user.to_param, :user => {:email => ''}, :format => 'xml' }
+    act! { put :update, :id => @user.id, :user => {:email => ''}, :format => 'xml' }
     
     it_assigns :user
     it_renders :xml, :status => :unprocessable_entity do
