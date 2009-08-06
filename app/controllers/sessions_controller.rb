@@ -32,7 +32,7 @@ class SessionsController < ApplicationController
     if @current_user = current_site.users.authenticate(name, password)
       successful_login
     else
-      failed_login I18n.t 'txt.invalid_login', :default => "Invalid login"
+      failed_login I18n.t('txt.invalid_login', :default => "Invalid login")
    end
   end
 
@@ -52,7 +52,7 @@ class SessionsController < ApplicationController
         end
         successful_login
       else
-        failed_login I18n.t 'txt.invalid_openid', :default => "Sorry, no user by the identity URL #{openid_url} exists"
+        failed_login I18n.t('txt.invalid_openid', :default => "Sorry, no user by the identity URL #{openid_url} exists")
       end
     else
       failed_login result.message
