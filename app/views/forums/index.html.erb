@@ -15,11 +15,9 @@
 
 <h1 style="margin-top:0;"><%= I18n.t 'txt.forums', :default => 'Forums' %></h1>
 <p class="subtitle">
-<%= feed_icon_tag I18n.t('txt.recent_posts', :default => "Recent Posts"), formatted_posts_path(:format => 'atom') %>
+<%= feed_icon_tag I18n.t('txt.recent_posts', :default => "Recent Posts"), posts_path(:format => 'atom') %>
 <%= I18n.t 'txt.count_topics', :count => current_site.topics.size, :num => number_with_delimiter(current_site.topics.size) %>,
-<%= I18n.t 'txt.count_posts', :count => current_site.posts.size, :num => number_with_delimiter(current_site.posts.size) %>
-<%# OPTIMIZE ME voice_count %>
-
+<%= I18n.t 'txt.count_posts',  :count => current_site.posts.size,  :num => number_with_delimiter(current_site.posts.size) %>
 </p>
 
 <table border="0" cellspacing="0" cellpadding="0" class="wide forums">
@@ -28,7 +26,7 @@
     <th class="la" width="30%" colspan="1"><%= I18n.t 'txt.latest_post', :default => 'Last Post' %></th>
   </tr>
 <% for forum in @forums do %>  
-  <tr>
+  <tr class="forum" id="forum_<%= forum.id %>_row">
     <td class="vat c1">
     
       <% if recent_forum_activity(forum) %>

@@ -1,12 +1,11 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
 <head>
   <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
   <title><%=h @current_site && current_site.name || I18n.t('txt.beast_title', :default => 'Altered Beast') %><%= " - #{h @page_title}" if @page_title %></title>
   <%= stylesheet_link_tag 'display' %>
   <%= stylesheet_link_tag 'captcha' %>
-  <%= javascript_include_tag "prototype", "effects", "lowpro", "application", :cache => 'beast' %>
+  <%= javascript_include_tag "prototype", "effects", "lowpro", "time", "application", :cache => "beast" %>
 <% unless @feed_icons.blank? -%>
   <% @feed_icons.each do |feed| -%>
   <%= auto_discovery_link_tag :atom, feed[:url], :title => "Subscribe to '#{feed[:title]}'" %>
@@ -28,7 +27,7 @@
     <li><%= link_to_function I18n.t('txt.search', :default => 'Search'), "#", :href => root_path, :id => 'search-link' %></li>
 
     <% if @current_site and logged_in? -%>
-    <li class="login"><%=  link_to current_user.login, user_path(current_user) %></li>
+    <li class="login"><%=  link_to current_user.display_name, user_path(current_user) %></li>
     <li class="logout"><%= link_to I18n.t('txt.settings', :default => 'Settings'), settings_path %></li>
     <li class="logout"><%= link_to I18n.t('txt.logout', :default => 'Logout'), logout_path(:to => CGI.escape(request.request_uri)) %></li>
     <% else -%>

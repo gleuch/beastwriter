@@ -27,7 +27,7 @@
 <h1 style="margin-top:0.5em"><%= h @forum.name %></h1>
 
 <p class="subtitle">
-  <%= feed_icon_tag @forum.name, formatted_forum_posts_path(@forum, :atom) %>
+  <%= feed_icon_tag @forum.name, forum_posts_path(@forum, :format => :atom) %> 
   <%= I18n.t 'txt.count_topics', :count => @forum.topics.size, :num => number_with_delimiter(@forum.topics.size) %>,
   <%= I18n.t 'txt.count_posts', :count => @forum.posts.size, :num => number_with_delimiter(@forum.posts.size) %>
 </p>

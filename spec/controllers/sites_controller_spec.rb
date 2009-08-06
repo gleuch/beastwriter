@@ -51,6 +51,7 @@ describe SitesController, "GET #new" do
   act! { get :new }
 
   before do
+    @controller.stub!(:admin_required).and_return(true)
     login_as :default
   end
 
@@ -95,6 +96,7 @@ describe SitesController, "POST #create" do
   before do
     login_as :default
     @attributes = {:name => 'yow'}
+    @controller.stub!(:admin_required).and_return(true)
   end
   
   describe SitesController, "(successful creation)" do

@@ -132,31 +132,6 @@ describe PostsController, "GET #show" do
   end
 end
 
-describe PostsController, "GET #new" do
-  include PostsControllerParentObjects
-  define_models
-  act! { get :new, :forum_id => @forum.to_param, :topic_id => @topic.to_param }
-  before do
-    @post  = Post.new
-  end
-
-  it_assigns :forum, :topic, :parent => lambda { @topic }
-
-  it "assigns @post" do
-    act!
-    assigns[:post].should be_new_record
-  end
-  
-  it_renders :template, :new, :pending => true
-  
-  describe PostsController, "(xml)" do
-    define_models
-    act! { get :new, :forum_id => @forum.to_param, :topic_id => @topic.to_param, :format => 'xml' }
-    it_assigns :forum, :topic, :parent => lambda { @topic }
-    it_renders :xml, :post
-  end
-end
-
 describe PostsController, "GET #edit" do
   include PostsControllerParentObjects
   act! { get :edit, :forum_id => @forum.to_param, :topic_id => @topic.to_param, :id => @post.to_param }
@@ -185,7 +160,7 @@ describe PostsController, "POST #create" do
     act! { post :create, :forum_id => @forum.to_param, :topic_id => @topic.to_param, :post => {:body => ''} }
 
     it_assigns :post, :forum, :topic, :parent => lambda { @topic }
-    it_renders :template, :new, :pending => true
+    it_redirects_to { forum_topic_url(@forum, @topic) }
   end
   
   describe PostsController, "(successful creation, xml)" do

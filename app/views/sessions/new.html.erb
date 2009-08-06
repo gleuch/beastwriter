@@ -1,16 +1,45 @@
 <h1><%= I18n.t('txt.login', :default => 'Login') %></h1>
 
 <% form_tag session_path do -%>
+<div id="openid_fields" style="display:none">
+<p>
+  <label for="openid_url">Login with OpenID</label>
+  <br />
+  <%= text_field_tag 'openid_url', params[:openid_url], :class => "openid_url" %>
+</p>
+<p>or login with <a href="#" onclick="LoginForm.setToPassword()">username/password</a></p>
+</div>
+
+<div id="password_fields">
 <p><%= label_tag I18n.t('txt.login_name', :default => 'Login') %><br />
 <%= text_field_tag 'login', @login %></p>
 
 <p><%= label_tag I18n.t('txt.password', :default => 'Password') %><br/>
 <%= password_field_tag 'password', nil %></p>
 
-<!-- Uncomment this if you want this functionality
 <p><%= label_tag 'remember_me', I18n.t('txt.remember_me', :default => 'Remember me') %>
 <%= check_box_tag 'remember_me', '1', @remember_me %></p>
--->
 
-<p><%= submit_tag I18n.t('txt.log_in', :default => 'Log in') %></p>
+<p><%= submit_tag I18n.t('txt.log_in', :default => 'Log in') %>
+   <%= link_to_function(I18n.t('reset password', :default => "reset password"), "$('reset-password').toggle();") %>
+   <a href="#" onclick="LoginForm.setToOpenID()"><%= I18n.t('txt.or_login_with_openid', :default => 'or login with OpenID') %></a>
+</p>
+</div>
+
+<p><%= submit_tag 'Log in' %></p>
+
 <% end -%>
+
+<% form_tag users_path, :id => 'reset-password', :style => 'display:none' do -%>
+
+  <hr />
+  <h5><%= 'Reset Password'[] %></h5>
+
+  <p><%= 'Enter your email, and a brand new login key will be sent to you.  Click the link in the email to log in, and then change your password.'[:email_directions] %></p>
+  <p><%= text_field_tag :email, "", :size => 30 %></p>
+  <p><%= submit_tag 'E-mail me the link'[:email_submit] %>
+    or <%= link_to_function('cancel'[], "$('reset-password').hide()") %></p>
+
+<% end -%>
+
+<%= javascript_tag "$('openid_input').focus();"%>
