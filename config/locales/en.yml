@@ -132,3 +132,9 @@
       zero: "no posts found"
       one: "1 post found"
       other: "{{count}} posts found"
+
+    views_users:
+      email_directions: Enter your email, and a brand new login key will be sent to you.  Click the link in the email to log in, and then change your password.
+      reset_password: Reset password
+      
+      

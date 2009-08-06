@@ -12,11 +12,11 @@
 <p><label for="password_confirmation"><%= I18n.t 'txt.password_confirm', :default => 'Confirm Password' %></label><br/>
 <%= f.password_field :password_confirmation %></p>
 
-<p><label for="user_openid_url"><%= I18n.t 'txt.openid_url', :default => "OpenID URL" %></label><br />
+<p><label for="user_openid_url"><%= I18n.t 'txt.openid_url', :default => "OpenID URL (optional)" %></label><br />
 <%= f.text_field :openid_url %>
 </p>
 
-<%= render :partial => '/captcha' %>
+<%#= render :partial => 'captcha' # enable for brainbuster %>
 
 <p><%= submit_tag I18n.t('txt.sign_up', :default => 'Sign up') %></p>
 

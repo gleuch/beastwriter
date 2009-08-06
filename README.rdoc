@@ -2,6 +2,7 @@
 
 The popular rails-based Beast forum, rewritten from the ground up with the same database and views.
 
+* full i18n (with German and English support)
 * updated for Rails 2.3.3
 * using rspec/model_stubbing
 * added a state machine for user logins
@@ -17,11 +18,6 @@ Check out the code via git:
 
     git clone git://github.com/courtenay/altered_beast.git
 
-Looking for a fully internationalized forum? After checking out the code,
-switch to the 'i18n' branch like so
-
-    git branch --track i18n origin/i18n
-    git checkout i18n
 
 === INSTALLATION
 

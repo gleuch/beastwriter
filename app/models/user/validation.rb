@@ -58,9 +58,9 @@ protected
   end
   
   def normalize_login_and_email
-    login.downcase!
-    login.strip!
-    email.downcase!
+    login.downcase! if login
+    login.strip! if login
+    email.downcase! if email
     return true
   end
 end

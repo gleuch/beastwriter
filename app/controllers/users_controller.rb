@@ -4,8 +4,8 @@ class UsersController < ApplicationController
   before_filter :login_required, :only => [:settings, :update]
 
   # Brainbuster Captcha
-  before_filter :create_brain_buster, :only => [:new]
-  before_filter :validate_brain_buster, :only => [:create]
+  # before_filter :create_brain_buster, :only => [:new]
+  # before_filter :validate_brain_buster, :only => [:create]
 
   def index
     users_scope = admin? ? :all_users : :users

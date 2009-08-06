@@ -14,7 +14,6 @@ class SessionsController < ApplicationController
     else
       cookies[:use_open_id] = {:value => '0', :expires => 1.year.ago.utc}
       password_authentication params[:login].downcase, params[:password]
-      flash[:error] = "Invalid login"
     end
   end
 
@@ -55,7 +54,7 @@ class SessionsController < ApplicationController
         failed_login I18n.t('txt.invalid_openid', :default => "Sorry, no user by the identity URL #{openid_url} exists")
       end
     else
-      failed_login result.message
+      failed_login result.message if openid_url
     end
   end
   end
