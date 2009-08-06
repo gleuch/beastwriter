@@ -14,7 +14,6 @@ ActionController::Routing::Routes.draw do |map|
     forum.resources :posts
   end
   
-  map.user '/users/:id', :controller => "users", :action => "show"
   map.resources :posts, :collection => {:search => :get}
   map.resources :users, :member => { :suspend   => :put,
                                      :settings  => :get,
