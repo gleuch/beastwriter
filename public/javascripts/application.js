@@ -94,7 +94,6 @@ var RowManager = {
 
 
 Event.addBehavior({
-	'span.time': toTimeAgoInWords,
 	'#search, #reply': function() { this.hide() },
 	'#search-link:click': function() {
 		$('search').toggle();

@@ -1,8 +1,8 @@
 <% form_tag session_path do -%>
-<p><label for="login">Login</label><br/>
+<p><label for="login"><%= I18n.t('txt.login', :default => 'Login') %></label><br/>
 <%= text_field_tag 'login' %></p>
 
-<p><label for="password">Password</label><br/>
+<p><label for="password"><%= I18n.t('txt.password', :default => 'Password') %></label><br/>
 <%= password_field_tag 'password' %></p>
 
 <p><label for="remember_me">Remember me:</label>

@@ -1,57 +1,57 @@
 <% content_for :right do %>
 
-<% if @current_site %>
-<%= @current_site.description %>
-<% else %>
-<%= main_site_description %>
-<% end %>
+<h5><%= I18n.t 'txt.sidebar.beast_title', :default => 'What is Beast?' %></h5>
+
+<p>
+  <%= I18n.t 'txt.sidebar.beast_desc', :default => "A small, light-weight forum in Rails with a scary name and a goal of around 500 lines of code when we're done." %>
+</p>
 
 <% if admin? %>
-<h6><%= 'Admin'[:admin_title] %></h6>
-<p><%= link_to 'Create New Forum'[:create_new_forum], new_forum_path, :class => "utility" %></p>
+<h6><%= I18n.t 'txt.admin.title', :default => 'Admin' %></h6>
+<p><%= link_to I18n.t('txt.admin.create_new_forum', :default => 'Create New Forum'), new_forum_path, :class => "utility" %></p>
 <% end %>
 
 <% end %>
 
-<h1 style="margin-top:0;"><%= 'Forums'[:forums_title] %></h1>
+<h1 style="margin-top:0;"><%= I18n.t 'txt.forums', :default => 'Forums' %></h1>
 <p class="subtitle">
-<%= feed_icon_tag "Recent Posts"[:recent_posts], posts_path(:format => 'atom') %>
-<%= topic_count %>, <%= post_count %> <%# OPTIMIZE ME voice_count %>
+<%= feed_icon_tag I18n.t('txt.recent_posts', :default => "Recent Posts"), posts_path(:format => 'atom') %>
+<%= I18n.t 'txt.count_topics', :count => current_site.topics.size, :num => number_with_delimiter(current_site.topics.size) %>,
+<%= I18n.t 'txt.count_posts',  :count => current_site.posts.size,  :num => number_with_delimiter(current_site.posts.size) %>
 </p>
 
 <table border="0" cellspacing="0" cellpadding="0" class="wide forums">
   <tr>
-    <th class="la" width="70%" colspan="3"><%= 'Forum'[:forum_title] %></th>
-    <th class="la" width="30%" colspan="1"><%= 'Last Post'[:last_post] %></th>
+    <th class="la" width="70%" colspan="3"><%= I18n.t 'txt.forum', :default => 'Forum' %></th>
+    <th class="la" width="30%" colspan="1"><%= I18n.t 'txt.latest_post', :default => 'Last Post' %></th>
   </tr>
 <% for forum in @forums do %>  
   <tr class="forum" id="forum_<%= forum.id %>_row">
     <td class="vat c1">
     
       <% if recent_forum_activity(forum) %>
-      <%= image_tag "clearbits/comment.gif", :class => "icon green", :title => 'Recent activity'[:recent_activity] %>
+      <%= image_tag "clearbits/comment.gif", :class => "icon green", :title => I18n.t('txt.recent_activity', :default => 'Recent activity') %>
       <% else %>
-      <%= image_tag "clearbits/comment.gif", :class => "icon grey", :title => 'No recent activity'[:no_recent_activity] %>
+      <%= image_tag "clearbits/comment.gif", :class => "icon grey", :title => I18n.t('txt.no_recent_activity', :default => 'No recent activity') %>
       <% end %>
     </td>
     <td class="c2 vat">
       <%= link_to h(forum.name), forum_path(forum), :class => "title" %>
       <div class="posts">
-        <%= '{count} topics'[(count=forum.topics.size)==1 ? :topic_count : :topics_count, number_with_delimiter(count)] %>, 
-        <%= '{count} posts'[(count=forum.posts.size)==1 ? :post_count : :posts_count, number_with_delimiter(count)] %>
+        <%= I18n.t 'txt.count_topics', :count => forum.topics.size, :num => number_with_delimiter(forum.topics.size) %>,
+        <%= I18n.t 'txt.count_posts', :count => forum.posts.size, :num => number_with_delimiter(forum.posts.size) %>
       </div>
-      <p class="desc"><%= forum.description_html %>
-        </p>
+      <p class="desc"><%= forum.description_html %></p>
     </td>
     <td class="c3">
-      <%= link_to 'Edit'[:edit_title], edit_forum_path(forum), :class => "tiny", :rel => "directory", :style => "float:right" if admin? %>
+      <%= link_to I18n.t('txt.edit', :default => 'Edit'), edit_forum_path(forum), :class => "tiny", :rel => "directory", :style => "float:right" if admin? %>
     </td>
 
     <td class="inv lp">
       <% if forum.recent_post -%>
-        <%= jstime forum.recent_post.created_at %><br />
-        <%= 'by {user}'[:by_user,"<strong>#{h(forum.recent_post.user.display_name)}</strong>"] %>
-        <span>(<%= link_to 'view'[], forum_topic_path(forum, forum.recent_post.topic, :page => forum.recent_post.topic.last_page, :anchor => dom_id(forum.recent_post)) %>)</span>
+        <%= I18n.t 'txt.post_age', :when => time_ago_in_words(forum.recent_post.created_at), :default => "posted {{when}} ago" %><br />
+        <strong><%= I18n.t 'txt.by_user', :default => 'by {{user}}', :user => "#{h(forum.recent_post.user.display_name)}" %></strong>
+        <span>(<%= link_to I18n.t('txt.view', :default => 'view'), forum_topic_path(forum, forum.recent_post.topic, :page => forum.recent_post.topic.last_page, :anchor => dom_id(forum.recent_post)) %>)</span>
       <% end -%>
     </td>
   </tr>
@@ -59,7 +59,7 @@
 </table>
 
 <p>
-  <%= link_to 'Recent posts'[:recent_posts], posts_path %>
+  <%= link_to I18n.t('txt.show_recent_posts', :default => 'Show recent posts'), posts_path %>
 </p>
 
 <%# TODO: online_users = User.currently_online -%>
@@ -72,4 +72,3 @@
 </div>
 </div>
 <% end %>
-

@@ -1,0 +1,3 @@
+[submodule "vendor/plugins/brain_buster"]
+	path = vendor/plugins/brain_buster
+	url = git://github.com/rsanheim/brain_buster.git

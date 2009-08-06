@@ -2,7 +2,11 @@ class UsersController < ApplicationController
   before_filter :admin_required, :only => [:suspend, :unsuspend, :destroy, :purge, :edit]
   before_filter :find_user, :only => [:update, :show, :edit, :suspend, :unsuspend, :destroy, :purge]
   before_filter :login_required, :only => [:settings, :update]
-  
+
+  # Brainbuster Captcha
+  before_filter :create_brain_buster, :only => [:new]
+  before_filter :validate_brain_buster, :only => [:create]
+
   def index
     users_scope = admin? ? :all_users : :users
     if params[:q]
@@ -23,7 +27,8 @@ class UsersController < ApplicationController
     @user.register! if @user.valid?
     unless @user.new_record?
       redirect_back_or_default('/login')
-      flash[:notice] = "Thanks for signing up! Please click the link in your email to activate your account"
+      flash[:notice] = I18n.t 'txt.activation_required', 
+        :default => "Thanks for signing up! Please click the link in your email to activate your account"
     else
       render :action => 'new'
     end
@@ -31,6 +36,7 @@ class UsersController < ApplicationController
 
   def settings
     @user = current_user
+    current_site
     render :action => "edit"
   end
   
@@ -102,8 +108,12 @@ protected
       current_site.users.find params[:id]
     end or raise ActiveRecord::RecordNotFound
   end
-  
+
   def authorized?
     admin? || params[:id].blank? || params[:id] == current_user.id.to_s
+  end
+
+  def render_or_redirect_for_captcha_failure
+    render :action => 'new'
   end
 end

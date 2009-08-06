@@ -11,6 +11,11 @@
 
 ActiveRecord::Schema.define(:version => 20090317123901) do
 
+  create_table "brain_busters", :force => true do |t|
+    t.string "question"
+    t.string "answer"
+  end
+
   create_table "forums", :force => true do |t|
     t.integer "site_id"
     t.string  "name"

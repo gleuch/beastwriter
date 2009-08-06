@@ -13,7 +13,7 @@ class SessionsController < ApplicationController
       open_id_authentication(params[:openid_url])
     else
       cookies[:use_open_id] = {:value => '0', :expires => 1.year.ago.utc}
-      password_authentication params[:login], params[:password]
+      password_authentication params[:login].downcase, params[:password]
       flash[:error] = "Invalid login"
     end
   end
@@ -22,7 +22,7 @@ class SessionsController < ApplicationController
     current_user.forget_me if logged_in?
     cookies.delete :auth_token
     reset_session
-    flash[:notice] = "You have been logged out."
+    flash[:notice] = I18n.t 'txt.logged_out', :default => "You have been logged out."
     redirect_back_or_default('/')
   end
 
@@ -32,7 +32,7 @@ class SessionsController < ApplicationController
     if @current_user = current_site.users.authenticate(name, password)
       successful_login
     else
-      failed_login "Sorry, that username/password doesn't work"
+      failed_login I18n.t 'txt.invalid_login', :default => "Invalid login"
    end
   end
 
@@ -52,7 +52,7 @@ class SessionsController < ApplicationController
         end
         successful_login
       else
-        failed_login "Sorry, no user by the identity URL {openid_url} exists"[:openid_no_user_message, openid_url.inspect]
+        failed_login I18n.t 'txt.invalid_openid', :default => "Sorry, no user by the identity URL #{openid_url} exists"
       end
     else
       failed_login result.message
@@ -63,7 +63,7 @@ class SessionsController < ApplicationController
 
   private
   def successful_login
-    flash[:notice] = 'You are now logged in! Welcome.'
+    flash[:notice] = I18n.t 'txt.successful_login', :default => "Logged in successfully"
     new_cookie_flag = (params[:remember_me] == "1")
     handle_remember_cookie! new_cookie_flag
     session[:user_id] = @current_user.id

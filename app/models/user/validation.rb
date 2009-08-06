@@ -3,6 +3,7 @@ class User
   # Virtual attribute for the unencrypted password
   attr_accessor :password
 
+  before_validation :normalize_login_and_email
   validates_presence_of     :login, :email
   validates_presence_of     :password,                   :if => :password_required?
   validates_presence_of     :password_confirmation,      :if => :password_required?
@@ -11,7 +12,6 @@ class User
   validates_length_of       :login,    :within => 3..40
   validates_length_of       :email,    :within => 3..100
   validates_uniqueness_of   :login, :email, :scope => :site_id
-  before_save :downcase_email_and_login
   before_save :encrypt_password
   before_create :set_first_user_as_admin
   # validates_email_format_of :email, :message=>"is invalid"  
@@ -57,8 +57,10 @@ protected
     self.admin = true if site and site.users.size.zero?
   end
   
-  def downcase_email_and_login
+  def normalize_login_and_email
     login.downcase!
+    login.strip!
     email.downcase!
+    return true
   end
 end
