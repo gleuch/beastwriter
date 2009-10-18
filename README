@@ -15,10 +15,10 @@ NOTE: This is a work in progress!!!
 
 TODO:
   * Add Capistrano.
-  * Add rspec test for rails-blog.
-  * Uncomment and massage out new routes.
+  * Add rspec test for rails-blog / role_requires.
+  * Uncomment and massage out new routes. (nearly done)
   * Convert pages to HAML.
-  * Add RoleRequires and look at removing out altered_beasts's moderatorships.
+  * Add RoleRequires (DONE), define roles, and look at removing out altered_beasts's moderatorships.
   * Continue the marriage process with controllers, models, and views.
   * Verify code looks good.
   * Write a better README!

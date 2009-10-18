@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20091018035717) do
+ActiveRecord::Schema.define(:version => 20091018193251) do
 
   create_table "brain_busters", :force => true do |t|
     t.string "question"
@@ -127,6 +127,18 @@ ActiveRecord::Schema.define(:version => 20091018035717) do
   add_index "posts", ["created_at", "forum_id"], :name => "index_posts_on_forum_id"
   add_index "posts", ["created_at", "topic_id"], :name => "index_posts_on_topic_id"
   add_index "posts", ["created_at", "user_id"], :name => "index_posts_on_user_id"
+
+  create_table "roles", :force => true do |t|
+    t.string "name"
+  end
+
+  create_table "roles_users", :id => false, :force => true do |t|
+    t.integer "role_id"
+    t.integer "user_id"
+  end
+
+  add_index "roles_users", ["role_id"], :name => "index_roles_users_on_role_id"
+  add_index "roles_users", ["user_id"], :name => "index_roles_users_on_user_id"
 
   create_table "sites", :force => true do |t|
     t.string   "name"

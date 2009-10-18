@@ -1,5 +1,6 @@
 class ApplicationController < ActionController::Base
   include AuthenticatedSystem
+  include RoleRequirementSystem
   include PingbackHelper
   include Haml
 
@@ -8,8 +9,6 @@ class ApplicationController < ActionController::Base
 
   before_filter :set_language
 
-
-  include AuthenticatedSystem
 
   # Scrub sensitive parameters from your log
   # filter_parameter_logging :password

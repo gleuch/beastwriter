@@ -1,5 +1,5 @@
 class Admin::LinksController < Admin::ApplicationController
-
+  require_role 'admin'
   before_filter :load_objects
 
   def index

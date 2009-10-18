@@ -1,5 +1,5 @@
 class Admin::CategoriesController < Admin::ApplicationController
-
+  require_role 'admin'
   before_filter :load_objects
   uses_tiny_mce
 
