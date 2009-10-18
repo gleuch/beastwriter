@@ -27,7 +27,7 @@ Rails::Initializer.run do |config|
 
 
   config.active_record.default_timezone = :utc
-  config.active_record.observers = :user_observer
+  # config.active_record.observers = :user_observer
 
 end
 

@@ -539,3 +539,594 @@ Migrating to CreatePermalinks (1)
  FROM sqlite_master
  WHERE type = 'table' AND NOT name = 'sqlite_sequence'
 [0m
+  [4;36;1mSQL (0.5ms)[0m   [0;1m SELECT name
+ FROM sqlite_master
+ WHERE type = 'table' AND NOT name = 'sqlite_sequence'
+[0m
+  [4;35;1mSQL (0.1ms)[0m   [0mSELECT version FROM schema_migrations[0m
+Migrating to CreatePermalinks (1)
+  [4;36;1mSQL (0.1ms)[0m   [0;1mselect sqlite_version(*)[0m
+  [4;35;1mUser Load (0.0ms)[0m   [0mSQLite3::SQLException: no such table: users: SELECT * FROM "users" LIMIT 30 OFFSET 0[0m
+  [4;36;1mSQL (0.5ms)[0m   [0;1m SELECT name
+ FROM sqlite_master
+ WHERE type = 'table' AND NOT name = 'sqlite_sequence'
+[0m
+  [4;35;1mSQL (0.1ms)[0m   [0mSELECT version FROM schema_migrations[0m
+Migrating to CreatePermalinks (1)
+  [4;36;1mSQL (0.1ms)[0m   [0;1mselect sqlite_version(*)[0m
+  [4;35;1mUser Load (0.0ms)[0m   [0mSQLite3::SQLException: no such table: users: SELECT * FROM "users" LIMIT 30 OFFSET 0[0m
+  [4;36;1mSQL (0.5ms)[0m   [0;1m SELECT name
+ FROM sqlite_master
+ WHERE type = 'table' AND NOT name = 'sqlite_sequence'
+[0m
+  [4;35;1mSQL (0.1ms)[0m   [0mSELECT version FROM schema_migrations[0m
+Migrating to AddOpenIdAuthenticationTables (20090317123901)
+  [4;36;1mSQL (0.1ms)[0m   [0;1mselect sqlite_version(*)[0m
+  [4;35;1mSQL (0.3ms)[0m   [0m SELECT name
+ FROM sqlite_master
+ WHERE type = 'table' AND NOT name = 'sqlite_sequence'
+[0m
+  [4;36;1mSQL (0.8ms)[0m   [0;1mCREATE TABLE "open_id_authentication_associations" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "server_url" blob, "handle" varchar(255), "secret" blob, "issued" integer, "lifetime" integer, "assoc_type" varchar(255)) [0m
+  [4;35;1mSQL (0.2ms)[0m   [0m SELECT name
+ FROM sqlite_master
+ WHERE type = 'table' AND NOT name = 'sqlite_sequence'
+[0m
+  [4;36;1mSQL (0.2ms)[0m   [0;1mCREATE TABLE "open_id_authentication_nonces" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "nonce" varchar(255), "created" integer) [0m
+  [4;35;1mSQL (0.2ms)[0m   [0m SELECT name
+ FROM sqlite_master
+ WHERE type = 'table' AND NOT name = 'sqlite_sequence'
+[0m
+  [4;36;1mSQL (0.2ms)[0m   [0;1mCREATE TABLE "open_id_authentication_settings" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "setting" varchar(255), "value" blob) [0m
+  [4;35;1mSQL (0.2ms)[0m   [0mINSERT INTO schema_migrations (version) VALUES ('20090317123901')[0m
+Migrating to CreateEntries (20090331233533)
+  [4;36;1mSQL (0.7ms)[0m   [0;1mCREATE TABLE "entries" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "user_id" varchar(255), "title" varchar(250), "permalink" varchar(250), "publish_at" datetime, "content" varchar(255), "content_parsed" varchar(255), "created_at" datetime, "updated_at" datetime) [0m
+  [4;35;1mSQL (0.3ms)[0m   [0mINSERT INTO schema_migrations (version) VALUES ('20090331233533')[0m
+Migrating to CreateCategories (20090404020537)
+  [4;36;1mSQL (0.7ms)[0m   [0;1mCREATE TABLE "categories" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "parent_id" integer DEFAULT 0, "name" varchar(50), "permalink" varchar(50), "description" varchar(300), "created_at" datetime, "updated_at" datetime) [0m
+  [4;35;1mSQL (0.2ms)[0m   [0mINSERT INTO schema_migrations (version) VALUES ('20090404020537')[0m
+Migrating to CreateCategoryEntries (20090404021136)
+  [4;36;1mSQL (0.6ms)[0m   [0;1mCREATE TABLE "category_entries" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "entry_id" integer, "category_id" integer, "created_at" datetime, "updated_at" datetime) [0m
+  [4;35;1mSQL (0.2ms)[0m   [0mINSERT INTO schema_migrations (version) VALUES ('20090404021136')[0m
+Migrating to CreateTags (20090404143849)
+  [4;36;1mSQL (0.7ms)[0m   [0;1mCREATE TABLE "tags" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "name" varchar(50), "permalink" varchar(50), "description" varchar(300), "created_at" datetime, "updated_at" datetime) [0m
+  [4;35;1mSQL (0.2ms)[0m   [0mINSERT INTO schema_migrations (version) VALUES ('20090404143849')[0m
+Migrating to CreateTagEntries (20090404143943)
+  [4;36;1mSQL (0.7ms)[0m   [0;1mCREATE TABLE "tag_entries" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "entry_id" integer, "tag_id" integer, "created_at" datetime, "updated_at" datetime) [0m
+  [4;35;1mSQL (0.2ms)[0m   [0mINSERT INTO schema_migrations (version) VALUES ('20090404143943')[0m
+Migrating to CreateComments (20090404165228)
+  [4;36;1mSQL (0.7ms)[0m   [0;1mCREATE TABLE "comments" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "entry_id" integer, "alias" varchar(255), "ip" varchar(255), "website" varchar(255), "email" varchar(255), "comment" varchar(255), "created_at" datetime, "updated_at" datetime) [0m
+  [4;35;1mSQL (0.2ms)[0m   [0mINSERT INTO schema_migrations (version) VALUES ('20090404165228')[0m
+Migrating to AddDeletedToComment (20090404170416)
+  [4;36;1mSQL (0.8ms)[0m   [0;1mALTER TABLE "comments" ADD "deleted_at" datetime[0m
+  [4;35;1mSQL (0.3ms)[0m   [0mINSERT INTO schema_migrations (version) VALUES ('20090404170416')[0m
+Migrating to CreateLinks (20090419215729)
+  [4;36;1mSQL (0.7ms)[0m   [0;1mCREATE TABLE "links" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "name" varchar(50), "url" varchar(100), "deleted_at" datetime, "created_at" datetime, "updated_at" datetime) [0m
+  [4;35;1mSQL (0.2ms)[0m   [0mINSERT INTO schema_migrations (version) VALUES ('20090419215729')[0m
+Migrating to AlterCommentsFields (20090422233019)
+  [4;36;1mSQL (0.8ms)[0m   [0;1mCREATE TEMPORARY TABLE "altered_comments" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "entry_id" integer, "author" varchar(255), "ip" varchar(255), "website" varchar(255), "email" varchar(255), "comment" varchar(255), "created_at" datetime, "updated_at" datetime, "deleted_at" datetime) [0m
+  [4;35;1mSQL (0.1ms)[0m   [0mPRAGMA index_list("comments")[0m
+  [4;36;1mSQL (0.6ms)[0m   [0;1mDROP TABLE "comments"[0m
+  [4;35;1mSQL (0.4ms)[0m   [0mCREATE TABLE "comments" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "entry_id" integer, "author" varchar(255), "ip" varchar(255), "website" varchar(255), "email" varchar(255), "comment" varchar(255), "created_at" datetime, "updated_at" datetime, "deleted_at" datetime) [0m
+  [4;36;1mSQL (0.1ms)[0m   [0;1mPRAGMA index_list("altered_comments")[0m
+  [4;35;1mSQL (0.7ms)[0m   [0mDROP TABLE "altered_comments"[0m
+  [4;36;1mSQL (0.6ms)[0m   [0;1mCREATE TEMPORARY TABLE "altered_comments" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "entry_id" integer, "author" varchar(255), "ip" varchar(255), "author_url" varchar(255), "email" varchar(255), "comment" varchar(255), "created_at" datetime, "updated_at" datetime, "deleted_at" datetime) [0m
+  [4;35;1mSQL (0.1ms)[0m   [0mPRAGMA index_list("comments")[0m
+  [4;36;1mSQL (0.4ms)[0m   [0;1mDROP TABLE "comments"[0m
+  [4;35;1mSQL (0.3ms)[0m   [0mCREATE TABLE "comments" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "entry_id" integer, "author" varchar(255), "ip" varchar(255), "author_url" varchar(255), "email" varchar(255), "comment" varchar(255), "created_at" datetime, "updated_at" datetime, "deleted_at" datetime) [0m
+  [4;36;1mSQL (0.1ms)[0m   [0;1mPRAGMA index_list("altered_comments")[0m
+  [4;35;1mSQL (0.3ms)[0m   [0mDROP TABLE "altered_comments"[0m
+  [4;36;1mSQL (0.4ms)[0m   [0;1mCREATE TEMPORARY TABLE "altered_comments" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "entry_id" integer, "author" varchar(255), "ip" varchar(255), "author_url" varchar(255), "author_email" varchar(255), "comment" varchar(255), "created_at" datetime, "updated_at" datetime, "deleted_at" datetime) [0m
+  [4;35;1mSQL (0.1ms)[0m   [0mPRAGMA index_list("comments")[0m
+  [4;36;1mSQL (0.5ms)[0m   [0;1mDROP TABLE "comments"[0m
+  [4;35;1mSQL (0.4ms)[0m   [0mCREATE TABLE "comments" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "entry_id" integer, "author" varchar(255), "ip" varchar(255), "author_url" varchar(255), "author_email" varchar(255), "comment" varchar(255), "created_at" datetime, "updated_at" datetime, "deleted_at" datetime) [0m
+  [4;36;1mSQL (0.1ms)[0m   [0;1mPRAGMA index_list("altered_comments")[0m
+  [4;35;1mSQL (0.3ms)[0m   [0mDROP TABLE "altered_comments"[0m
+  [4;36;1mSQL (0.4ms)[0m   [0;1mCREATE TEMPORARY TABLE "altered_comments" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "entry_id" integer, "author" varchar(255), "ip" varchar(255), "author_url" varchar(255), "author_email" varchar(255), "content" varchar(255), "created_at" datetime, "updated_at" datetime, "deleted_at" datetime) [0m
+  [4;35;1mSQL (0.1ms)[0m   [0mPRAGMA index_list("comments")[0m
+  [4;36;1mSQL (0.4ms)[0m   [0;1mDROP TABLE "comments"[0m
+  [4;35;1mSQL (0.3ms)[0m   [0mCREATE TABLE "comments" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "entry_id" integer, "author" varchar(255), "ip" varchar(255), "author_url" varchar(255), "author_email" varchar(255), "content" varchar(255), "created_at" datetime, "updated_at" datetime, "deleted_at" datetime) [0m
+  [4;36;1mSQL (0.1ms)[0m   [0;1mPRAGMA index_list("altered_comments")[0m
+  [4;35;1mSQL (0.3ms)[0m   [0mDROP TABLE "altered_comments"[0m
+  [4;36;1mSQL (0.3ms)[0m   [0;1mCREATE TEMPORARY TABLE "altered_comments" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "entry_id" integer, "author" varchar(255), "user_ip" varchar(255), "author_url" varchar(255), "author_email" varchar(255), "content" varchar(255), "created_at" datetime, "updated_at" datetime, "deleted_at" datetime) [0m
+  [4;35;1mSQL (0.1ms)[0m   [0mPRAGMA index_list("comments")[0m
+  [4;36;1mSQL (0.5ms)[0m   [0;1mDROP TABLE "comments"[0m
+  [4;35;1mSQL (0.3ms)[0m   [0mCREATE TABLE "comments" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "entry_id" integer, "author" varchar(255), "user_ip" varchar(255), "author_url" varchar(255), "author_email" varchar(255), "content" varchar(255), "created_at" datetime, "updated_at" datetime, "deleted_at" datetime) [0m
+  [4;36;1mSQL (0.1ms)[0m   [0;1mPRAGMA index_list("altered_comments")[0m
+  [4;35;1mSQL (0.3ms)[0m   [0mDROP TABLE "altered_comments"[0m
+  [4;36;1mSQL (0.3ms)[0m   [0;1mALTER TABLE "comments" ADD "user_agent" varchar(500)[0m
+  [4;35;1mSQL (0.2ms)[0m   [0mINSERT INTO schema_migrations (version) VALUES ('20090422233019')[0m
+Migrating to CreateUsers (20091018035713)
+  [4;36;1mSQL (0.7ms)[0m   [0;1m SELECT name
+ FROM sqlite_master
+ WHERE type = 'table' AND NOT name = 'sqlite_sequence'
+[0m
+  [4;35;1mSQL (0.6ms)[0m   [0mCREATE TABLE "users" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "login" varchar(40), "name" varchar(100) DEFAULT '', "email" varchar(100), "crypted_password" varchar(40), "salt" varchar(40), "created_at" datetime, "updated_at" datetime, "remember_token" varchar(40), "remember_token_expires_at" datetime) [0m
+  [4;36;1mSQL (0.6ms)[0m   [0;1mCREATE UNIQUE INDEX "index_users_on_login" ON "users" ("login")[0m
+  [4;35;1mSQL (0.2ms)[0m   [0mINSERT INTO schema_migrations (version) VALUES ('20091018035713')[0m
+Migrating to CreatePermalinks (20091018035714)
+  [4;36;1mUser Load (0.3ms)[0m   [0;1mSELECT * FROM "users" LIMIT 30 OFFSET 0[0m
+  [4;35;1mSQL (0.6ms)[0m   [0m SELECT name
+ FROM sqlite_master
+ WHERE type = 'table' AND NOT name = 'sqlite_sequence'
+[0m
+  [4;36;1mSQL (0.9ms)[0m   [0;1m SELECT name
+ FROM sqlite_master
+ WHERE type = 'table' AND NOT name = 'sqlite_sequence'
+[0m
+  [4;36;1mSQL (0.3ms)[0m   [0;1m SELECT name
+ FROM sqlite_master
+ WHERE type = 'table' AND NOT name = 'sqlite_sequence'
+[0m
+  [4;35;1mSQL (0.1ms)[0m   [0mselect sqlite_version(*)[0m
+  [4;36;1mSQL (2.3ms)[0m   [0;1mCREATE TABLE "schema_migrations" ("version" varchar(255) NOT NULL) [0m
+  [4;35;1mSQL (1.3ms)[0m   [0mCREATE UNIQUE INDEX "unique_schema_migrations" ON "schema_migrations" ("version")[0m
+  [4;36;1mSQL (0.2ms)[0m   [0;1m SELECT name
+ FROM sqlite_master
+ WHERE type = 'table' AND NOT name = 'sqlite_sequence'
+[0m
+  [4;35;1mSQL (0.1ms)[0m   [0mSELECT version FROM schema_migrations[0m
+Migrating to AddOpenIdAuthenticationTables (20090317123901)
+  [4;36;1mSQL (0.3ms)[0m   [0;1m SELECT name
+ FROM sqlite_master
+ WHERE type = 'table' AND NOT name = 'sqlite_sequence'
+[0m
+  [4;35;1mSQL (0.6ms)[0m   [0mCREATE TABLE "open_id_authentication_associations" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "server_url" blob, "handle" varchar(255), "secret" blob, "issued" integer, "lifetime" integer, "assoc_type" varchar(255)) [0m
+  [4;36;1mSQL (0.2ms)[0m   [0;1m SELECT name
+ FROM sqlite_master
+ WHERE type = 'table' AND NOT name = 'sqlite_sequence'
+[0m
+  [4;35;1mSQL (0.2ms)[0m   [0mCREATE TABLE "open_id_authentication_nonces" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "nonce" varchar(255), "created" integer) [0m
+  [4;36;1mSQL (0.2ms)[0m   [0;1m SELECT name
+ FROM sqlite_master
+ WHERE type = 'table' AND NOT name = 'sqlite_sequence'
+[0m
+  [4;35;1mSQL (0.2ms)[0m   [0mCREATE TABLE "open_id_authentication_settings" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "setting" varchar(255), "value" blob) [0m
+  [4;36;1mSQL (0.2ms)[0m   [0;1mINSERT INTO schema_migrations (version) VALUES ('20090317123901')[0m
+Migrating to CreateEntries (20090331233533)
+  [4;35;1mSQL (0.7ms)[0m   [0mCREATE TABLE "entries" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "user_id" varchar(255), "title" varchar(250), "permalink" varchar(250), "publish_at" datetime, "content" varchar(255), "content_parsed" varchar(255), "created_at" datetime, "updated_at" datetime) [0m
+  [4;36;1mSQL (0.3ms)[0m   [0;1mINSERT INTO schema_migrations (version) VALUES ('20090331233533')[0m
+Migrating to CreateCategories (20090404020537)
+  [4;35;1mSQL (0.9ms)[0m   [0mCREATE TABLE "categories" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "parent_id" integer DEFAULT 0, "name" varchar(50), "permalink" varchar(50), "description" varchar(300), "created_at" datetime, "updated_at" datetime) [0m
+  [4;36;1mSQL (0.3ms)[0m   [0;1mINSERT INTO schema_migrations (version) VALUES ('20090404020537')[0m
+Migrating to CreateCategoryEntries (20090404021136)
+  [4;35;1mSQL (0.8ms)[0m   [0mCREATE TABLE "category_entries" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "entry_id" integer, "category_id" integer, "created_at" datetime, "updated_at" datetime) [0m
+  [4;36;1mSQL (0.7ms)[0m   [0;1mINSERT INTO schema_migrations (version) VALUES ('20090404021136')[0m
+Migrating to CreateTags (20090404143849)
+  [4;35;1mSQL (0.7ms)[0m   [0mCREATE TABLE "tags" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "name" varchar(50), "permalink" varchar(50), "description" varchar(300), "created_at" datetime, "updated_at" datetime) [0m
+  [4;36;1mSQL (0.4ms)[0m   [0;1mINSERT INTO schema_migrations (version) VALUES ('20090404143849')[0m
+Migrating to CreateTagEntries (20090404143943)
+  [4;35;1mSQL (0.7ms)[0m   [0mCREATE TABLE "tag_entries" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "entry_id" integer, "tag_id" integer, "created_at" datetime, "updated_at" datetime) [0m
+  [4;36;1mSQL (0.2ms)[0m   [0;1mINSERT INTO schema_migrations (version) VALUES ('20090404143943')[0m
+Migrating to CreateComments (20090404165228)
+  [4;35;1mSQL (0.8ms)[0m   [0mCREATE TABLE "comments" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "entry_id" integer, "alias" varchar(255), "ip" varchar(255), "website" varchar(255), "email" varchar(255), "comment" varchar(255), "created_at" datetime, "updated_at" datetime) [0m
+  [4;36;1mSQL (0.3ms)[0m   [0;1mINSERT INTO schema_migrations (version) VALUES ('20090404165228')[0m
+Migrating to AddDeletedToComment (20090404170416)
+  [4;35;1mSQL (0.7ms)[0m   [0mALTER TABLE "comments" ADD "deleted_at" datetime[0m
+  [4;36;1mSQL (0.2ms)[0m   [0;1mINSERT INTO schema_migrations (version) VALUES ('20090404170416')[0m
+Migrating to CreateLinks (20090419215729)
+  [4;35;1mSQL (0.7ms)[0m   [0mCREATE TABLE "links" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "name" varchar(50), "url" varchar(100), "deleted_at" datetime, "created_at" datetime, "updated_at" datetime) [0m
+  [4;36;1mSQL (0.2ms)[0m   [0;1mINSERT INTO schema_migrations (version) VALUES ('20090419215729')[0m
+Migrating to AlterCommentsFields (20090422233019)
+  [4;35;1mSQL (1.0ms)[0m   [0mCREATE TEMPORARY TABLE "altered_comments" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "entry_id" integer, "author" varchar(255), "ip" varchar(255), "website" varchar(255), "email" varchar(255), "comment" varchar(255), "created_at" datetime, "updated_at" datetime, "deleted_at" datetime) [0m
+  [4;36;1mSQL (0.1ms)[0m   [0;1mPRAGMA index_list("comments")[0m
+  [4;35;1mSQL (1.2ms)[0m   [0mDROP TABLE "comments"[0m
+  [4;36;1mSQL (0.3ms)[0m   [0;1mCREATE TABLE "comments" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "entry_id" integer, "author" varchar(255), "ip" varchar(255), "website" varchar(255), "email" varchar(255), "comment" varchar(255), "created_at" datetime, "updated_at" datetime, "deleted_at" datetime) [0m
+  [4;35;1mSQL (0.1ms)[0m   [0mPRAGMA index_list("altered_comments")[0m
+  [4;36;1mSQL (0.7ms)[0m   [0;1mDROP TABLE "altered_comments"[0m
+  [4;35;1mSQL (0.3ms)[0m   [0mCREATE TEMPORARY TABLE "altered_comments" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "entry_id" integer, "author" varchar(255), "ip" varchar(255), "author_url" varchar(255), "email" varchar(255), "comment" varchar(255), "created_at" datetime, "updated_at" datetime, "deleted_at" datetime) [0m
+  [4;36;1mSQL (0.1ms)[0m   [0;1mPRAGMA index_list("comments")[0m
+  [4;35;1mSQL (0.4ms)[0m   [0mDROP TABLE "comments"[0m
+  [4;36;1mSQL (0.3ms)[0m   [0;1mCREATE TABLE "comments" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "entry_id" integer, "author" varchar(255), "ip" varchar(255), "author_url" varchar(255), "email" varchar(255), "comment" varchar(255), "created_at" datetime, "updated_at" datetime, "deleted_at" datetime) [0m
+  [4;35;1mSQL (0.1ms)[0m   [0mPRAGMA index_list("altered_comments")[0m
+  [4;36;1mSQL (0.3ms)[0m   [0;1mDROP TABLE "altered_comments"[0m
+  [4;35;1mSQL (2.3ms)[0m   [0mCREATE TEMPORARY TABLE "altered_comments" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "entry_id" integer, "author" varchar(255), "ip" varchar(255), "author_url" varchar(255), "author_email" varchar(255), "comment" varchar(255), "created_at" datetime, "updated_at" datetime, "deleted_at" datetime) [0m
+  [4;36;1mSQL (0.1ms)[0m   [0;1mPRAGMA index_list("comments")[0m
+  [4;35;1mSQL (0.5ms)[0m   [0mDROP TABLE "comments"[0m
+  [4;36;1mSQL (0.3ms)[0m   [0;1mCREATE TABLE "comments" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "entry_id" integer, "author" varchar(255), "ip" varchar(255), "author_url" varchar(255), "author_email" varchar(255), "comment" varchar(255), "created_at" datetime, "updated_at" datetime, "deleted_at" datetime) [0m
+  [4;35;1mSQL (0.1ms)[0m   [0mPRAGMA index_list("altered_comments")[0m
+  [4;36;1mSQL (0.4ms)[0m   [0;1mDROP TABLE "altered_comments"[0m
+  [4;35;1mSQL (0.4ms)[0m   [0mCREATE TEMPORARY TABLE "altered_comments" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "entry_id" integer, "author" varchar(255), "ip" varchar(255), "author_url" varchar(255), "author_email" varchar(255), "content" varchar(255), "created_at" datetime, "updated_at" datetime, "deleted_at" datetime) [0m
+  [4;36;1mSQL (0.1ms)[0m   [0;1mPRAGMA index_list("comments")[0m
+  [4;35;1mSQL (0.3ms)[0m   [0mDROP TABLE "comments"[0m
+  [4;36;1mSQL (0.3ms)[0m   [0;1mCREATE TABLE "comments" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "entry_id" integer, "author" varchar(255), "ip" varchar(255), "author_url" varchar(255), "author_email" varchar(255), "content" varchar(255), "created_at" datetime, "updated_at" datetime, "deleted_at" datetime) [0m
+  [4;35;1mSQL (0.1ms)[0m   [0mPRAGMA index_list("altered_comments")[0m
+  [4;36;1mSQL (0.3ms)[0m   [0;1mDROP TABLE "altered_comments"[0m
+  [4;35;1mSQL (0.3ms)[0m   [0mCREATE TEMPORARY TABLE "altered_comments" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "entry_id" integer, "author" varchar(255), "user_ip" varchar(255), "author_url" varchar(255), "author_email" varchar(255), "content" varchar(255), "created_at" datetime, "updated_at" datetime, "deleted_at" datetime) [0m
+  [4;36;1mSQL (0.1ms)[0m   [0;1mPRAGMA index_list("comments")[0m
+  [4;35;1mSQL (0.4ms)[0m   [0mDROP TABLE "comments"[0m
+  [4;36;1mSQL (0.3ms)[0m   [0;1mCREATE TABLE "comments" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "entry_id" integer, "author" varchar(255), "user_ip" varchar(255), "author_url" varchar(255), "author_email" varchar(255), "content" varchar(255), "created_at" datetime, "updated_at" datetime, "deleted_at" datetime) [0m
+  [4;35;1mSQL (0.1ms)[0m   [0mPRAGMA index_list("altered_comments")[0m
+  [4;36;1mSQL (0.3ms)[0m   [0;1mDROP TABLE "altered_comments"[0m
+  [4;35;1mSQL (0.3ms)[0m   [0mALTER TABLE "comments" ADD "user_agent" varchar(500)[0m
+  [4;36;1mSQL (0.2ms)[0m   [0;1mINSERT INTO schema_migrations (version) VALUES ('20090422233019')[0m
+Migrating to CreateUsers (20091018035713)
+  [4;35;1mSQL (0.8ms)[0m   [0m SELECT name
+ FROM sqlite_master
+ WHERE type = 'table' AND NOT name = 'sqlite_sequence'
+[0m
+  [4;36;1mSQL (0.7ms)[0m   [0;1mCREATE TABLE "users" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "login" varchar(40), "name" varchar(100) DEFAULT '', "email" varchar(100), "crypted_password" varchar(40), "salt" varchar(40), "created_at" datetime, "updated_at" datetime, "remember_token" varchar(40), "remember_token_expires_at" datetime) [0m
+  [4;35;1mSQL (0.7ms)[0m   [0mCREATE UNIQUE INDEX "index_users_on_login" ON "users" ("login")[0m
+  [4;36;1mSQL (0.2ms)[0m   [0;1mINSERT INTO schema_migrations (version) VALUES ('20091018035713')[0m
+Migrating to CreatePermalinks (20091018035714)
+  [4;35;1mUser Load (0.3ms)[0m   [0mSELECT * FROM "users" LIMIT 30 OFFSET 0[0m
+  [4;36;1mSQL (0.3ms)[0m   [0;1m SELECT name
+ FROM sqlite_master
+ WHERE type = 'table' AND NOT name = 'sqlite_sequence'
+[0m
+  [4;35;1mSQL (0.1ms)[0m   [0mselect sqlite_version(*)[0m
+  [4;36;1mSQL (2.3ms)[0m   [0;1mCREATE TABLE "schema_migrations" ("version" varchar(255) NOT NULL) [0m
+  [4;35;1mSQL (1.4ms)[0m   [0mCREATE UNIQUE INDEX "unique_schema_migrations" ON "schema_migrations" ("version")[0m
+  [4;36;1mSQL (0.2ms)[0m   [0;1m SELECT name
+ FROM sqlite_master
+ WHERE type = 'table' AND NOT name = 'sqlite_sequence'
+[0m
+  [4;35;1mSQL (0.1ms)[0m   [0mSELECT version FROM schema_migrations[0m
+Migrating to CreateEntries (20090331233533)
+  [4;36;1mSQL (0.8ms)[0m   [0;1mCREATE TABLE "entries" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "user_id" varchar(255), "title" varchar(250), "permalink" varchar(250), "publish_at" datetime, "content" varchar(255), "content_parsed" varchar(255), "created_at" datetime, "updated_at" datetime) [0m
+  [4;35;1mSQL (0.2ms)[0m   [0mINSERT INTO schema_migrations (version) VALUES ('20090331233533')[0m
+Migrating to CreateCategories (20090404020537)
+  [4;36;1mSQL (0.7ms)[0m   [0;1mCREATE TABLE "categories" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "parent_id" integer DEFAULT 0, "name" varchar(50), "permalink" varchar(50), "description" varchar(300), "created_at" datetime, "updated_at" datetime) [0m
+  [4;35;1mSQL (0.3ms)[0m   [0mINSERT INTO schema_migrations (version) VALUES ('20090404020537')[0m
+Migrating to CreateCategoryEntries (20090404021136)
+  [4;36;1mSQL (0.6ms)[0m   [0;1mCREATE TABLE "category_entries" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "entry_id" integer, "category_id" integer, "created_at" datetime, "updated_at" datetime) [0m
+  [4;35;1mSQL (0.2ms)[0m   [0mINSERT INTO schema_migrations (version) VALUES ('20090404021136')[0m
+Migrating to CreateTags (20090404143849)
+  [4;36;1mSQL (1.0ms)[0m   [0;1mCREATE TABLE "tags" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "name" varchar(50), "permalink" varchar(50), "description" varchar(300), "created_at" datetime, "updated_at" datetime) [0m
+  [4;35;1mSQL (0.2ms)[0m   [0mINSERT INTO schema_migrations (version) VALUES ('20090404143849')[0m
+Migrating to CreateTagEntries (20090404143943)
+  [4;36;1mSQL (0.8ms)[0m   [0;1mCREATE TABLE "tag_entries" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "entry_id" integer, "tag_id" integer, "created_at" datetime, "updated_at" datetime) [0m
+  [4;35;1mSQL (0.3ms)[0m   [0mINSERT INTO schema_migrations (version) VALUES ('20090404143943')[0m
+Migrating to CreateComments (20090404165228)
+  [4;36;1mSQL (0.7ms)[0m   [0;1mCREATE TABLE "comments" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "entry_id" integer, "alias" varchar(255), "ip" varchar(255), "website" varchar(255), "email" varchar(255), "comment" varchar(255), "created_at" datetime, "updated_at" datetime) [0m
+  [4;35;1mSQL (0.2ms)[0m   [0mINSERT INTO schema_migrations (version) VALUES ('20090404165228')[0m
+Migrating to AddDeletedToComment (20090404170416)
+  [4;36;1mSQL (0.7ms)[0m   [0;1mALTER TABLE "comments" ADD "deleted_at" datetime[0m
+  [4;35;1mSQL (0.2ms)[0m   [0mINSERT INTO schema_migrations (version) VALUES ('20090404170416')[0m
+Migrating to CreateLinks (20090419215729)
+  [4;36;1mSQL (0.9ms)[0m   [0;1mCREATE TABLE "links" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "name" varchar(50), "url" varchar(100), "deleted_at" datetime, "created_at" datetime, "updated_at" datetime) [0m
+  [4;35;1mSQL (0.4ms)[0m   [0mINSERT INTO schema_migrations (version) VALUES ('20090419215729')[0m
+Migrating to AlterCommentsFields (20090422233019)
+  [4;36;1mSQL (0.9ms)[0m   [0;1mCREATE TEMPORARY TABLE "altered_comments" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "entry_id" integer, "author" varchar(255), "ip" varchar(255), "website" varchar(255), "email" varchar(255), "comment" varchar(255), "created_at" datetime, "updated_at" datetime, "deleted_at" datetime) [0m
+  [4;35;1mSQL (0.1ms)[0m   [0mPRAGMA index_list("comments")[0m
+  [4;36;1mSQL (0.8ms)[0m   [0;1mDROP TABLE "comments"[0m
+  [4;35;1mSQL (0.3ms)[0m   [0mCREATE TABLE "comments" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "entry_id" integer, "author" varchar(255), "ip" varchar(255), "website" varchar(255), "email" varchar(255), "comment" varchar(255), "created_at" datetime, "updated_at" datetime, "deleted_at" datetime) [0m
+  [4;36;1mSQL (0.1ms)[0m   [0;1mPRAGMA index_list("altered_comments")[0m
+  [4;35;1mSQL (0.7ms)[0m   [0mDROP TABLE "altered_comments"[0m
+  [4;36;1mSQL (0.4ms)[0m   [0;1mCREATE TEMPORARY TABLE "altered_comments" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "entry_id" integer, "author" varchar(255), "ip" varchar(255), "author_url" varchar(255), "email" varchar(255), "comment" varchar(255), "created_at" datetime, "updated_at" datetime, "deleted_at" datetime) [0m
+  [4;35;1mSQL (0.1ms)[0m   [0mPRAGMA index_list("comments")[0m
+  [4;36;1mSQL (0.5ms)[0m   [0;1mDROP TABLE "comments"[0m
+  [4;35;1mSQL (0.4ms)[0m   [0mCREATE TABLE "comments" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "entry_id" integer, "author" varchar(255), "ip" varchar(255), "author_url" varchar(255), "email" varchar(255), "comment" varchar(255), "created_at" datetime, "updated_at" datetime, "deleted_at" datetime) [0m
+  [4;36;1mSQL (0.1ms)[0m   [0;1mPRAGMA index_list("altered_comments")[0m
+  [4;35;1mSQL (0.3ms)[0m   [0mDROP TABLE "altered_comments"[0m
+  [4;36;1mSQL (0.4ms)[0m   [0;1mCREATE TEMPORARY TABLE "altered_comments" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "entry_id" integer, "author" varchar(255), "ip" varchar(255), "author_url" varchar(255), "author_email" varchar(255), "comment" varchar(255), "created_at" datetime, "updated_at" datetime, "deleted_at" datetime) [0m
+  [4;35;1mSQL (0.1ms)[0m   [0mPRAGMA index_list("comments")[0m
+  [4;36;1mSQL (0.4ms)[0m   [0;1mDROP TABLE "comments"[0m
+  [4;35;1mSQL (0.3ms)[0m   [0mCREATE TABLE "comments" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "entry_id" integer, "author" varchar(255), "ip" varchar(255), "author_url" varchar(255), "author_email" varchar(255), "comment" varchar(255), "created_at" datetime, "updated_at" datetime, "deleted_at" datetime) [0m
+  [4;36;1mSQL (0.1ms)[0m   [0;1mPRAGMA index_list("altered_comments")[0m
+  [4;35;1mSQL (0.3ms)[0m   [0mDROP TABLE "altered_comments"[0m
+  [4;36;1mSQL (0.3ms)[0m   [0;1mCREATE TEMPORARY TABLE "altered_comments" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "entry_id" integer, "author" varchar(255), "ip" varchar(255), "author_url" varchar(255), "author_email" varchar(255), "content" varchar(255), "created_at" datetime, "updated_at" datetime, "deleted_at" datetime) [0m
+  [4;35;1mSQL (0.1ms)[0m   [0mPRAGMA index_list("comments")[0m
+  [4;36;1mSQL (0.7ms)[0m   [0;1mDROP TABLE "comments"[0m
+  [4;35;1mSQL (0.3ms)[0m   [0mCREATE TABLE "comments" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "entry_id" integer, "author" varchar(255), "ip" varchar(255), "author_url" varchar(255), "author_email" varchar(255), "content" varchar(255), "created_at" datetime, "updated_at" datetime, "deleted_at" datetime) [0m
+  [4;36;1mSQL (0.1ms)[0m   [0;1mPRAGMA index_list("altered_comments")[0m
+  [4;35;1mSQL (0.3ms)[0m   [0mDROP TABLE "altered_comments"[0m
+  [4;36;1mSQL (0.3ms)[0m   [0;1mCREATE TEMPORARY TABLE "altered_comments" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "entry_id" integer, "author" varchar(255), "user_ip" varchar(255), "author_url" varchar(255), "author_email" varchar(255), "content" varchar(255), "created_at" datetime, "updated_at" datetime, "deleted_at" datetime) [0m
+  [4;35;1mSQL (0.2ms)[0m   [0mPRAGMA index_list("comments")[0m
+  [4;36;1mSQL (0.4ms)[0m   [0;1mDROP TABLE "comments"[0m
+  [4;35;1mSQL (0.3ms)[0m   [0mCREATE TABLE "comments" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "entry_id" integer, "author" varchar(255), "user_ip" varchar(255), "author_url" varchar(255), "author_email" varchar(255), "content" varchar(255), "created_at" datetime, "updated_at" datetime, "deleted_at" datetime) [0m
+  [4;36;1mSQL (0.0ms)[0m   [0;1mPRAGMA index_list("altered_comments")[0m
+  [4;35;1mSQL (0.3ms)[0m   [0mDROP TABLE "altered_comments"[0m
+  [4;36;1mSQL (0.3ms)[0m   [0;1mALTER TABLE "comments" ADD "user_agent" varchar(500)[0m
+  [4;35;1mSQL (0.2ms)[0m   [0mINSERT INTO schema_migrations (version) VALUES ('20090422233019')[0m
+Migrating to CreateAlteredBeastSchema (20091018035715)
+  [4;36;1mSQL (0.3ms)[0m   [0;1m SELECT name
+ FROM sqlite_master
+ WHERE type = 'table' AND NOT name = 'sqlite_sequence'
+[0m
+  [4;35;1mSQL (0.1ms)[0m   [0mselect sqlite_version(*)[0m
+  [4;36;1mSQL (2.7ms)[0m   [0;1mCREATE TABLE "schema_migrations" ("version" varchar(255) NOT NULL) [0m
+  [4;35;1mSQL (1.4ms)[0m   [0mCREATE UNIQUE INDEX "unique_schema_migrations" ON "schema_migrations" ("version")[0m
+  [4;36;1mSQL (0.2ms)[0m   [0;1m SELECT name
+ FROM sqlite_master
+ WHERE type = 'table' AND NOT name = 'sqlite_sequence'
+[0m
+  [4;35;1mSQL (0.1ms)[0m   [0mSELECT version FROM schema_migrations[0m
+Migrating to CreateEntries (20090331233533)
+  [4;36;1mSQL (0.8ms)[0m   [0;1mCREATE TABLE "entries" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "user_id" varchar(255), "title" varchar(250), "permalink" varchar(250), "publish_at" datetime, "content" varchar(255), "content_parsed" varchar(255), "created_at" datetime, "updated_at" datetime) [0m
+  [4;35;1mSQL (0.2ms)[0m   [0mINSERT INTO schema_migrations (version) VALUES ('20090331233533')[0m
+Migrating to CreateCategories (20090404020537)
+  [4;36;1mSQL (0.7ms)[0m   [0;1mCREATE TABLE "categories" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "parent_id" integer DEFAULT 0, "name" varchar(50), "permalink" varchar(50), "description" varchar(300), "created_at" datetime, "updated_at" datetime) [0m
+  [4;35;1mSQL (0.2ms)[0m   [0mINSERT INTO schema_migrations (version) VALUES ('20090404020537')[0m
+Migrating to CreateCategoryEntries (20090404021136)
+  [4;36;1mSQL (1.6ms)[0m   [0;1mCREATE TABLE "category_entries" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "entry_id" integer, "category_id" integer, "created_at" datetime, "updated_at" datetime) [0m
+  [4;35;1mSQL (0.4ms)[0m   [0mINSERT INTO schema_migrations (version) VALUES ('20090404021136')[0m
+Migrating to CreateTags (20090404143849)
+  [4;36;1mSQL (0.7ms)[0m   [0;1mCREATE TABLE "tags" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "name" varchar(50), "permalink" varchar(50), "description" varchar(300), "created_at" datetime, "updated_at" datetime) [0m
+  [4;35;1mSQL (0.2ms)[0m   [0mINSERT INTO schema_migrations (version) VALUES ('20090404143849')[0m
+Migrating to CreateTagEntries (20090404143943)
+  [4;36;1mSQL (0.6ms)[0m   [0;1mCREATE TABLE "tag_entries" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "entry_id" integer, "tag_id" integer, "created_at" datetime, "updated_at" datetime) [0m
+  [4;35;1mSQL (0.2ms)[0m   [0mINSERT INTO schema_migrations (version) VALUES ('20090404143943')[0m
+Migrating to CreateComments (20090404165228)
+  [4;36;1mSQL (0.7ms)[0m   [0;1mCREATE TABLE "comments" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "entry_id" integer, "alias" varchar(255), "ip" varchar(255), "website" varchar(255), "email" varchar(255), "comment" varchar(255), "created_at" datetime, "updated_at" datetime) [0m
+  [4;35;1mSQL (0.2ms)[0m   [0mINSERT INTO schema_migrations (version) VALUES ('20090404165228')[0m
+Migrating to AddDeletedToComment (20090404170416)
+  [4;36;1mSQL (0.7ms)[0m   [0;1mALTER TABLE "comments" ADD "deleted_at" datetime[0m
+  [4;35;1mSQL (0.3ms)[0m   [0mINSERT INTO schema_migrations (version) VALUES ('20090404170416')[0m
+Migrating to CreateLinks (20090419215729)
+  [4;36;1mSQL (0.7ms)[0m   [0;1mCREATE TABLE "links" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "name" varchar(50), "url" varchar(100), "deleted_at" datetime, "created_at" datetime, "updated_at" datetime) [0m
+  [4;35;1mSQL (0.2ms)[0m   [0mINSERT INTO schema_migrations (version) VALUES ('20090419215729')[0m
+Migrating to AlterCommentsFields (20090422233019)
+  [4;36;1mSQL (0.9ms)[0m   [0;1mCREATE TEMPORARY TABLE "altered_comments" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "entry_id" integer, "author" varchar(255), "ip" varchar(255), "website" varchar(255), "email" varchar(255), "comment" varchar(255), "created_at" datetime, "updated_at" datetime, "deleted_at" datetime) [0m
+  [4;35;1mSQL (0.1ms)[0m   [0mPRAGMA index_list("comments")[0m
+  [4;36;1mSQL (1.4ms)[0m   [0;1mDROP TABLE "comments"[0m
+  [4;35;1mSQL (0.4ms)[0m   [0mCREATE TABLE "comments" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "entry_id" integer, "author" varchar(255), "ip" varchar(255), "website" varchar(255), "email" varchar(255), "comment" varchar(255), "created_at" datetime, "updated_at" datetime, "deleted_at" datetime) [0m
+  [4;36;1mSQL (0.1ms)[0m   [0;1mPRAGMA index_list("altered_comments")[0m
+  [4;35;1mSQL (0.7ms)[0m   [0mDROP TABLE "altered_comments"[0m
+  [4;36;1mSQL (0.4ms)[0m   [0;1mCREATE TEMPORARY TABLE "altered_comments" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "entry_id" integer, "author" varchar(255), "ip" varchar(255), "author_url" varchar(255), "email" varchar(255), "comment" varchar(255), "created_at" datetime, "updated_at" datetime, "deleted_at" datetime) [0m
+  [4;35;1mSQL (0.1ms)[0m   [0mPRAGMA index_list("comments")[0m
+  [4;36;1mSQL (0.6ms)[0m   [0;1mDROP TABLE "comments"[0m
+  [4;35;1mSQL (0.5ms)[0m   [0mCREATE TABLE "comments" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "entry_id" integer, "author" varchar(255), "ip" varchar(255), "author_url" varchar(255), "email" varchar(255), "comment" varchar(255), "created_at" datetime, "updated_at" datetime, "deleted_at" datetime) [0m
+  [4;36;1mSQL (0.1ms)[0m   [0;1mPRAGMA index_list("altered_comments")[0m
+  [4;35;1mSQL (0.4ms)[0m   [0mDROP TABLE "altered_comments"[0m
+  [4;36;1mSQL (0.4ms)[0m   [0;1mCREATE TEMPORARY TABLE "altered_comments" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "entry_id" integer, "author" varchar(255), "ip" varchar(255), "author_url" varchar(255), "author_email" varchar(255), "comment" varchar(255), "created_at" datetime, "updated_at" datetime, "deleted_at" datetime) [0m
+  [4;35;1mSQL (0.1ms)[0m   [0mPRAGMA index_list("comments")[0m
+  [4;36;1mSQL (0.4ms)[0m   [0;1mDROP TABLE "comments"[0m
+  [4;35;1mSQL (0.3ms)[0m   [0mCREATE TABLE "comments" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "entry_id" integer, "author" varchar(255), "ip" varchar(255), "author_url" varchar(255), "author_email" varchar(255), "comment" varchar(255), "created_at" datetime, "updated_at" datetime, "deleted_at" datetime) [0m
+  [4;36;1mSQL (0.1ms)[0m   [0;1mPRAGMA index_list("altered_comments")[0m
+  [4;35;1mSQL (0.3ms)[0m   [0mDROP TABLE "altered_comments"[0m
+  [4;36;1mSQL (0.3ms)[0m   [0;1mCREATE TEMPORARY TABLE "altered_comments" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "entry_id" integer, "author" varchar(255), "ip" varchar(255), "author_url" varchar(255), "author_email" varchar(255), "content" varchar(255), "created_at" datetime, "updated_at" datetime, "deleted_at" datetime) [0m
+  [4;35;1mSQL (0.1ms)[0m   [0mPRAGMA index_list("comments")[0m
+  [4;36;1mSQL (0.5ms)[0m   [0;1mDROP TABLE "comments"[0m
+  [4;35;1mSQL (0.3ms)[0m   [0mCREATE TABLE "comments" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "entry_id" integer, "author" varchar(255), "ip" varchar(255), "author_url" varchar(255), "author_email" varchar(255), "content" varchar(255), "created_at" datetime, "updated_at" datetime, "deleted_at" datetime) [0m
+  [4;36;1mSQL (0.1ms)[0m   [0;1mPRAGMA index_list("altered_comments")[0m
+  [4;35;1mSQL (0.3ms)[0m   [0mDROP TABLE "altered_comments"[0m
+  [4;36;1mSQL (0.3ms)[0m   [0;1mCREATE TEMPORARY TABLE "altered_comments" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "entry_id" integer, "author" varchar(255), "user_ip" varchar(255), "author_url" varchar(255), "author_email" varchar(255), "content" varchar(255), "created_at" datetime, "updated_at" datetime, "deleted_at" datetime) [0m
+  [4;35;1mSQL (0.1ms)[0m   [0mPRAGMA index_list("comments")[0m
+  [4;36;1mSQL (0.4ms)[0m   [0;1mDROP TABLE "comments"[0m
+  [4;35;1mSQL (0.3ms)[0m   [0mCREATE TABLE "comments" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "entry_id" integer, "author" varchar(255), "user_ip" varchar(255), "author_url" varchar(255), "author_email" varchar(255), "content" varchar(255), "created_at" datetime, "updated_at" datetime, "deleted_at" datetime) [0m
+  [4;36;1mSQL (0.1ms)[0m   [0;1mPRAGMA index_list("altered_comments")[0m
+  [4;35;1mSQL (0.4ms)[0m   [0mDROP TABLE "altered_comments"[0m
+  [4;36;1mSQL (0.3ms)[0m   [0;1mALTER TABLE "comments" ADD "user_agent" varchar(500)[0m
+  [4;35;1mSQL (0.2ms)[0m   [0mINSERT INTO schema_migrations (version) VALUES ('20090422233019')[0m
+Migrating to CreateAlteredBeastSchema (20091018035715)
+  [4;36;1mSQL (0.6ms)[0m   [0;1m SELECT name
+ FROM sqlite_master
+ WHERE type = 'table' AND NOT name = 'sqlite_sequence'
+[0m
+  [4;35;1mSQL (0.8ms)[0m   [0mCREATE TABLE "forums" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "site_id" integer, "name" varchar(255), "description" varchar(255), "topics_count" integer DEFAULT 0, "posts_count" integer DEFAULT 0, "position" integer DEFAULT 0, "description_html" text, "state" varchar(255) DEFAULT 'public', "permalink" varchar(255)) [0m
+  [4;36;1mSQL (0.4ms)[0m   [0;1mCREATE INDEX "index_forums_on_position_and_site_id" ON "forums" ("position", "site_id")[0m
+  [4;35;1mSQL (0.2ms)[0m   [0mCREATE INDEX "index_forums_on_site_id_and_permalink" ON "forums" ("site_id", "permalink")[0m
+  [4;36;1mSQL (0.7ms)[0m   [0;1m SELECT name
+ FROM sqlite_master
+ WHERE type = 'table' AND NOT name = 'sqlite_sequence'
+[0m
+  [4;35;1mSQL (0.4ms)[0m   [0mCREATE TABLE "moderatorships" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "forum_id" integer, "user_id" integer, "created_at" datetime, "updated_at" datetime) [0m
+  [4;36;1mSQL (0.5ms)[0m   [0;1m SELECT name
+ FROM sqlite_master
+ WHERE type = 'table' AND NOT name = 'sqlite_sequence'
+[0m
+  [4;35;1mSQL (0.3ms)[0m   [0mCREATE TABLE "monitorships" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "user_id" integer, "topic_id" integer, "created_at" datetime, "updated_at" datetime, "active" boolean DEFAULT 't') [0m
+  [4;36;1mSQL (0.5ms)[0m   [0;1m SELECT name
+ FROM sqlite_master
+ WHERE type = 'table' AND NOT name = 'sqlite_sequence'
+[0m
+  [4;35;1mSQL (5.5ms)[0m   [0mCREATE TABLE "open_id_authentication_associations" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "server_url" blob, "handle" varchar(255), "secret" blob, "issued" integer, "lifetime" integer, "assoc_type" varchar(255)) [0m
+  [4;36;1mSQL (0.6ms)[0m   [0;1m SELECT name
+ FROM sqlite_master
+ WHERE type = 'table' AND NOT name = 'sqlite_sequence'
+[0m
+  [4;35;1mSQL (0.2ms)[0m   [0mCREATE TABLE "open_id_authentication_nonces" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "nonce" varchar(255), "created" integer) [0m
+  [4;36;1mSQL (0.6ms)[0m   [0;1m SELECT name
+ FROM sqlite_master
+ WHERE type = 'table' AND NOT name = 'sqlite_sequence'
+[0m
+  [4;35;1mSQL (0.2ms)[0m   [0mCREATE TABLE "open_id_authentication_settings" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "setting" varchar(255), "value" blob) [0m
+  [4;36;1mSQL (0.6ms)[0m   [0;1m SELECT name
+ FROM sqlite_master
+ WHERE type = 'table' AND NOT name = 'sqlite_sequence'
+[0m
+  [4;35;1mSQL (0.2ms)[0m   [0mCREATE TABLE "posts" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "user_id" integer, "topic_id" integer, "body" text, "created_at" datetime, "updated_at" datetime, "forum_id" integer, "body_html" text, "site_id" integer) [0m
+  [4;36;1mSQL (0.2ms)[0m   [0;1mCREATE INDEX "index_posts_on_forum_id" ON "posts" ("created_at", "forum_id")[0m
+  [4;35;1mSQL (0.2ms)[0m   [0mCREATE INDEX "index_posts_on_topic_id" ON "posts" ("created_at", "topic_id")[0m
+  [4;36;1mSQL (0.2ms)[0m   [0;1mCREATE INDEX "index_posts_on_user_id" ON "posts" ("created_at", "user_id")[0m
+  [4;35;1mSQL (0.6ms)[0m   [0m SELECT name
+ FROM sqlite_master
+ WHERE type = 'table' AND NOT name = 'sqlite_sequence'
+[0m
+  [4;36;1mSQL (0.3ms)[0m   [0;1mCREATE TABLE "sites" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "name" varchar(255), "host" varchar(255), "created_at" datetime, "updated_at" datetime, "topics_count" integer DEFAULT 0, "users_count" integer DEFAULT 0, "posts_count" integer DEFAULT 0, "description" text, "tagline" text) [0m
+  [4;35;1mSQL (0.7ms)[0m   [0m SELECT name
+ FROM sqlite_master
+ WHERE type = 'table' AND NOT name = 'sqlite_sequence'
+[0m
+  [4;36;1mSQL (0.3ms)[0m   [0;1mCREATE TABLE "topics" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "forum_id" integer, "user_id" integer, "title" varchar(255), "created_at" datetime, "updated_at" datetime, "hits" integer DEFAULT 0, "sticky" integer DEFAULT 0, "posts_count" integer DEFAULT 0, "locked" boolean DEFAULT 'f', "last_post_id" integer, "last_updated_at" datetime, "last_user_id" integer, "site_id" integer, "permalink" varchar(255)) [0m
+  [4;35;1mSQL (0.2ms)[0m   [0mCREATE INDEX "index_topics_on_forum_id_and_permalink" ON "topics" ("forum_id", "permalink")[0m
+  [4;36;1mSQL (0.2ms)[0m   [0;1mCREATE INDEX "index_topics_on_forum_id_and_last_updated_at" ON "topics" ("last_updated_at", "forum_id")[0m
+  [4;35;1mSQL (0.2ms)[0m   [0mCREATE INDEX "index_topics_on_sticky_and_last_updated_at" ON "topics" ("sticky", "last_updated_at", "forum_id")[0m
+  [4;36;1mSQL (0.8ms)[0m   [0;1m SELECT name
+ FROM sqlite_master
+ WHERE type = 'table' AND NOT name = 'sqlite_sequence'
+[0m
+  [4;35;1mSQL (0.4ms)[0m   [0mCREATE TABLE "users" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "login" varchar(255), "email" varchar(255), "crypted_password" varchar(40), "salt" varchar(40), "created_at" datetime, "updated_at" datetime, "remember_token" varchar(255), "remember_token_expires_at" datetime, "activation_code" varchar(40), "activated_at" datetime, "state" varchar(255) DEFAULT 'passive', "deleted_at" datetime, "admin" boolean DEFAULT 'f', "site_id" integer, "last_login_at" datetime, "bio_html" text, "openid_url" varchar(255), "last_seen_at" datetime, "website" varchar(255), "posts_count" integer DEFAULT 0, "bio" varchar(255), "display_name" varchar(255), "permalink" varchar(255)) [0m
+  [4;36;1mSQL (0.2ms)[0m   [0;1mCREATE INDEX "index_users_on_last_seen_at" ON "users" ("last_seen_at")[0m
+  [4;35;1mSQL (0.2ms)[0m   [0mCREATE INDEX "index_site_users_on_permalink" ON "users" ("site_id", "permalink")[0m
+  [4;36;1mSQL (0.2ms)[0m   [0;1mCREATE INDEX "index_site_users_on_posts_count" ON "users" ("site_id", "posts_count")[0m
+  [4;35;1mSQL (0.2ms)[0m   [0mINSERT INTO schema_migrations (version) VALUES ('20091018035715')[0m
+Migrating to CreatePermalinks (20091018035716)
+  [4;36;1mUser Load (0.4ms)[0m   [0;1mSELECT * FROM "users" LIMIT 30 OFFSET 0[0m
+  [4;36;1mSQL (0.3ms)[0m   [0;1m SELECT name
+ FROM sqlite_master
+ WHERE type = 'table' AND NOT name = 'sqlite_sequence'
+[0m
+  [4;35;1mSQL (0.1ms)[0m   [0mselect sqlite_version(*)[0m
+  [4;36;1mSQL (2.3ms)[0m   [0;1mCREATE TABLE "schema_migrations" ("version" varchar(255) NOT NULL) [0m
+  [4;35;1mSQL (1.3ms)[0m   [0mCREATE UNIQUE INDEX "unique_schema_migrations" ON "schema_migrations" ("version")[0m
+  [4;36;1mSQL (0.2ms)[0m   [0;1m SELECT name
+ FROM sqlite_master
+ WHERE type = 'table' AND NOT name = 'sqlite_sequence'
+[0m
+  [4;35;1mSQL (0.1ms)[0m   [0mSELECT version FROM schema_migrations[0m
+Migrating to CreateEntries (20090331233533)
+  [4;36;1mSQL (0.8ms)[0m   [0;1mCREATE TABLE "entries" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "user_id" varchar(255), "title" varchar(250), "permalink" varchar(250), "publish_at" datetime, "content" varchar(255), "content_parsed" varchar(255), "created_at" datetime, "updated_at" datetime) [0m
+  [4;35;1mSQL (0.2ms)[0m   [0mINSERT INTO schema_migrations (version) VALUES ('20090331233533')[0m
+Migrating to CreateCategories (20090404020537)
+  [4;36;1mSQL (0.7ms)[0m   [0;1mCREATE TABLE "categories" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "parent_id" integer DEFAULT 0, "name" varchar(50), "permalink" varchar(50), "description" varchar(300), "created_at" datetime, "updated_at" datetime) [0m
+  [4;35;1mSQL (0.2ms)[0m   [0mINSERT INTO schema_migrations (version) VALUES ('20090404020537')[0m
+Migrating to CreateCategoryEntries (20090404021136)
+  [4;36;1mSQL (0.6ms)[0m   [0;1mCREATE TABLE "category_entries" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "entry_id" integer, "category_id" integer, "created_at" datetime, "updated_at" datetime) [0m
+  [4;35;1mSQL (0.2ms)[0m   [0mINSERT INTO schema_migrations (version) VALUES ('20090404021136')[0m
+Migrating to CreateTags (20090404143849)
+  [4;36;1mSQL (0.7ms)[0m   [0;1mCREATE TABLE "tags" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "name" varchar(50), "permalink" varchar(50), "description" varchar(300), "created_at" datetime, "updated_at" datetime) [0m
+  [4;35;1mSQL (0.2ms)[0m   [0mINSERT INTO schema_migrations (version) VALUES ('20090404143849')[0m
+Migrating to CreateTagEntries (20090404143943)
+  [4;36;1mSQL (0.7ms)[0m   [0;1mCREATE TABLE "tag_entries" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "entry_id" integer, "tag_id" integer, "created_at" datetime, "updated_at" datetime) [0m
+  [4;35;1mSQL (0.2ms)[0m   [0mINSERT INTO schema_migrations (version) VALUES ('20090404143943')[0m
+Migrating to CreateComments (20090404165228)
+  [4;36;1mSQL (0.7ms)[0m   [0;1mCREATE TABLE "comments" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "entry_id" integer, "alias" varchar(255), "ip" varchar(255), "website" varchar(255), "email" varchar(255), "comment" varchar(255), "created_at" datetime, "updated_at" datetime) [0m
+  [4;35;1mSQL (0.2ms)[0m   [0mINSERT INTO schema_migrations (version) VALUES ('20090404165228')[0m
+Migrating to AddDeletedToComment (20090404170416)
+  [4;36;1mSQL (0.7ms)[0m   [0;1mALTER TABLE "comments" ADD "deleted_at" datetime[0m
+  [4;35;1mSQL (0.2ms)[0m   [0mINSERT INTO schema_migrations (version) VALUES ('20090404170416')[0m
+Migrating to CreateLinks (20090419215729)
+  [4;36;1mSQL (0.7ms)[0m   [0;1mCREATE TABLE "links" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "name" varchar(50), "url" varchar(100), "deleted_at" datetime, "created_at" datetime, "updated_at" datetime) [0m
+  [4;35;1mSQL (0.2ms)[0m   [0mINSERT INTO schema_migrations (version) VALUES ('20090419215729')[0m
+Migrating to AlterCommentsFields (20090422233019)
+  [4;36;1mSQL (0.9ms)[0m   [0;1mCREATE TEMPORARY TABLE "altered_comments" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "entry_id" integer, "author" varchar(255), "ip" varchar(255), "website" varchar(255), "email" varchar(255), "comment" varchar(255), "created_at" datetime, "updated_at" datetime, "deleted_at" datetime) [0m
+  [4;35;1mSQL (0.1ms)[0m   [0mPRAGMA index_list("comments")[0m
+  [4;36;1mSQL (0.8ms)[0m   [0;1mDROP TABLE "comments"[0m
+  [4;35;1mSQL (0.3ms)[0m   [0mCREATE TABLE "comments" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "entry_id" integer, "author" varchar(255), "ip" varchar(255), "website" varchar(255), "email" varchar(255), "comment" varchar(255), "created_at" datetime, "updated_at" datetime, "deleted_at" datetime) [0m
+  [4;36;1mSQL (0.1ms)[0m   [0;1mPRAGMA index_list("altered_comments")[0m
+  [4;35;1mSQL (0.7ms)[0m   [0mDROP TABLE "altered_comments"[0m
+  [4;36;1mSQL (0.4ms)[0m   [0;1mCREATE TEMPORARY TABLE "altered_comments" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "entry_id" integer, "author" varchar(255), "ip" varchar(255), "author_url" varchar(255), "email" varchar(255), "comment" varchar(255), "created_at" datetime, "updated_at" datetime, "deleted_at" datetime) [0m
+  [4;35;1mSQL (0.1ms)[0m   [0mPRAGMA index_list("comments")[0m
+  [4;36;1mSQL (0.5ms)[0m   [0;1mDROP TABLE "comments"[0m
+  [4;35;1mSQL (0.3ms)[0m   [0mCREATE TABLE "comments" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "entry_id" integer, "author" varchar(255), "ip" varchar(255), "author_url" varchar(255), "email" varchar(255), "comment" varchar(255), "created_at" datetime, "updated_at" datetime, "deleted_at" datetime) [0m
+  [4;36;1mSQL (0.1ms)[0m   [0;1mPRAGMA index_list("altered_comments")[0m
+  [4;35;1mSQL (0.4ms)[0m   [0mDROP TABLE "altered_comments"[0m
+  [4;36;1mSQL (0.4ms)[0m   [0;1mCREATE TEMPORARY TABLE "altered_comments" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "entry_id" integer, "author" varchar(255), "ip" varchar(255), "author_url" varchar(255), "author_email" varchar(255), "comment" varchar(255), "created_at" datetime, "updated_at" datetime, "deleted_at" datetime) [0m
+  [4;35;1mSQL (0.1ms)[0m   [0mPRAGMA index_list("comments")[0m
+  [4;36;1mSQL (0.4ms)[0m   [0;1mDROP TABLE "comments"[0m
+  [4;35;1mSQL (0.3ms)[0m   [0mCREATE TABLE "comments" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "entry_id" integer, "author" varchar(255), "ip" varchar(255), "author_url" varchar(255), "author_email" varchar(255), "comment" varchar(255), "created_at" datetime, "updated_at" datetime, "deleted_at" datetime) [0m
+  [4;36;1mSQL (0.1ms)[0m   [0;1mPRAGMA index_list("altered_comments")[0m
+  [4;35;1mSQL (0.3ms)[0m   [0mDROP TABLE "altered_comments"[0m
+  [4;36;1mSQL (0.3ms)[0m   [0;1mCREATE TEMPORARY TABLE "altered_comments" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "entry_id" integer, "author" varchar(255), "ip" varchar(255), "author_url" varchar(255), "author_email" varchar(255), "content" varchar(255), "created_at" datetime, "updated_at" datetime, "deleted_at" datetime) [0m
+  [4;35;1mSQL (0.1ms)[0m   [0mPRAGMA index_list("comments")[0m
+  [4;36;1mSQL (0.6ms)[0m   [0;1mDROP TABLE "comments"[0m
+  [4;35;1mSQL (0.4ms)[0m   [0mCREATE TABLE "comments" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "entry_id" integer, "author" varchar(255), "ip" varchar(255), "author_url" varchar(255), "author_email" varchar(255), "content" varchar(255), "created_at" datetime, "updated_at" datetime, "deleted_at" datetime) [0m
+  [4;36;1mSQL (0.1ms)[0m   [0;1mPRAGMA index_list("altered_comments")[0m
+  [4;35;1mSQL (0.3ms)[0m   [0mDROP TABLE "altered_comments"[0m
+  [4;36;1mSQL (0.4ms)[0m   [0;1mCREATE TEMPORARY TABLE "altered_comments" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "entry_id" integer, "author" varchar(255), "user_ip" varchar(255), "author_url" varchar(255), "author_email" varchar(255), "content" varchar(255), "created_at" datetime, "updated_at" datetime, "deleted_at" datetime) [0m
+  [4;35;1mSQL (0.1ms)[0m   [0mPRAGMA index_list("comments")[0m
+  [4;36;1mSQL (0.4ms)[0m   [0;1mDROP TABLE "comments"[0m
+  [4;35;1mSQL (0.3ms)[0m   [0mCREATE TABLE "comments" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "entry_id" integer, "author" varchar(255), "user_ip" varchar(255), "author_url" varchar(255), "author_email" varchar(255), "content" varchar(255), "created_at" datetime, "updated_at" datetime, "deleted_at" datetime) [0m
+  [4;36;1mSQL (0.1ms)[0m   [0;1mPRAGMA index_list("altered_comments")[0m
+  [4;35;1mSQL (0.4ms)[0m   [0mDROP TABLE "altered_comments"[0m
+  [4;36;1mSQL (0.3ms)[0m   [0;1mALTER TABLE "comments" ADD "user_agent" varchar(500)[0m
+  [4;35;1mSQL (0.2ms)[0m   [0mINSERT INTO schema_migrations (version) VALUES ('20090422233019')[0m
+Migrating to CreateAlteredBeastSchema (20091018035715)
+  [4;36;1mSQL (0.6ms)[0m   [0;1m SELECT name
+ FROM sqlite_master
+ WHERE type = 'table' AND NOT name = 'sqlite_sequence'
+[0m
+  [4;35;1mSQL (0.8ms)[0m   [0mCREATE TABLE "forums" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "site_id" integer, "name" varchar(255), "description" varchar(255), "topics_count" integer DEFAULT 0, "posts_count" integer DEFAULT 0, "position" integer DEFAULT 0, "description_html" text, "state" varchar(255) DEFAULT 'public', "permalink" varchar(255)) [0m
+  [4;36;1mSQL (0.3ms)[0m   [0;1mCREATE INDEX "index_forums_on_position_and_site_id" ON "forums" ("position", "site_id")[0m
+  [4;35;1mSQL (0.2ms)[0m   [0mCREATE INDEX "index_forums_on_site_id_and_permalink" ON "forums" ("site_id", "permalink")[0m
+  [4;36;1mSQL (0.7ms)[0m   [0;1m SELECT name
+ FROM sqlite_master
+ WHERE type = 'table' AND NOT name = 'sqlite_sequence'
+[0m
+  [4;35;1mSQL (0.3ms)[0m   [0mCREATE TABLE "moderatorships" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "forum_id" integer, "user_id" integer, "created_at" datetime, "updated_at" datetime) [0m
+  [4;36;1mSQL (0.5ms)[0m   [0;1m SELECT name
+ FROM sqlite_master
+ WHERE type = 'table' AND NOT name = 'sqlite_sequence'
+[0m
+  [4;35;1mSQL (0.3ms)[0m   [0mCREATE TABLE "monitorships" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "user_id" integer, "topic_id" integer, "created_at" datetime, "updated_at" datetime, "active" boolean DEFAULT 't') [0m
+  [4;36;1mSQL (0.5ms)[0m   [0;1m SELECT name
+ FROM sqlite_master
+ WHERE type = 'table' AND NOT name = 'sqlite_sequence'
+[0m
+  [4;35;1mSQL (0.3ms)[0m   [0mCREATE TABLE "open_id_authentication_associations" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "server_url" blob, "handle" varchar(255), "secret" blob, "issued" integer, "lifetime" integer, "assoc_type" varchar(255)) [0m
+  [4;36;1mSQL (0.6ms)[0m   [0;1m SELECT name
+ FROM sqlite_master
+ WHERE type = 'table' AND NOT name = 'sqlite_sequence'
+[0m
+  [4;35;1mSQL (0.2ms)[0m   [0mCREATE TABLE "open_id_authentication_nonces" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "nonce" varchar(255), "created" integer) [0m
+  [4;36;1mSQL (0.6ms)[0m   [0;1m SELECT name
+ FROM sqlite_master
+ WHERE type = 'table' AND NOT name = 'sqlite_sequence'
+[0m
+  [4;35;1mSQL (0.2ms)[0m   [0mCREATE TABLE "open_id_authentication_settings" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "setting" varchar(255), "value" blob) [0m
+  [4;36;1mSQL (0.6ms)[0m   [0;1m SELECT name
+ FROM sqlite_master
+ WHERE type = 'table' AND NOT name = 'sqlite_sequence'
+[0m
+  [4;35;1mSQL (0.2ms)[0m   [0mCREATE TABLE "posts" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "user_id" integer, "topic_id" integer, "body" text, "created_at" datetime, "updated_at" datetime, "forum_id" integer, "body_html" text, "site_id" integer) [0m
+  [4;36;1mSQL (0.2ms)[0m   [0;1mCREATE INDEX "index_posts_on_forum_id" ON "posts" ("created_at", "forum_id")[0m
+  [4;35;1mSQL (0.2ms)[0m   [0mCREATE INDEX "index_posts_on_topic_id" ON "posts" ("created_at", "topic_id")[0m
+  [4;36;1mSQL (0.2ms)[0m   [0;1mCREATE INDEX "index_posts_on_user_id" ON "posts" ("created_at", "user_id")[0m
+  [4;35;1mSQL (0.6ms)[0m   [0m SELECT name
+ FROM sqlite_master
+ WHERE type = 'table' AND NOT name = 'sqlite_sequence'
+[0m
+  [4;36;1mSQL (0.3ms)[0m   [0;1mCREATE TABLE "sites" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "name" varchar(255), "host" varchar(255), "created_at" datetime, "updated_at" datetime, "topics_count" integer DEFAULT 0, "users_count" integer DEFAULT 0, "posts_count" integer DEFAULT 0, "description" text, "tagline" text) [0m
+  [4;35;1mSQL (0.8ms)[0m   [0m SELECT name
+ FROM sqlite_master
+ WHERE type = 'table' AND NOT name = 'sqlite_sequence'
+[0m
+  [4;36;1mSQL (0.4ms)[0m   [0;1mCREATE TABLE "topics" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "forum_id" integer, "user_id" integer, "title" varchar(255), "created_at" datetime, "updated_at" datetime, "hits" integer DEFAULT 0, "sticky" integer DEFAULT 0, "posts_count" integer DEFAULT 0, "locked" boolean DEFAULT 'f', "last_post_id" integer, "last_updated_at" datetime, "last_user_id" integer, "site_id" integer, "permalink" varchar(255)) [0m
+  [4;35;1mSQL (0.2ms)[0m   [0mCREATE INDEX "index_topics_on_forum_id_and_permalink" ON "topics" ("forum_id", "permalink")[0m
+  [4;36;1mSQL (0.2ms)[0m   [0;1mCREATE INDEX "index_topics_on_forum_id_and_last_updated_at" ON "topics" ("last_updated_at", "forum_id")[0m
+  [4;35;1mSQL (0.2ms)[0m   [0mCREATE INDEX "index_topics_on_sticky_and_last_updated_at" ON "topics" ("sticky", "last_updated_at", "forum_id")[0m
+  [4;36;1mSQL (0.8ms)[0m   [0;1m SELECT name
+ FROM sqlite_master
+ WHERE type = 'table' AND NOT name = 'sqlite_sequence'
+[0m
+  [4;35;1mSQL (0.5ms)[0m   [0mCREATE TABLE "users" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "login" varchar(255), "email" varchar(255), "crypted_password" varchar(40), "salt" varchar(40), "created_at" datetime, "updated_at" datetime, "remember_token" varchar(255), "remember_token_expires_at" datetime, "activation_code" varchar(40), "activated_at" datetime, "state" varchar(255) DEFAULT 'passive', "deleted_at" datetime, "admin" boolean DEFAULT 'f', "site_id" integer, "last_login_at" datetime, "bio_html" text, "openid_url" varchar(255), "last_seen_at" datetime, "website" varchar(255), "posts_count" integer DEFAULT 0, "bio" varchar(255), "display_name" varchar(255), "permalink" varchar(255)) [0m
+  [4;36;1mSQL (0.3ms)[0m   [0;1mCREATE INDEX "index_users_on_last_seen_at" ON "users" ("last_seen_at")[0m
+  [4;35;1mSQL (0.2ms)[0m   [0mCREATE INDEX "index_site_users_on_permalink" ON "users" ("site_id", "permalink")[0m
+  [4;36;1mSQL (0.2ms)[0m   [0;1mCREATE INDEX "index_site_users_on_posts_count" ON "users" ("site_id", "posts_count")[0m
+  [4;35;1mSQL (0.2ms)[0m   [0mINSERT INTO schema_migrations (version) VALUES ('20091018035715')[0m
+Migrating to AddBrainBuster (20091018035717)
+  [4;36;1mSQL (0.9ms)[0m   [0;1m SELECT name
+ FROM sqlite_master
+ WHERE type = 'table' AND NOT name = 'sqlite_sequence'
+[0m
+  [4;35;1mSQL (0.7ms)[0m   [0mCREATE TABLE "brain_busters" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "question" varchar(255), "answer" varchar(255)) [0m
+  [4;36;1mSQL (0.2ms)[0m   [0;1mINSERT INTO schema_migrations (version) VALUES ('20091018035717')[0m
+  [4;35;1mSQL (1.0ms)[0m   [0m SELECT name
+ FROM sqlite_master
+ WHERE type = 'table' AND NOT name = 'sqlite_sequence'
+[0m
+  [4;36;1mSQL (0.5ms)[0m   [0;1mSELECT version FROM schema_migrations[0m
+  [4;35;1mSQL (0.8ms)[0m   [0m SELECT name
+ FROM sqlite_master
+ WHERE type = 'table' AND NOT name = 'sqlite_sequence'
+[0m
+  [4;36;1mSQL (0.1ms)[0m   [0;1mPRAGMA index_list("brain_busters")[0m
+  [4;35;1mSQL (0.1ms)[0m   [0mPRAGMA index_list("categories")[0m
+  [4;36;1mSQL (0.1ms)[0m   [0;1mPRAGMA index_list("category_entries")[0m
+  [4;35;1mSQL (0.1ms)[0m   [0mPRAGMA index_list("comments")[0m
+  [4;36;1mSQL (0.1ms)[0m   [0;1mPRAGMA index_list("entries")[0m
+  [4;35;1mSQL (0.2ms)[0m   [0mPRAGMA index_list("forums")[0m
+  [4;36;1mSQL (0.2ms)[0m   [0;1mPRAGMA index_info('index_forums_on_site_id_and_permalink')[0m
+  [4;35;1mSQL (0.2ms)[0m   [0mPRAGMA index_info('index_forums_on_position_and_site_id')[0m
+  [4;36;1mSQL (0.1ms)[0m   [0;1mPRAGMA index_list("links")[0m
+  [4;35;1mSQL (0.1ms)[0m   [0mPRAGMA index_list("moderatorships")[0m
+  [4;36;1mSQL (0.1ms)[0m   [0;1mPRAGMA index_list("monitorships")[0m
+  [4;35;1mSQL (0.1ms)[0m   [0mPRAGMA index_list("open_id_authentication_associations")[0m
+  [4;36;1mSQL (0.1ms)[0m   [0;1mPRAGMA index_list("open_id_authentication_nonces")[0m
+  [4;35;1mSQL (0.1ms)[0m   [0mPRAGMA index_list("open_id_authentication_settings")[0m
+  [4;36;1mSQL (0.2ms)[0m   [0;1mPRAGMA index_list("posts")[0m
+  [4;35;1mSQL (0.2ms)[0m   [0mPRAGMA index_info('index_posts_on_user_id')[0m
+  [4;36;1mSQL (0.2ms)[0m   [0;1mPRAGMA index_info('index_posts_on_topic_id')[0m
+  [4;35;1mSQL (0.2ms)[0m   [0mPRAGMA index_info('index_posts_on_forum_id')[0m
+  [4;36;1mSQL (0.1ms)[0m   [0;1mPRAGMA index_list("sites")[0m
+  [4;35;1mSQL (0.0ms)[0m   [0mPRAGMA index_list("tag_entries")[0m
+  [4;36;1mSQL (0.1ms)[0m   [0;1mPRAGMA index_list("tags")[0m
+  [4;35;1mSQL (0.3ms)[0m   [0mPRAGMA index_list("topics")[0m
+  [4;36;1mSQL (0.2ms)[0m   [0;1mPRAGMA index_info('index_topics_on_sticky_and_last_updated_at')[0m
+  [4;35;1mSQL (0.2ms)[0m   [0mPRAGMA index_info('index_topics_on_forum_id_and_last_updated_at')[0m
+  [4;36;1mSQL (0.2ms)[0m   [0;1mPRAGMA index_info('index_topics_on_forum_id_and_permalink')[0m
+  [4;35;1mSQL (0.2ms)[0m   [0mPRAGMA index_list("users")[0m
+  [4;36;1mSQL (0.2ms)[0m   [0;1mPRAGMA index_info('index_site_users_on_posts_count')[0m
+  [4;35;1mSQL (0.2ms)[0m   [0mPRAGMA index_info('index_site_users_on_permalink')[0m
+  [4;36;1mSQL (0.1ms)[0m   [0;1mPRAGMA index_info('index_users_on_last_seen_at')[0m
