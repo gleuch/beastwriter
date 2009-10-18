@@ -1,0 +1,45 @@
+<% content_for :right do %>
+
+<h5><%= I18n.t 'txt.sidebar.beast_title', :default => 'What is Beast?' %></h5>
+
+<p>
+  <%= I18n.t 'txt.sidebar.beast_desc', :default => "A small, light-weight forum in Rails with a scary name and a goal of around 500 lines of code when we're done." %>
+</p>
+
+<% if admin? %>
+<h6><%= I18n.t 'txt.admin.title', :default => 'Admin' %></h6>
+<p><%= link_to I18n.t('txt.views_sites.create_new_site', :default => 'Create new site'), new_site_path, :class => "utility" %></p>
+<% end %>
+
+<% end %>
+
+<h1 style="margin-top:0;"><%= I18n.t 'txt.views_sites.title', :default => 'Sites' %></h1>
+<%= will_paginate @sites %>
+
+<table border="0" cellspacing="0" cellpadding="0" class="wide forums">
+  <tr>
+    <th class="la" width="60%"><%= I18n.t 'txt.views_sites.site_title', :default => 'Name' %></th>
+    <th class="la" width="15%"><%= I18n.t 'txt.forums', :default => 'Forums' %></th>
+    <th class="la" width="15%"><%= I18n.t 'txt.users', :default => 'Users' %></th>
+    <th class="la" width="10%">&nbsp;</th>
+  </tr>
+<% @sites.each do |site| -%>  
+  <tr>
+    <td class="c1 vat">
+      <%= link_to h(site.name), (site.default? ? root_path : root_url(:host => site.host, :port => request.port)), :class => "title" %>
+			<%= content_tag(:small, "(#{h(site.host)})") unless site.default? -%>
+    </td>
+    <td class="c2">
+      <%= link_to I18n.t('txt.count_forums', :count => site.forums.count, :num => number_with_delimiter(site.forums.count)), forums_url(:host => site.host, :port => request.port) %>
+    </td>
+    <td class="c2">
+      <%= link_to I18n.t('txt.count_users', :count => site.users.count, :num => number_with_delimiter(site.users.count)), users_url(:host => site.host, :port => request.port) %>
+    </td>
+    <td class="c2">
+      <%= link_to I18n.t('txt.edit', :default => 'edit'), edit_site_path(site), :class => "tiny", :rel => "directory" if admin? %>
+    </td>
+  </tr>
+<% end %>
+</table>
+
+<%= will_paginate @sites %>

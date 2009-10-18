@@ -1,0 +1,27 @@
+<%= form.error_messages %>
+<table border="0" cellspacing="0" cellpadding="0" class="noborder nopad wide" id="site_name">
+	<tr>
+	  <td>
+	    <label for="site_name"><%= I18n.t 'txt.views_sites.site_title', :default => 'Name' %></label><br />
+	    <%= form.text_field :name, :class => "primary" %>
+	  </td>
+	</tr>
+	<tr>
+	  <td>
+	    <label for="site_description"><%= I18n.t 'txt.views_sites.description', :default => 'Description' %></label><br />
+	    <%= form.text_area :description, :class => "primary", :size => "52x5" %>
+	  </td>
+	</tr>
+	<tr>
+	  <td>
+	    <label for="site_tagline"><%= I18n.t 'txt.views_sites.tagline', :default => 'Tagline' %></label><br />
+	    <%= form.text_field :tagline, :class => "primary" %>
+	  </td>
+	</tr>
+	<tr>
+	  <td>
+	    <label for="site_host"><%= I18n.t 'txt.views_sites.site_host', :default => 'Host' %></label><br />
+	    http://<%= form.text_field :host %>
+	  </td>
+	</tr>
+</table>

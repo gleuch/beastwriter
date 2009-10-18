@@ -1,0 +1,311 @@
+'de':
+  date:
+    formats:
+      default: "%d.%m.%Y"
+      short: "%e. %b"
+      long: "%e. %B %Y"
+      only_day: "%e"
+ 
+    day_names: [Sonntag, Montag, Dienstag, Mittwoch, Donnerstag, Freitag, Samstag]
+    abbr_day_names: [So, Mo, Di, Mi, Do, Fr, Sa]
+    month_names: [~, Januar, Februar, März, April, Mai, Juni, Juli, August, September, Oktober, November, Dezember]
+    abbr_month_names: [~, Jan, Feb, Mär, Apr, Mai, Jun, Jul, Aug, Sep, Okt, Nov, Dez]
+    order: [ :day, :month, :year ]
+  
+  time:
+    formats:
+      default: "%A, %e. %B %Y, %H:%M Uhr"
+      time: "%H:%M"
+      short: "%e. %B, %H:%M Uhr"
+      long: "%A, %e. %B %Y, %H:%M Uhr"
+      only_second: "%S"
+ 
+    am: ""
+    pm: ""
+      
+  datetime:
+    distance_in_words:
+      half_a_minute: 'eine halbe Minute'
+      less_than_x_seconds:
+        zero: 'weniger als 1 Sekunde'
+        one: '1 Sekunde'
+        other: '{{count}} Sekunden'
+      x_seconds:
+        one: '1 Sekunde'
+        other: '{{count}} Sekunden'
+      less_than_x_minutes:
+        zero: 'weniger als 1 Minute'
+        one: 'eine Minute'
+        other: '{{count}} Minuten'
+      x_minutes:
+        one: '1 Minute'
+        other: '{{count}} Minuten'
+      about_x_hours:
+        one: 'etwa 1 Stunde'
+        other: '{{count}} Stunden'
+      x_days:
+        one: '1 Tag'
+        other: '{{count}} Tagen'
+      about_x_months:
+        one: 'etwa 1 Monat'
+        other: '{{count}} Monate'
+      x_months:
+        one: '1 Monat'
+        other: '{{count}} Monate'
+      about_x_years:
+        one: 'etwa 1 Jahr'
+        other: '{{count}} Jahre'
+      over_x_years:
+        one: 'mehr als 1 Jahr'
+        other: '{{count}} Jahre'
+      
+  number:
+    format:
+      precision: 2
+      separator: ','
+      delimiter: '.'
+    currency:
+      format:
+        unit: '€'
+        format: '%n%u'
+        
+  active_record:
+    error:
+      header_message: ["Konnte das {{object_name}} Objekt nicht speichern: 1 Fehler.", "Konnte das {{object_name}} Objekt nicht speichern: {{count}} Fehler."]
+      message: "Bitte überprüfen Sie die folgenden Felder:"
+    error_messages:
+      inclusion: "ist kein gültiger Wert"
+      exclusion: "ist nicht verfügbar"
+      invalid: "ist nicht gültig"
+      confirmation: "stimmt nicht mit der Bestätigung überein"
+      accepted: "muss akzeptiert werden"
+      empty: "muss ausgefüllt werden"
+      blank: "muss ausgefüllt werden"
+      too_long: "ist zu lang (nicht mehr als {{count}} Zeichen)"
+      too_short: "ist zu kurz (nicht weniger als {{count}} Zeichen)"
+      wrong_length: "hat die falsche Länge (muss genau {{count}} Zeichen haben)"
+      taken: "ist bereits vergeben"
+      not_a_number: "ist keine Zahl"
+      greater_than: "muss größer als {{count}} sein"
+      greater_than_or_equal_to: "muss größer oder gleich {{count}} sein"
+      equal_to: "muss genau {{count}} sein"
+      less_than: "muss kleiner als {{count}} sein"
+      less_than_or_equal_to: "muss kleiner oder gleich {{count}} sein"
+      odd: "muss ungerade sein"
+      even: "muss gerade sein"
+
+  txt:
+    view: anzeigen
+    create: hinzufügen
+    edit: editieren
+    save: speichern
+    save_changes: "Änderungen speichern"
+    delete: löschen
+    cancel: abbrechen
+
+    or: oder
+    and: und
+    all: alle
+
+    site: Seite
+    sites: Seiten
+    forum: Forum
+    forums: Foren
+    user: Benutzer
+    users: Benutzer
+    voice: Teilnehmer
+    voices: Teilnehmer
+    topic: Thema
+    topics: Themen
+    post: Beitrag
+    posts: Beiträge
+    views: aufgerufen
+    search: Suche
+    settings: Einstellungen
+    signup: Registrieren
+    login: Einloggen
+    logout: Ausloggen
+
+    user_is_administrator: Administrator
+    user_is_moderator: Moderator
+
+    user_since: Benutzer seit {{date}}
+    monitored: monitored
+    locked: gesperrt
+    locked_topic: Dieses Thema ist gesperrt.
+
+    latest_post: Letzter Beitrag
+    recent_activity: Neue Aktivitäten
+    recent_posts: Neue Beiträge
+    no_recent_activity: Keine neuen Aktivitäten
+    show_recent_posts: Neueste Themen anzeigen
+    search_results_for_searchterm: "Suchergebnis für &raquo;{{searchterm}}&laquo;"
+    goto_last_page: zur letzten Seite
+
+    new_topic: Neues Thema
+    post_topic: Thema starten
+    reply_to_topic: Neuen Beitrag zu diesem Thema schreiben
+
+    by_user: "von {{user}}"
+    page_nr: "Seite {{nr}}"
+
+    login: Login
+    login_name: Login
+    password: Passwort
+    password_confirm: Passwort bestätigen
+    remember_me: Login merken
+    email: Email
+    log_in: Einloggen
+    sign_up: Anmelden
+    invalid_login: Ungültiger Login
+    successful_login: Login erfolgreich
+    logged_out: Sie sind ausgeloggt
+    
+    forum_created: Das Forum wurde erfolgreich angelegt.
+    forum_created: Das Forum wurde erfolgreich aktualisiert.
+    
+    suspended_user_post: Dieser Beitrag wurde entfernt
+
+    searching_for: Suche nach
+    
+    footer_message: Two's company. Three's a forum. More's a Beast.
+
+    sidebar:
+      beast_title: "Was ist Beast?"
+      beast_desc: "Ein kleines, schlankes Forum mit einem furchterregenden Namen, basierend auf Ruby on Rails und dem Ziel, aus etwa 500 Zeilen Quelltext zu bestehen – wenn es mal fertig sein sollte. ;-)"
+
+    admin:
+      title: Administration
+      create_new_forum: Neues Forum anlegen
+
+      admin_and_moderation: Admin & Moderation
+      remove_moderated_forum: Der Benutzer kann folgende Foren moderieren. Anklicken um dessen Moderation zu löschen.
+      remove_user_as_moderator: Benutzer als Moderator von &raquo;{{forum}}&laquo; entfernen?
+      add_as_moderator: Als Moderator hinzufügen
+      user_is_an_administrator: User ist ein Administrator
+      suspend_user_account: Benutzer sperren
+      user_account_is_suspended: Benutzer ist gesperrt
+      unsuspend_user_account: Benutzer freischalten
+      edit_user_account: Benutzer editieren
+      edit_post: Beitrag editieren
+
+    count_forums:
+      zero: "kein Forum"
+      one: "1 Forum"
+      other: "{{num}} Foren"
+
+    count_users:
+      zero: "kein Benutzer"
+      one: "1 Benutzer"
+      other: "{{num}} Benutzer"
+
+    count_users_active:
+      zero: "kein aktiver Benutzer"
+      one: "1 aktiver Benutzer"
+      other: "{{num}} aktive Benutzer"
+
+    count_users_lurking:
+      zero: "kein nur-lesender Benutzer"
+      one: "1 nur-lesender Benutzer"
+      other: "{{num}} nur-lesende Benutzer"
+
+    count_voices:
+      zero: "kein Teilnehmer"
+      one: "1 Teilnehmer"
+      other: "{{num}} Teilnehmer"
+
+    count_topics:
+      zero: "kein Thema"
+      one: "1 Thema"
+      other: "{{num}} Themen"
+
+    count_posts:
+      zero: "kein Beitrag"
+      one: "1 Beitrag"
+      other: "{{num}} Beiträge"
+
+    count_posts_found:
+      zero: "kein Beitrag gefunden"
+      one: "1 Beitrag gefunden"
+      other: "{{count}} Beiträge gefunden"
+
+    post_age: "vor {{when}}"
+
+    views_sites:
+      title: Seiten
+      site_title: Name
+      site_host: Hostname
+      create_new_site: Neue Seite anlegen
+      new: Neue Seite
+      new_desc: Willkommen beim brandneuen Altered Beast Forum. Bitte gib Deiner Seite einen Namen!
+      edit: Seite editieren
+
+    views_users:
+      find_a_user: Einen Benutzer suchen
+      display_name_or_login: Name des Benutzers
+      name_or_login: "Name / Login"
+      current_status_title: Status
+      website_title: Webseite
+      posts_title: Beiträge
+      admin_in_parens: "(Administrator)"
+      search_title: suchen
+
+      avatars_title: Avatar
+      gravatar_notice: Damit Ihr eigener Avatar angezeigt wird, melden Sie sich bitte kostenlos bei {{gravatar}} an und hinterlegen Sie dort Ihren ganz persönlichen Avatar.
+      settings: Einstellungen
+      for_user: für Benutzer {{user}}
+      change_email_or_password: Email oder Passwort ändern
+      update_profile: Profil aktualisieren
+
+      basics_title: Generell
+      change_login: Bitte ändern Sie Ihren Login
+      login_field: Der Login-Name sollte mit mindestens 2 Buchstaben anfangen und kann aus Buchstaben, Nummern und dem Unterstrich bestehen.
+      password_title: Passwort
+      password_field: Zum Ändern des Passwortes geben Sie 2 mal Ihr neues Passwort ein. Ein Passwort muss mindestens 5 Stellen haben.
+      once: neues Passwort
+      and_again: neues Passwort bestätigen
+
+      profile: Benutzerprofil
+      display_name: Angezeigter Name (wenn Sie dieses Feld leerlassen, wird stattdessen Ihr Login-Name angezeigt)
+      openid_url_title: "Optional: Login via OpenID"
+      open_id_field: Sofern verfügbar, können Sie hier Ihre OpenID URL eintragen. Mit dieser können Sie sich dann ebenfalls hier einloggen.
+      website_title: Webseite
+      without_http: "ohne HTTP:// Prefix"
+      bio_title: "Über mich (öffentlich)"
+
+    views_forums:
+      title: Name des Forums
+      position: Position
+      desc: Beschreibung
+      edit: Forum editieren
+      unmoderated: "Das Forum ist unmoderiert.<br />Bitte verhalten Sie sich andern gegenüber höflich."
+      new: Neues Forum
+      comma_locked_topic: ', dieses Thema ist gesperrt.'
+      recent_activity: Neue Aktivitäten
+      no_recent_activity: Keine neuen Aktivitäten
+
+    views_topics:
+      edit: Thema editieren
+      topic: Thema
+      body: Beitrag
+      save_reply: Beitrag speichern
+      delete_sure: "Dieses Thema wirklich löschen?"
+      topic_locked: Thema gesperrt
+      locked_topic: Dieses Thema ist gesperrt.
+
+    views_posts:
+      edit: Beitrag editieren
+      save: Beitrag speichern
+      save_reply: Beitrag speichern
+      delete: Beitrag löschen
+      delete_sure: "Diesen Beitrag wirklich löschen?"
+      formatting_help: Formatierungshilfe
+      formatting_bold: '*fett*'
+      formatting_italics: '_kursiv_'
+      formatting_blockquote: 'bq. <span>(Zitat)</span>'
+      formatting_list: '* oder # <span>Aufzählungslisten</span>'
+
+    moderator:
+      zero: Moderator
+      one: Moderator
+      other: Moderatoren
