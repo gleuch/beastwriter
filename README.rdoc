@@ -1,32 +1,15 @@
-== Altered Beast
+== BeastWriter
 
-The popular rails-based Beast forum, rewritten from the ground up with the same database and views.
+A blogging and community forum Rails application, a marriage between lloydpick's rails-blog and courtenay's altered_beast.
 
-* full i18n (with German and English support)
-* updated for Rails 2.3.3
-* using rspec/model_stubbing
-* added a state machine for user logins
-* built-in multi-site support
-* spam protection from akismet/viking
-* forum authorization rules (public/private/invitation)
-* email and atom feed support
-* xml/json API (not 100% tested yet, fixing soon)
-* highline based easy console installer
-* internationalization via the I18n framework
+=== NOTE: This is a work in progress!!!
 
-Check out the code via git:
-
-    git clone git://github.com/courtenay/altered_beast.git
-
-
-=== INSTALLATION
-
-    # download altered_beast
-    # gem install rails 2.3.3
-    $ mkdir log
-    $ rake tmp:create
-    $ rake app:bootstrap
-
-    Follow the instructions to create your database and load users.
-    Start the application with script/server and visit http://localhost:3000 to 
-    visit your new forum.
+=== TODO
+  * Add Capistrano.
+  * Add rspec test for rails-blog.
+  * Uncomment and massage out new routes.
+  * Convert pages to HAML.
+  * Add RoleRequires and look at removing out altered_beasts's moderatorships.
+  * Continue the marriage process with controllers, models, and views.
+  * Verify code looks good.
+  * Write a better README!
