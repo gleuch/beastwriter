@@ -7,12 +7,12 @@ class ApplicationController < ActionController::Base
   helper :pingback
 
   before_filter :set_language
-  before_filter :login_required, :only => [:new, :edit, :create, :update, :destroy]
+
+
+  include AuthenticatedSystem
 
   # Scrub sensitive parameters from your log
-  filter_parameter_logging :password
-
-  layout "public/public"
+  # filter_parameter_logging :password
 
 
   def set_title(title); @title = title; end

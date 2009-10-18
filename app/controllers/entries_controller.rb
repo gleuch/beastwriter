@@ -37,7 +37,7 @@ class EntriesController < ApplicationController
   end
 
 
-  protected
+protected
 
   def return_date_selection(params)
     if params[:month] && params[:year] && params[:day]

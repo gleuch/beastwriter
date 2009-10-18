@@ -60,7 +60,7 @@ class Admin::CategoriesController < Admin::ApplicationController
   end
 
 
-  private
+private
 
   def load_objects
     @category = Category.find_by_permalink(params[:id]) if params[:id]
