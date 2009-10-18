@@ -19,9 +19,9 @@ class ApplicationController < ActionController::Base
   def month_name_from_number(num); Date::MONTHNAMES[num.to_i] if num; end
 
   # raised in #current_site
-  rescue_from Site::UndefinedError do |e|
-    redirect_to new_site_path
-  end
+  # rescue_from Site::UndefinedError do |e|
+  #   redirect_to new_site_path
+  # end
 
   def current_page; @page ||= params[:page].blank? ? 1 : params[:page].to_i; end
   helper_method :current_page

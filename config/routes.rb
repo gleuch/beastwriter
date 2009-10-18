@@ -5,6 +5,13 @@ ActionController::Routing::Routes.draw do |map|
   map.login '/login', :controller => 'sessions', :action => 'new'
 
   map.resource :session
+  
+# User routes
+  map.resources :users, :member => { :suspend => [:put], :unsuspend => [:put], :purge => [:delete] }
+  map.with_options :controller => 'users' do |user|
+    user.register '/register', :action => 'create'
+    user.signup '/signup', :action => 'new'
+  end
 
 # Admin routes
   map.namespace(:admin) do |admin|
@@ -15,6 +22,7 @@ ActionController::Routing::Routes.draw do |map|
     admin.resources :moderatorships
     admin.resources :monitorship
   end
+  map.admin_path '/admin', :controller => 'admin/entries', :action => 'index'
 
 
 # Blog routes
@@ -39,18 +47,9 @@ ActionController::Routing::Routes.draw do |map|
   map.resources :posts, :collection => {:search => :get}
 
   map.with_options :controller => 'posts', :action => 'monitored' do |map|
-    map.formatted_monitored_posts '/users/:user_id/monitored.:format'
-    map.monitored_posts           '/users/:user_id/monitored'
+    # map.formatted_monitored_posts '/users/:user_id/monitored.:format'
+    # map.monitored_posts           '/users/:user_id/monitored'
   end
-
-
-# User routes
-  map.resources :users, :member => { :suspend => [:put], :unsuspend => [:put], :purge => [:delete] }
-  map.with_options :controller => 'users' do |user|
-    user.register '/register', :action => 'create'
-    user.signup '/signup', :action => 'new'
-  end
-
 
 
 # Additional Routes

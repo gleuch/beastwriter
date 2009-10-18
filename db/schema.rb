@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20091018193251) do
+ActiveRecord::Schema.define(:version => 20091018215746) do
 
   create_table "brain_busters", :force => true do |t|
     t.string "question"
@@ -39,10 +39,10 @@ ActiveRecord::Schema.define(:version => 20091018193251) do
     t.string   "author_url"
     t.string   "author_email"
     t.string   "content"
-    t.datetime "created_at"
-    t.datetime "updated_at"
     t.datetime "deleted_at"
     t.string   "user_agent",   :limit => 500
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   create_table "entries", :force => true do |t|
@@ -79,40 +79,6 @@ ActiveRecord::Schema.define(:version => 20091018193251) do
     t.datetime "updated_at"
   end
 
-  create_table "moderatorships", :force => true do |t|
-    t.integer  "forum_id"
-    t.integer  "user_id"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
-  create_table "monitorships", :force => true do |t|
-    t.integer  "user_id"
-    t.integer  "topic_id"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-    t.boolean  "active",     :default => true
-  end
-
-  create_table "open_id_authentication_associations", :force => true do |t|
-    t.binary  "server_url"
-    t.string  "handle"
-    t.binary  "secret"
-    t.integer "issued"
-    t.integer "lifetime"
-    t.string  "assoc_type"
-  end
-
-  create_table "open_id_authentication_nonces", :force => true do |t|
-    t.string  "nonce"
-    t.integer "created"
-  end
-
-  create_table "open_id_authentication_settings", :force => true do |t|
-    t.string "setting"
-    t.binary "value"
-  end
-
   create_table "posts", :force => true do |t|
     t.integer  "user_id"
     t.integer  "topic_id"
@@ -137,8 +103,8 @@ ActiveRecord::Schema.define(:version => 20091018193251) do
     t.integer "user_id"
   end
 
-  add_index "roles_users", ["role_id"], :name => "index_roles_users_on_role_id"
-  add_index "roles_users", ["user_id"], :name => "index_roles_users_on_user_id"
+  add_index "roles_users", ["role_id"], :name => "index_roles"
+  add_index "roles_users", ["user_id"], :name => "index_users"
 
   create_table "sites", :force => true do |t|
     t.string   "name"
