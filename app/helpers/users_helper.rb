@@ -1,22 +1,5 @@
 module UsersHelper
-  # todo: make this use "size" instead of "count" and maybe cache it
-  def user_count
-    count = current_site.users.count
-    I18n.t 'txt.count_users', :count => count, :num => number_with_delimiter(count)
-  end
-
-  # todo: cache this?
-  def active_user_count
-    count = current_site.users.count(:conditions => "posts_count > 0")
-    I18n.t 'txt.count_users_active', :count => count, :num => number_with_delimiter(count)
-  end
   
-  # todo: cache this?
-  def lurking_user_count
-    count = current_site.users.count(:conditions => "posts_count = 0")
-    I18n.t 'txt.count_users_lurking', :count => count, :num => number_with_delimiter(count)
-  end
-
   #
   # Use this to wrap view elements that the user can't access.
   # !! Note: this is an *interface*, not *security* feature !!

@@ -16,3 +16,9 @@
 [submodule "vendor/plugins/brain_buster"]
 	path = vendor/plugins/brain_buster
 	url = git://github.com/rsanheim/brain_buster.git
+[submodule "pingback_engine"]
+	path = pingback_engine
+	url = git://github.com/apotonick/pingback_engine.git
+[submodule "vendor/plugins/restful_authentication"]
+	path = vendor/plugins/restful_authentication
+	url = git://github.com/technoweenie/restful-authentication.git

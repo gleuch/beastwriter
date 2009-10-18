@@ -1,14 +1,21 @@
 require File.dirname(__FILE__) + '/../spec_helper'
+  
+# Be sure to include AuthenticatedTestHelper in spec/spec_helper.rb instead
+# Then, you can remove it from this and the units test.
+include AuthenticatedTestHelper
 
 describe UsersController do
-  define_models :users
+  fixtures :users
 
   it 'allows signup' do
     lambda do
       create_user
-      response.should be_redirect      
+      response.should be_redirect
     end.should change(User, :count).by(1)
   end
+
+  
+
 
   it 'requires login on signup' do
     lambda do
@@ -42,173 +49,113 @@ describe UsersController do
     end.should_not change(User, :count)
   end
   
-  it 'activates user' do
-    sites(:default).users.authenticate(users(:pending).login, 'test').should be_nil
-    get :activate, :activation_code => users(:pending).activation_code
-    response.should redirect_to('/')
-    sites(:default).users.authenticate(users(:pending).login, 'test').should == users(:pending)
-    flash[:notice].should_not be_nil
-  end
   
-  it 'does not activate user without key' do
-    get :activate
-    flash[:notice].should be_nil
-  end
-  
-  it 'does not activate user with blank key' do
-    get :activate, :activation_code => ''
-    flash[:notice].should be_nil
-  end
-  
-  it 'activates the first user as admin' do
-    User.delete_all
-    create_user
-    user = User.find_by_login('quire')
-    user.register!
-    user.activate!
-    user.active?.should == true
-    user.admin?.should == true
-  end
-  
-  it "sends an email to the user on create" do
-    create_user :login => "admin", :email => "admin@example.com"
-    response.should be_redirect
-    lambda{ create_user }.should change(ActionMailer::Base.deliveries, :size).by(1)
-  end
   
   def create_user(options = {})
     post :create, :user => { :login => 'quire', :email => 'quire@example.com',
-      :password => 'monkey', :password_confirmation => 'monkey' }.merge(options)
+      :password => 'quire69', :password_confirmation => 'quire69' }.merge(options)
   end
 end
 
-describe UsersController, "GET #index" do
-  define_models :stubbed
-  before do
-    current_site :default
-    @controller.stub!(:current_site).and_return(@site)
-  end
-
-  act! { get :index, :page => 2 }
-
-  it "should make a paginated list of users available as @users" do
-    @site.users.should_receive(:paginate).with(:page => 2).and_return "users"
-    acting { assigns(:users).should == "users" }
-  end
-
-  describe "with search parameter" do
-    define_models :stubbed
-    act! { get :index, :q => "bob" }
-    define_models do
-      model User do
-        stub :bob, :display_name => "Bob", :login => "robert"
-        stub :rob, :display_name => "Robert", :login => "bob" 
-        stub :robby, :display_name => "Robby", :login => "robby"
-      end
-    end
-    it "should find users by name" do
-      acting
-      assigns(:users).should include(users(:bob))
-    end
-    it "should find users by login" do
-      acting
-      assigns(:users).should include(users(:rob))
-    end
-    it "should not include non-matching users" do
-      acting
-      assigns(:users).should_not include(users(:robby))
-    end
-  end
-end
-
-describe UsersController, "PUT #make_admin" do
-  before do
-    login_as :admin
-    current_site :default
-    @attributes = {'login' => "Default"}
-  end
-  
-  describe UsersController, "(as admin, successful)" do
-    define_models :users
-
-    it "sets admin" do
-      user = users(:default)
-      user.admin.should be_false
-      put :make_admin, :id => users(:default).id, :user => { :admin => "1" }
-      user.reload.admin.should be_true
+describe UsersController do
+  describe "route generation" do
+    it "should route users's 'index' action correctly" do
+      route_for(:controller => 'users', :action => 'index').should == "/users"
     end
     
-    it "unsets admin" do
-      user = users(:default)
-      user.update_attribute :admin, true
-      user.admin.should be_true
-      put :make_admin, :id => users(:default).id, :user => { }
-      user.reload.admin.should be_false
-    end
-  end
-end
-
-describe UsersController, "PUT #update" do
-  define_models :users
-  before do
-    login_as :default
-    current_site :default
-    @attributes = {'login' => "Default"}
-  end
-  
-  describe UsersController, "(successful save)" do
-    define_models
-    act! { put :update,{ :id => @user.id, :user => @attributes }}
-
-    before do
-      @user.stub!(:save).and_return(true)
+    it "should route users's 'new' action correctly" do
+      route_for(:controller => 'users', :action => 'new').should == "/signup"
     end
     
-    it_assigns :user, :flash => { :notice => :not_nil }
-    it_redirects_to { settings_path }
-
-    describe "updating from edit form" do
-      define_models :stubbed
-      %w(display_name website bio).each do |field|
-        it "should update #{field}" do
-          put :update, :id => @user.id, :user => { field => "test" }
-          assigns(:user).attributes[field].should == "test"
-        end
-      end
-      it "should update openid_url" do
-        put :update, :id => @user.id, :user => { 'openid_url' => 'test' }
-        assigns(:user).attributes['openid_url'].should == 'http://test/'
-      end
+    it "should route {:controller => 'users', :action => 'create'} correctly" do
+      route_for(:controller => 'users', :action => 'create').should == "/register"
+    end
+    
+    it "should route users's 'show' action correctly" do
+      route_for(:controller => 'users', :action => 'show', :id => '1').should == "/users/1"
+    end
+    
+    it "should route users's 'edit' action correctly" do
+      route_for(:controller => 'users', :action => 'edit', :id => '1').should == "/users/1/edit"
+    end
+    
+    it "should route users's 'update' action correctly" do
+      route_for(:controller => 'users', :action => 'update', :id => '1').should == "/users/1"
+    end
+    
+    it "should route users's 'destroy' action correctly" do
+      route_for(:controller => 'users', :action => 'destroy', :id => '1').should == "/users/1"
     end
   end
   
-  describe UsersController, "(successful save, xml)" do
-    define_models
-    act! { put :update, :id => @user.id, :user => @attributes, :format => 'xml' }
-
-    before do
-      @user.stub!(:save).and_return(true)
+  describe "route recognition" do
+    it "should generate params for users's index action from GET /users" do
+      params_from(:get, '/users').should == {:controller => 'users', :action => 'index'}
+      params_from(:get, '/users.xml').should == {:controller => 'users', :action => 'index', :format => 'xml'}
+      params_from(:get, '/users.json').should == {:controller => 'users', :action => 'index', :format => 'json'}
     end
     
-    it_assigns :user
-    it_renders :blank
-  end
-
-  describe UsersController, "(unsuccessful save)" do
-    define_models
-    act! { put :update, :id => @user.id, :user => {:email => ''} }
+    it "should generate params for users's new action from GET /users" do
+      params_from(:get, '/users/new').should == {:controller => 'users', :action => 'new'}
+      params_from(:get, '/users/new.xml').should == {:controller => 'users', :action => 'new', :format => 'xml'}
+      params_from(:get, '/users/new.json').should == {:controller => 'users', :action => 'new', :format => 'json'}
+    end
     
-    it_assigns :user
-    it_renders :template, :edit
+    it "should generate params for users's create action from POST /users" do
+      params_from(:post, '/users').should == {:controller => 'users', :action => 'create'}
+      params_from(:post, '/users.xml').should == {:controller => 'users', :action => 'create', :format => 'xml'}
+      params_from(:post, '/users.json').should == {:controller => 'users', :action => 'create', :format => 'json'}
+    end
+    
+    it "should generate params for users's show action from GET /users/1" do
+      params_from(:get , '/users/1').should == {:controller => 'users', :action => 'show', :id => '1'}
+      params_from(:get , '/users/1.xml').should == {:controller => 'users', :action => 'show', :id => '1', :format => 'xml'}
+      params_from(:get , '/users/1.json').should == {:controller => 'users', :action => 'show', :id => '1', :format => 'json'}
+    end
+    
+    it "should generate params for users's edit action from GET /users/1/edit" do
+      params_from(:get , '/users/1/edit').should == {:controller => 'users', :action => 'edit', :id => '1'}
+    end
+    
+    it "should generate params {:controller => 'users', :action => update', :id => '1'} from PUT /users/1" do
+      params_from(:put , '/users/1').should == {:controller => 'users', :action => 'update', :id => '1'}
+      params_from(:put , '/users/1.xml').should == {:controller => 'users', :action => 'update', :id => '1', :format => 'xml'}
+      params_from(:put , '/users/1.json').should == {:controller => 'users', :action => 'update', :id => '1', :format => 'json'}
+    end
+    
+    it "should generate params for users's destroy action from DELETE /users/1" do
+      params_from(:delete, '/users/1').should == {:controller => 'users', :action => 'destroy', :id => '1'}
+      params_from(:delete, '/users/1.xml').should == {:controller => 'users', :action => 'destroy', :id => '1', :format => 'xml'}
+      params_from(:delete, '/users/1.json').should == {:controller => 'users', :action => 'destroy', :id => '1', :format => 'json'}
+    end
   end
   
-  describe UsersController, "(unsuccessful save, xml)" do
-    define_models
-    act! { put :update, :id => @user.id, :user => {:email => ''}, :format => 'xml' }
+  describe "named routing" do
+    before(:each) do
+      get :new
+    end
     
-    it_assigns :user
-    it_renders :xml, :status => :unprocessable_entity do
-      assigns(:user).errors.to_xml
+    it "should route users_path() to /users" do
+      users_path().should == "/users"
+      formatted_users_path(:format => 'xml').should == "/users.xml"
+      formatted_users_path(:format => 'json').should == "/users.json"
+    end
+    
+    it "should route new_user_path() to /users/new" do
+      new_user_path().should == "/users/new"
+      formatted_new_user_path(:format => 'xml').should == "/users/new.xml"
+      formatted_new_user_path(:format => 'json').should == "/users/new.json"
+    end
+    
+    it "should route user_(:id => '1') to /users/1" do
+      user_path(:id => '1').should == "/users/1"
+      formatted_user_path(:id => '1', :format => 'xml').should == "/users/1.xml"
+      formatted_user_path(:id => '1', :format => 'json').should == "/users/1.json"
+    end
+    
+    it "should route edit_user_path(:id => '1') to /users/1/edit" do
+      edit_user_path(:id => '1').should == "/users/1/edit"
     end
   end
+  
 end

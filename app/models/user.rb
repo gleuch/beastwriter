@@ -1,85 +1,54 @@
+require 'digest/sha1'
+
 class User < ActiveRecord::Base
-  concerned_with :states, :activation, :posting, :validation
-  formats_attributes :bio
+  include Authentication
+  include Authentication::ByPassword
+  include Authentication::ByCookieToken
 
-  belongs_to :site, :counter_cache => true
-  validates_presence_of :site_id
-  
-  has_many :posts, :order => "#{Post.table_name}.created_at desc"
-  has_many :topics, :order => "#{Topic.table_name}.created_at desc"
-  
-  has_many :moderatorships, :dependent => :delete_all
-  has_many :forums, :through => :moderatorships, :source => :forum do
-    def moderatable
-      find :all, :select => "#{Forum.table_name}.*, #{Moderatorship.table_name}.id as moderatorship_id"
-    end
-  end
-  
-  has_many :monitorships, :dependent => :delete_all
-  has_many :monitored_topics, :through => :monitorships, :source => :topic, :conditions => {"#{Monitorship.table_name}.active" => true}
-  
-  has_permalink :login, :scope => :site_id
-  
-  attr_readonly :posts_count, :last_seen_at
+  validates_presence_of     :login
+  validates_length_of       :login,    :within => 3..40
+  validates_uniqueness_of   :login
+  validates_format_of       :login,    :with => Authentication.login_regex, :message => Authentication.bad_login_message
 
-  named_scope :named_like, lambda {|name|
-    { :conditions => ["users.display_name like ? or users.login like ?", 
-                        "#{name}%", "#{name}%"] }}
+  validates_format_of       :name,     :with => Authentication.name_regex,  :message => Authentication.bad_name_message, :allow_nil => true
+  validates_length_of       :name,     :maximum => 100
 
-  def self.prefetch_from(records)
-    find(:all, :select => 'distinct *', :conditions => ['id in (?)', records.collect(&:user_id).uniq])
-  end
+  validates_presence_of     :email
+  validates_length_of       :email,    :within => 6..100 #r@a.wk
+  validates_uniqueness_of   :email
+  validates_format_of       :email,    :with => Authentication.email_regex, :message => Authentication.bad_email_message
+
   
-  def self.index_from(records)
-    prefetch_from(records).index_by(&:id)
-  end
 
-  def available_forums
-    @available_forums ||= site.ordered_forums - forums
-  end
+  # HACK HACK HACK -- how to do attr_accessible from here?
+  # prevents a user from submitting a crafted form that bypasses activation
+  # anything else you want your user to change should be added here.
+  attr_accessible :login, :email, :name, :password, :password_confirmation
 
-  def moderator_of?(forum)
-    !!(admin? || Moderatorship.exists?(:user_id => id, :forum_id => forum.id))
-  end
 
-  def display_name
-    n = read_attribute(:display_name)
-    n.blank? ? login : n
-  end
 
-  alias_method :to_s, :display_name
-  
-  # this is used to keep track of the last time a user has been seen (reading a topic)
-  # it is used to know when topics are new or old and which should have the green
-  # activity light next to them
+  # Authenticates a user by their login name and unencrypted password.  Returns the user or nil.
   #
-  # we cheat by not calling it all the time, but rather only when a user views a topic
-  # which means it isn't truly "last seen at" but it does serve it's intended purpose
+  # uff.  this is really an authorization, not authentication routine.  
+  # We really need a Dispatch Chain here or something.
+  # This will also let us return a human error message.
   #
-  # This is now also used to show which users are online... not at accurate as the
-  # session based approach, but less code and less overhead.
-  def seen!
-    now = Time.now.utc
-    self.class.update_all ['last_seen_at = ?', now], ['id = ?', id]
-    write_attribute :last_seen_at, now
-  end
-  
-  def to_param
-    id.to_s # permalink || login
+  def self.authenticate(login, password)
+    return nil if login.blank? || password.blank?
+    u = find_by_login(login.downcase) # need to get the salt
+    u && u.authenticated?(password) ? u : nil
   end
 
-  def openid_url=(value)
-    write_attribute :openid_url, value.blank? ? nil : OpenIdAuthentication.normalize_identifier(value)
+  def login=(value)
+    write_attribute :login, (value ? value.downcase : nil)
   end
 
-  def using_openid
-    self.openid_url.blank? ? false : true
+  def email=(value)
+    write_attribute :email, (value ? value.downcase : nil)
   end
-  
-  def to_xml(options = {})
-    options[:except] ||= []
-    options[:except] << :email << :login_key << :login_key_expires_at << :password_hash << :openid_url << :activated << :admin
-    super
-  end
+
+  protected
+    
+
 
 end
