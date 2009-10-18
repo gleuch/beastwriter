@@ -1,38 +1,38 @@
-class PostsController < ApplicationController
+class EntriesController < ApplicationController
 
   def index
-    @posts = Post.active.limit(5)
+    @entries = Entry.active.limit(5)
     set_title("Homepage")
 
     respond_to do |format|
       format.html
-      format.xml { render :xml => @posts }
-      format.json { render :json => @posts }
+      format.xml { render :xml => @entries }
+      format.json { render :json => @entries }
       format.atom
     end
   end
 
   def show
     set_xpingback_header
-    @post = Post.active.find_by_permalink(params[:id]) if params[:id]
-    @post = Post.active.find_by_permalink(params[:post_id]) if params[:post_id]
-    set_title(@post.title)
+    @entry = Entry.active.find_by_permalink(params[:id]) if params[:id]
+    @entry = Entry.active.find_by_permalink(params[:entry_id]) if params[:entry_id]
+    set_title(@entry.title)
 
     respond_to do |format|
       format.html
-      format.xml { render :xml => @post }
-      format.json { render :json => @post }
+      format.xml { render :xml => @entry }
+      format.json { render :json => @entry }
     end
   end
 
   def archive
-    @posts = Post.active.find_by_date(params)
-    set_title("Posts created #{return_date_selection(params)}")
+    @entries = Entry.active.find_by_date(params)
+    set_title("Entries created #{return_date_selection(params)}")
 
     respond_to do |format|
       format.html
-      format.xml { render :xml => @posts }
-      format.json { render :json => @posts }
+      format.xml { render :xml => @entries }
+      format.json { render :json => @entries }
     end
   end
 

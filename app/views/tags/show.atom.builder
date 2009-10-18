@@ -1,11 +1,11 @@
 atom_feed do |feed|
   feed.title("Limi's Sphere of Influence - #{@tag.name} Feed")
-  feed.updated(@posts.first.created_at)
+  feed.updated(@entries.first.created_at)
 
-  @posts.each do |post|
-    feed.entry(post) do |entry|
-      entry.title(post.title)
-      entry.content(post.content, :type => 'html')
+  @entries.each do |entry|
+    feed.entry(entry) do |entry|
+      entry.title(entry.title)
+      entry.content(entry.content, :type => 'html')
       entry.author { |author| author.name("Limi") }
     end
   end

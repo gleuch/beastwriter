@@ -1,0 +1,8 @@
+<div class="sidebarbox">
+  <h2>Recent Entries</h2>
+    <ul>
+      <% entries.each do |entry| %>
+      <li><%= link_to(entry.title, entry_path(entry.permalink)) %></li>
+      <% end %>
+    </ul>
+</div>

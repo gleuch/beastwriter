@@ -3,7 +3,7 @@
   <p><a href="#" onclick="Effect.BlindDown('comment_form'); return false;">Post a comment of your own...</a></p>
   <div id="comment_form" style="display: none">
     <br />
-    <% remote_form_for [@post, Comment.new] do |f| %>
+    <% remote_form_for [@entry, Comment.new] do |f| %>
       <p>
         <%= f.label :author, "Nickname" %><br />
         <%= f.text_field :author %>
@@ -25,6 +25,6 @@
   </div>
   <br />
   <div id="comments">
-    <%= render :partial => @post.comments.active.order %>
+    <%= render :partial => @entry.comments.active.order %>
   </div>
 </div>

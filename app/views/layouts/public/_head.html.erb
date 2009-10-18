@@ -1,6 +1,6 @@
 <head>
   <title>Limi's Sphere of Influence <%= "- #{@title}" if @title %></title>
-  <%= auto_discovery_link_tag :atom, posts_path(:atom) %>
+  <%= auto_discovery_link_tag :atom, entries_path(:atom) %>
   <meta name="robots" content="follow, all" />
   <%= javascript_include_tag :all %>
   <%= stylesheet_link_tag("style") %>

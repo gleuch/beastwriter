@@ -16,7 +16,7 @@ class Tag < ActiveRecord::Base
   # Associations
   has_permalink :name
   has_many :tag_entry
-  has_many :posts, :through => :tag_entry
+  has_many :entries, :through => :tag_entry
 
   # Validations
   validates_presence_of :name, :permalink, :description

@@ -1,15 +1,18 @@
-[submodule "web/vendor/plugins/tiny_mce"]
-	path = web/vendor/plugins/tiny_mce
+[submodule "vendor/plugins/tiny_mce"]
+	path = vendor/plugins/tiny_mce
 	url = git://github.com/kete/tiny_mce.git
-[submodule "web/vendor/plugins/rakismet"]
-	path = web/vendor/plugins/rakismet
+[submodule "vendor/plugins/rakismet"]
+	path = vendor/plugins/rakismet
 	url = git://github.com/jfrench/rakismet.git
-[submodule "web/vendor/plugins/pingback_engine"]
-	path = web/vendor/plugins/pingback_engine
+[submodule "vendor/plugins/pingback_engine"]
+	path = vendor/plugins/pingback_engine
 	url = git://github.com/apotonick/pingback_engine.git
-[submodule "web/vendor/plugins/permalink_fu"]
-	path = web/vendor/plugins/permalink_fu
+[submodule "vendor/plugins/permalink_fu"]
+	path = vendor/plugins/permalink_fu
 	url = git://github.com/technoweenie/permalink_fu.git
-[submodule "web/vendor/plugins/acts_as_tree"]
-	path = web/vendor/plugins/acts_as_tree
+[submodule "vendor/plugins/acts_as_tree"]
+	path = vendor/plugins/acts_as_tree
 	url = git://github.com/rails/acts_as_tree.git
+[submodule "vendor/plugins/brain_buster"]
+	path = vendor/plugins/brain_buster
+	url = git://github.com/rsanheim/brain_buster.git

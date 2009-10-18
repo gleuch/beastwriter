@@ -47,16 +47,16 @@ Pingback.save_callback do |ping|
     comment.comment    = ping.content
     comment.created_at = ping.time
 
-    referenced_post = Post.find_by_url(ping.target_uri)
+    referenced_entry = Entry.find_by_url(ping.target_uri)
 
-    if referenced_post
-      comment.post_id = referenced_post.id
+    if referenced_entry
+      comment.entry_id = referenced_entry.id
       comment.save
 
       ping.reply_ok # report success.
     else
       # report error:
-      ping.reply_target_uri_does_not_accept_posts
+      ping.reply_target_uri_does_not_accept_entrys
     end
   end
   

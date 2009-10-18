@@ -1,6 +1,6 @@
-class CreatePosts < ActiveRecord::Migration
+class CreateEntries < ActiveRecord::Migration
   def self.up
-    create_table :posts do |t|
+    create_table :entries do |t|
       t.string :user_id
       t.string :title, :limit => 250
       t.string :permalink, :limit => 250
@@ -12,6 +12,6 @@ class CreatePosts < ActiveRecord::Migration
   end
 
   def self.down
-    drop_table :posts
+    drop_table :entries
   end
 end

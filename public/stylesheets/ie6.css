@@ -6,7 +6,7 @@
   background: #020202;
   }
 
-.topPost span.topComments, .topPost span.topMore, .topPost span.topTags {
+.topEntry span.topComments, .topEntry span.topMore, .topEntry span.topTags {
   background: #020202;
   padding: 0 10px;
   }

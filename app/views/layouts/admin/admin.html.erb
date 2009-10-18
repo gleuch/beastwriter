@@ -26,7 +26,7 @@
       <li><%= link_to "Categories", admin_categories_path %></li>
       <li><%= link_to "Comments", admin_comments_path %></li>
       <li><%= link_to "Links", admin_links_path %></li>
-      <li><%= link_to "Posts", admin_posts_path %></li>
+      <li><%= link_to "Entries", admin_entries_path %></li>
     </ul>
   </div>
 <!-- Menu -->
@@ -85,7 +85,7 @@
 			</div>
 			<div class="tabcontent" id="country2" style="display: none;">
 				<div class="required">
-					<form name="f" method="post" action="#">
+					<form name="f" method="entry" action="#">
 						<fieldset>
 						<legend>Availability:</legend>
 						<input type="checkbox" value="Part-time" class="inputCheckbox" id="availability1" name="availability"/>

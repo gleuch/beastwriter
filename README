@@ -6,9 +6,9 @@ database-backed web applications according to the Model-View-Control pattern.
 This pattern splits the view (also called the presentation) into "dumb" templates
 that are primarily responsible for inserting pre-built data in between HTML tags.
 The model contains the "smart" domain objects (such as Account, Product, Person,
-Post) that holds all the business logic and knows how to persist themselves to
+Entry) that holds all the business logic and knows how to persist themselves to
 a database. The controller handles the incoming requests (such as Save New Account,
-Update Product, Show Post) by manipulating the model and directing data to the view.
+Update Product, Show Entry) by manipulating the model and directing data to the view.
 
 In Rails, the model is handled by what's called an object-relational mapping
 layer entitled Active Record. This layer allows you to present the data from
@@ -138,7 +138,7 @@ Example:
 
   class WeblogController < ActionController::Base
     def index
-      @posts = Post.find(:all)
+      @entries = Entry.find(:all)
       debugger
     end
   end
@@ -146,16 +146,16 @@ Example:
 So the controller will accept the action, run the first line, then present you
 with a IRB prompt in the server window. Here you can do things like:
 
-  >> @posts.inspect
-  => "[#<Post:0x14a6be8 @attributes={\"title\"=>nil, \"body\"=>nil, \"id\"=>\"1\"}>,
-       #<Post:0x14a6620 @attributes={\"title\"=>\"Rails you know!\", \"body\"=>\"Only ten..\", \"id\"=>\"2\"}>]"
-  >> @posts.first.title = "hello from a debugger"
+  >> @entries.inspect
+  => "[#<Entry:0x14a6be8 @attributes={\"title\"=>nil, \"body\"=>nil, \"id\"=>\"1\"}>,
+       #<Entry:0x14a6620 @attributes={\"title\"=>\"Rails you know!\", \"body\"=>\"Only ten..\", \"id\"=>\"2\"}>]"
+  >> @entries.first.title = "hello from a debugger"
   => "hello from a debugger"
 
 ...and even better is that you can examine how your runtime objects actually work:
 
-  >> f = @posts.first
-  => #<Post:0x13630c4 @attributes={"title"=>nil, "body"=>nil, "id"=>"1"}>
+  >> f = @entries.first
+  => #<Entry:0x13630c4 @attributes={"title"=>nil, "body"=>nil, "id"=>"1"}>
   >> f.
   Display all 152 possibilities? (y or n)
 

@@ -19,7 +19,7 @@
 
       <div id="catnav">
         <div id="toprss">
-          <%= link_to image_tag("rss-trans.png", :width => 65, :height => 24), posts_path(:atom) %>
+          <%= link_to image_tag("rss-trans.png", :width => 65, :height => 24), entries_path(:atom) %>
         </div> <!-- Closes toprss -->
         <ul id="nav">
           <li><%= link_to "Home", root_path %></li>
@@ -48,8 +48,8 @@
           <h3>Archives</h3>
           <p>All entries, chronologically...</p>
           <ul>
-            <% months = Post.active.group_by { |t| t.publish_at.beginning_of_month } %>
-            <% months.each do |month, post| %>
+            <% months = Entry.active.group_by { |t| t.publish_at.beginning_of_month } %>
+            <% months.each do |month, entry| %>
               <li><%= link_to month.strftime('%B %Y'), archive_month_path(:year => month.strftime('%Y'), :month => month.strftime('%m')) %></li>
             <% end %>
           </ul>

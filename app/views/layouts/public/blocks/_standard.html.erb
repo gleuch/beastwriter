@@ -3,7 +3,7 @@
     <ul>
       <li>Welcome to the blog of a gamer based web programmer!</li>
       <li>
-        <%= render :partial => "layouts/public/blocks/recent_posts", :locals => { :posts => Post.active.limit(10) } %>
+        <%= render :partial => "layouts/public/blocks/recent_entries", :locals => { :entries => Entry.active.limit(10) } %>
       </li>
     </ul>
   </div>

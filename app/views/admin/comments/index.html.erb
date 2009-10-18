@@ -6,7 +6,7 @@
     <tr>
       <th>ID</th>
       <th>Author</th>
-      <th>Post</th>
+      <th>Entry</th>
       <th>Comment</th>
       <th>Action</th>
     </tr>
@@ -16,7 +16,7 @@
       <tr <%= cycle("", "class=\"row2\"") %>>
         <td><%= comment.id %></td>
         <td><%= comment.author %></td>
-        <td><%= link_to comment.post.title, admin_post_path(comment.post) %></td>
+        <td><%= link_to comment.entry.title, admin_entry_path(comment.entry) %></td>
         <td><%= comment.content %></td>
         <td>
           <%= link_to "edit", edit_admin_comment_path(comment), :class => :edit %>

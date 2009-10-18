@@ -1,5 +1,5 @@
-<%= f.label :post %>
-<%= collection_select(:comment, :post_id, Post.find(:all), :id, :title, :class =>"medium") %>
+<%= f.label :entry %>
+<%= collection_select(:comment, :entry_id, Entry.find(:all), :id, :title, :class =>"medium") %>
 <br />
 <%= f.label :author %>
 <%= f.text_field :author, :class => :medium %>

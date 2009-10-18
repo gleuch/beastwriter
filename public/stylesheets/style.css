@@ -278,66 +278,66 @@ body {
   background: url(/images/bg-trans.png) repeat;
   padding: 5px;
   }
-.topPost {
+.topEntry {
   margin: 0;
   padding: 0;
   font-size: 9pt;
   }
-.topPost h2.topTitle a {
+.topEntry h2.topTitle a {
   font-size: 15pt;
   font-weight: normal;
   color: #fff;
   letter-spacing: -2px;
   }
-.topPost h2.topTitle a:hover {
+.topEntry h2.topTitle a:hover {
   text-decoration: none;
   color: #abd1ea;
   }
-.topPost p.topMeta {
+.topEntry p.topMeta {
   padding: 0;
   margin: -10px 0 0 0;
   font-size: 9pt;
   color: #cdcdcd;  
   }
-.topPost p.topMeta a {
+.topEntry p.topMeta a {
   text-decoration: underline;
   color: #fff;
   }
-.topPost p.topMeta a:hover {
+.topEntry p.topMeta a:hover {
   color: #ccc;
   }
-.topPost div.topData {
+.topEntry div.topData {
   color: #efefef;
 }
-.topPost div.topData a {
+.topEntry div.topData a {
   text-decoration: none;
   color: #fff;
   }
-.topPost div.topData a:hover {
+.topEntry div.topData a:hover {
   text-decoration: underline;
   color: #abd1ea;
   }
-.topPost div.topContent {
+.topEntry div.topContent {
   font-size: 9pt;
   color: #efefef;
   margin: 8px 0;
   }
-.topPost div.topContent a {
+.topEntry div.topContent a {
   text-decoration: underline;
   color: #fff;
   }
-.topPost div.topContent a:hover {
+.topEntry div.topContent a:hover {
   text-decoration: underline;
   color: #ff9933;
   }
 
-.topPost div.topContent ul, .topPost div.topContent ol {
+.topEntry div.topContent ul, .topEntry div.topContent ol {
   padding: 0 0 0 30px;
   }
-.topPost div.topContent ul li, .topPost div.topContent ol li {
+.topEntry div.topContent ul li, .topEntry div.topContent ol li {
   color: #eee;
   }
-.topPost span.topComments, .topPost span.topMore, .topPost span.topTags {
+.topEntry span.topComments, .topEntry span.topMore, .topEntry span.topTags {
   font-size: 9pt;
   font-style: italic;
   background: url(/images/bg-trans.png) repeat;
@@ -347,45 +347,45 @@ body {
   color: #fff;
   border: 1px solid #111;
   }
-.topPost span.linkpages {
+.topEntry span.linkpages {
   font-size: 9pt;
   font-style: italic;
   color: #fff;
   margin-bottom: 10px; display:block;
   }
-.topPost span.linkpages a:hover {
+.topEntry span.linkpages a:hover {
   color: #ddd;
   }
-.topPost span.topComments:hover, .topPost span.topMore:hover, .topPost span.topTags:hover {
+.topEntry span.topComments:hover, .topEntry span.topMore:hover, .topEntry span.topTags:hover {
   background: #040404;
   }
-.topPost span.topComments a {
+.topEntry span.topComments a {
   color: #fff;
   background: url(/images/comments.gif) left no-repeat;
   padding-left: 20px;
   line-height: 27pt;
   vertical-align: middle;
   }
-.topPost span.topMore a {
+.topEntry span.topMore a {
   color: #fff;
   background: url(/images/more.gif) left no-repeat;
   padding-left: 20px;
   line-height: 27pt;
   vertical-align: middle;
   }
-.topPost span.topTags em {
+.topEntry span.topTags em {
   background: url(/images/tags.gif) left no-repeat;
   padding-left: 20px;
   line-height: 27pt;
   vertical-align: middle;
   color: #0a0a0a;
   }
-.topPost span.topTags a {
+.topEntry span.topTags a {
   color: #fff;
   line-height: 27pt;
   vertical-align: middle;
   }
-.topPost span.topComments a:hover, .topPost span.topMore a:hover, .topPost span.topTags a:hover {
+.topEntry span.topComments a:hover, .topEntry span.topMore a:hover, .topEntry span.topTags a:hover {
   color: #fff;
   text-decoration: underline;
   }

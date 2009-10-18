@@ -1,7 +1,7 @@
 # == Schema Information
 # Schema version: 20090404170416
 #
-# Table name: posts
+# Table name: entries
 #
 #  id             :integer         not null, primary key
 #  user_id        :string(255)
@@ -14,7 +14,7 @@
 #  updated_at     :datetime
 #
 
-class Post < ActiveRecord::Base
+class Entry < ActiveRecord::Base
 
   # Associations
   has_many :categories, :through => :category_entry
@@ -80,7 +80,7 @@ class Post < ActiveRecord::Base
     self.save!
   end
 
-  # Boolean on wether the post is published or not
+  # Boolean on wether the entry is published or not
   def published?
     if self.publish_at < Time.now.utc
       true

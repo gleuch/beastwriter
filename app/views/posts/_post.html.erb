@@ -1,6 +1,0 @@
-<div class="topPost">
-  <h2 class="topTitle"><%= link_to(post.title, post_path(post.permalink)) %></h2>
-  <div class="topData"><%= post.publish_at %> - <%= post.categories.collect {|c| link_to c.name, category_path(c)}.to_sentence %></div>
-  <div class="topContent"><%= post.content %></div>
-  <div class="cleared"></div>
-</div>

@@ -3,8 +3,8 @@ class CommentsController < ApplicationController
   has_rakismet :only => :create
 
   def create
-    @post = Post.find_by_permalink(params[:post_id])
-    @comment = @post.comments.new(params[:comment])
+    @entry = Entry.find_by_permalink(params[:entry_id])
+    @comment = @entry.comments.new(params[:comment])
 
     # If it thinks it's spam, just don't bother saving it at all
     unless @comment.spam?
@@ -12,7 +12,7 @@ class CommentsController < ApplicationController
     end
 
     respond_to do |format|
-      format.html { redirect_to @post }
+      format.html { redirect_to @entry }
       format.js
     end
   end

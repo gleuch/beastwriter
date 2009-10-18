@@ -21,14 +21,14 @@ ActiveRecord::Schema.define(:version => 20090422233019) do
   end
 
   create_table "category_entries", :force => true do |t|
-    t.integer  "post_id"
+    t.integer  "entry_id"
     t.integer  "category_id"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
 
   create_table "comments", :force => true do |t|
-    t.integer  "post_id"
+    t.integer  "entry_id"
     t.string   "author"
     t.string   "user_ip"
     t.string   "author_url"
@@ -48,7 +48,7 @@ ActiveRecord::Schema.define(:version => 20090422233019) do
     t.datetime "updated_at"
   end
 
-  create_table "posts", :force => true do |t|
+  create_table "entries", :force => true do |t|
     t.string   "user_id"
     t.string   "title",          :limit => 250
     t.string   "permalink",      :limit => 250
@@ -60,7 +60,7 @@ ActiveRecord::Schema.define(:version => 20090422233019) do
   end
 
   create_table "tag_entries", :force => true do |t|
-    t.integer  "post_id"
+    t.integer  "entry_id"
     t.integer  "tag_id"
     t.datetime "created_at"
     t.datetime "updated_at"

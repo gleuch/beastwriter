@@ -1,5 +1,5 @@
 atom_feed do |feed|
-  feed.title("Limi's Sphere of Influence - #{@category.name} Feed")
+  feed.title("Limi's Sphere of Influence")
   feed.updated(@entries.first.created_at)
 
   @entries.each do |entry|

@@ -9,7 +9,7 @@
 <br />
 <%= f.label :categories %>
 <% for category in Category.find(:all) %>
-  <%= check_box_tag "post[category_ids][]", category.id, @post.categories.include?(category) %>
+  <%= check_box_tag "entry[category_ids][]", category.id, @entry.categories.include?(category) %>
   <%= category.name %>
 <% end %>
 <br /><br />

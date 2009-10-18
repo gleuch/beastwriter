@@ -1,3 +1,11 @@
-web/nbproject/
-web/config/database.yml
-web/log/*.log
+*~
+.DS_Store
+tmp
+log
+config/database.yml
+vendor/rails
+db/*.sqlite
+db/*.sqlite2
+db/*.sqlite3
+db/*.db
+public/javascripts/beast.js

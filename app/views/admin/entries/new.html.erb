@@ -1,6 +1,6 @@
-<% form_for(@post, :url => admin_posts_path) do |f| %>
+<% form_for(@entry, :url => admin_entries_path) do |f| %>
   <fieldset>
-    <legend>New Post</legend>
+    <legend>New Entry</legend>
     <%= render :partial => 'form', :locals => {:f => f} %>
   </fieldset>
 <% end %>
