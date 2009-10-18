@@ -1,5 +1,10 @@
 module AuthenticatedSystem
   protected
+
+    def current_site
+      @current_site ||= Site.find_by_host(request.host.dup) or raise Site::UndefinedError
+    end
+
     # Returns true or false if the user is logged in.
     # Preloads @current_user with the user model if they're logged in.
     def logged_in?
@@ -16,6 +21,17 @@ module AuthenticatedSystem
     def current_user=(new_user)
       session[:user_id] = new_user ? new_user.id : nil
       @current_user = new_user || false
+    end
+
+    def admin?
+      logged_in? && current_user.admin?
+    end
+    
+    def moderator_of?(record)
+      return true if admin?
+      return false unless logged_in?
+      forum = record.respond_to?(:forum) ? record.forum : record
+      current_user.moderator_of? forum
     end
 
     # Check if the user is authorized
@@ -51,6 +67,10 @@ module AuthenticatedSystem
     #
     def login_required
       authorized? || access_denied
+    end
+
+    def admin_required
+      admin? || access_denied
     end
 
     # Redirect as appropriate when an access request fails.
