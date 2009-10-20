@@ -11,6 +11,17 @@ ActionController::Routing::Routes.draw do |map|
   map.with_options :controller => 'users' do |user|
     user.register '/register', :action => 'create'
     user.signup '/signup', :action => 'new'
+    # user.user_troubleshooting '/users/troubleshooting', :action => 'troubleshooting'
+    # user.user_forgot_password '/users/forgot_password', :action => 'forgot_password'
+    # user.user_reset_password '/users/reset_password/:password_reset_code', :action => 'reset_password'
+    # user.user_forgot_login '/users/forgot_login', :action => 'forgot_login'
+    # user.user_clueless '/users/clueless', :action => 'clueless'
+
+    # user.user_clear_dismissals '/settings/clear_user_dismissals', :action => 'clear_dismissals'
+
+    # user.user_update_email '/settings/account/email', :action => 'update_email', :panel => 'account', :conditions => {:method => [:post, :put]} #These were throwing errors due to duplication of required/optional
+    # user.user_update_password '/settings/account/password', :action => 'update_password', :panel => 'account', :conditions => {:method => [:post, :put]}
+    user.user_settings '/settings', :action => 'settings'
   end
 
 # Admin routes
@@ -19,8 +30,6 @@ ActionController::Routing::Routes.draw do |map|
     admin.resources :comments
     admin.resources :links
     admin.resources :entries
-    admin.resources :moderatorships
-    admin.resources :monitorship
   end
   map.admin_path '/admin', :controller => 'admin/entries', :action => 'index'
 
@@ -36,20 +45,14 @@ ActionController::Routing::Routes.draw do |map|
 
 # Forum routes
   map.resources :sites
-  map.resources :forums, :has_many => :posts do |forum|
-    forum.resources :topics do |topic|
-      topic.resources :posts
-      topic.resource :monitorship
+  map.resources :forums do |forum|
+    forum.resources :threads, :controller => 'forum_threads' do |thread|
+      thread.resources :posts, :controller => 'forum_posts'
     end
-    forum.resources :posts
+    forum.resources :posts, :controller => 'forum_posts'
   end
 
-  map.resources :posts, :collection => {:search => :get}
-
-  map.with_options :controller => 'posts', :action => 'monitored' do |map|
-    # map.formatted_monitored_posts '/users/:user_id/monitored.:format'
-    # map.monitored_posts           '/users/:user_id/monitored'
-  end
+  map.resources :posts, :controller => 'forum_posts', :collection => {:search => :get}
 
 
 # Additional Routes

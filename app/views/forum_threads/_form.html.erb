@@ -1,0 +1,32 @@
+<p>
+<label for="thread_title"><%= I18n.t('txt.views_threads.thread', :default => 'Name') %></label><br />
+<%= form.text_field :title, :onchange => "/*ThreadForm.editNewTitle(this);*/", :class => "primary", :tabindex => 10 %>
+
+<% if false %>
+  <% for_moderators_of @forum do -%>
+  <label style="margin-left:1em;">
+  <%= form.check_box :sticky %> <%= I18n.t('txt.sticky', :default => 'sticky') %>
+  </label>
+
+  <label style="margin-left:1em;">
+  <%= form.check_box :locked %> <%= I18n.t('txt.locked', :default => 'locked') %>
+  </label>
+  <% end -%>
+<% end %>
+</p>
+
+<% if @thread.new_record? -%>
+<p>
+	<label for="thread_body"><%= I18n.t('txt.views_threads.body', :default => 'Body') %></label><br />
+	<%= form.text_area :body, :rows => 12, :tabindex => 20 %>
+</p>
+<% end -%>
+
+<% if admin? && !@thread.new_record? && forums = Forum.ordered -%>
+	<% if forums.size > 1 -%>
+<p id="thread_forum_id">
+  <label for="thread_forum_id"><%= I18n.t('txt.forum', :default => 'Forum') %></label><br />
+  <%= form.select :forum_id, forums.map {|x| [x.name, x.id] } %></p>
+</p>
+	<% end -%>
+<% end -%>

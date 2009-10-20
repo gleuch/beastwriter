@@ -52,12 +52,12 @@ module ApplicationHelper
     end
   end
 
-  def topic_title_link(topic, options)
-    if topic.title =~ /^\[([^\]]{1,15})\]((\s+)\w+.*)/
+  def thread_title_link(thread, options)
+    if thread.title =~ /^\[([^\]]{1,15})\]((\s+)\w+.*)/
       "<span class='flag'>#{$1}</span>" + 
-      link_to(h($2.strip), forum_topic_path(@forum, topic), options)
+      link_to(h($2.strip), forum_thread_path(@forum, thread), options)
     else
-      link_to(h(topic.title), forum_topic_path(@forum, topic), options)
+      link_to(h(thread.title), forum_thread_path(@forum, thread), options)
     end
   end
 
@@ -72,9 +72,9 @@ module ApplicationHelper
   def search_path(atom = false)
     options = params[:q].blank? ? {} : {:q => params[:q]}
     prefix = 
-      if @topic
-        options.update :topic_id => @topic, :forum_id => @forum
-        :forum_topic
+      if @thread
+        options.update :forum_thread_id => @thread, :forum_id => @forum
+        :forum_thread
       elsif @forum
         options.update :forum_id => @forum
         :forum
@@ -84,11 +84,7 @@ module ApplicationHelper
       else
         :search
       end
-    atom ? send("#{prefix}_posts_path", options.update(:format => :atom)) : send("#{prefix}_posts_path", options)
-  end
-
-  def for_moderators_of(record, &block)
-    moderator_of?(record) && concat(capture(&block))
+    atom ? send("#{prefix}_forum_posts_path", options.update(:format => :atom)) : send("#{prefix}_forum_posts_path", options)
   end
 
 end

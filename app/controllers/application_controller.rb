@@ -18,13 +18,19 @@ class ApplicationController < ActionController::Base
 
   def month_name_from_number(num); Date::MONTHNAMES[num.to_i] if num; end
 
-  # raised in #current_site
-  # rescue_from Site::UndefinedError do |e|
-  #   redirect_to new_site_path
-  # end
-
   def current_page; @page ||= params[:page].blank? ? 1 : params[:page].to_i; end
   helper_method :current_page
+
+
+
+  def admin?; (logged_in? && current_user.has_role?(:admin)); end
+  def staff?; (logged_in? && current_user.has_role?(:staff)); end
+  helper_method :admin?, :staff?
+
+  def dev?; ENV['RAILS_ENV'] == 'development'; end
+  def prod?; ENV['RAILS_ENV'] == 'production'; end
+  alias :is_dev? :dev?
+  helper_method :is_dev?, :dev?, :prod?
 
 
 private

@@ -5,18 +5,18 @@
 <hr />
 <% end %>
 
-<h5 style="margin-bottom:1.0em;"><%= I18n.t 'txt.moderator', :count => @forum.moderators.size, :default => 'Moderator' %></h5>
-
-<% unless @forum.moderators.empty? -%>
-<ul class="flat" style="margin-top:1em;">
-<% @forum.moderators.each do |user| -%>
-  <li><%= link_to h(user.display_name || user.login), user %></li>
-<% end -%>
-</ul>
-<% else -%>
-<p><%= I18n.t 'txt.views_forums.unmoderated', :default => 'This forum is currently unmoderated.<br />Please always be courteous.' %></p>
-<% end -%>
-
+<% if false %>
+  <h5 style="margin-bottom:1.0em;"><%= I18n.t 'txt.moderator', :count => @forum.moderators.size, :default => 'Moderator' %></h5>
+  <% unless @forum.moderators.empty? -%>
+    <ul class="flat" style="margin-top:1em;">
+    <% @forum.moderators.each do |user| -%>
+      <li><%= link_to h(user.display_name || user.login), user %></li>
+    <% end -%>
+    </ul>
+  <% else -%>
+    <p><%= I18n.t 'txt.views_forums.unmoderated', :default => 'This forum is currently unmoderated.<br />Please always be courteous.' %></p>
+    <% end -%>
+  <% end %>
 <% end %>
 
 <% @page_title = @forum.name %>
@@ -28,65 +28,65 @@
 
 <p class="subtitle">
   <%= feed_icon_tag @forum.name, forum_posts_path(@forum, :format => :atom) %> 
-  <%= I18n.t 'txt.count_topics', :count => @forum.topics.size, :num => number_with_delimiter(@forum.topics.size) %>,
+  <%= I18n.t 'txt.count_threads', :count => @forum.threads.size, :num => number_with_delimiter(@forum.threads.size) %>,
   <%= I18n.t 'txt.count_posts', :count => @forum.posts.size, :num => number_with_delimiter(@forum.posts.size) %>
 </p>
 
-<% if @topics.total_entries -%>
+<% if @threads.total_entries -%>
 <% if logged_in? %>
-<p style="float:right; margin-top:0;"><%= link_to I18n.t('txt.new_topic', :default => 'New topic'), new_forum_topic_path(@forum), :class => "utility" %></p>
+<p style="float:right; margin-top:0;"><%= link_to I18n.t('txt.new_thread', :default => 'New thread'), new_forum_thread_path(@forum), :class => "utility" %></p>
 <% end %>
-<%= will_paginate @topics %>
+<%= will_paginate @threads %>
 <% end -%>
 
-<table border="0" cellspacing="0" cellpadding="0" class="wide topics">
+<table border="0" cellspacing="0" cellpadding="0" class="wide threads">
 <tr>
-  <th class="la" colspan="2"><%= I18n.t 'txt.topic', :default => 'Topic' %></th>
+  <th class="la" colspan="2"><%= I18n.t 'txt.thread', :default => 'Thread' %></th>
   <th width="1%"><%= I18n.t 'txt.posts', :default => 'Posts' %></th>
   <th width="1%"><%= I18n.t 'txt.views', :default => 'Views' %></th>
   <th class="la"><%= I18n.t 'txt.latest_post', :default => 'Latest post' %></th>
 </tr>
-<% for topic in @topics %>
+<% for thread in @threads %>
 <tr class="hentry">
   <td style="padding:5px; width:16px;" class="c1">
     <% 
     icon = "comment"
     color = ""
-    if topic.locked?
+    if thread.locked?
       icon = "lock"
-      post = I18n.t('txt.views_forums.comma_locked_topic', :default => ', this topic is locked.')
+      post = I18n.t('txt.views_forums.comma_locked_thread', :default => ', this thread is locked.')
       color = "darkgrey"
     end
     %>
-    <% if recent_topic_activity(topic) %>
+    <% if recent_thread_activity(thread) %>
     <%= image_tag "clearbits/#{icon}.gif", :class => "icon green", :title => I18n.t('txt.views_forums.recent_activity', :default => "Recent activity") + "#{post}" %>
     <% else %>
       <%= image_tag "clearbits/#{icon}.gif", :class => "icon grey #{color}", :title => I18n.t('txt.views_forums.no_recent_activity', :default => "No recent activity") + "#{post}" %>
     <% end %>
   </td>
   <td class="c2">
-    <%= I18n.t('txt.sticky', :default => ('[sticky]' + '<strong>')) if topic.sticky? %>
-    <%= topic_title_link (topic), :class => "entry-title", :rel => "bookmark" %>
-    <%= "</strong>" if topic.sticky? %>
-    <% if topic.paged? -%>
-      <small><%= link_to I18n.t('txt.goto_last_page', :default => 'last'), forum_topic_path(@forum, topic, :page => topic.last_page) %></small>
+    <%= I18n.t('txt.sticky', :default => ('[sticky]' + '<strong>')) if thread.sticky? %>
+    <%= thread_title_link (thread), :class => "entry-title", :rel => "bookmark" %>
+    <%= "</strong>" if thread.sticky? %>
+    <% if thread.paged? -%>
+      <small><%= link_to I18n.t('txt.goto_last_page', :default => 'last'), forum_thread_path(@forum, thread, :page => thread.last_page) %></small>
     <% end -%>
   </td>
-  <td class="ca inv stat"><%= topic.posts.size %></td>
-  <td class="ca inv stat"><%= number_with_delimiter(topic.hits) %></td>
+  <td class="ca inv stat"><%= thread.posts.size %></td>
+  <td class="ca inv stat"><%= number_with_delimiter(thread.hits) %></td>
   <td class="lp">
-    <abbr class="updated" title="<%= topic.last_updated_at.xmlschema %>"><%= I18n.t 'txt.post_age', :when => time_ago_in_words(topic.last_updated_at), :default => "posted {{when}} ago" %></abbr>
-    <% if topic.last_user -%>
-    <%= I18n.t 'txt.by_user', :default => 'by {{user}}', :user => "<span class=\"author\"><strong class=\"fn\">#{h(topic.last_user.display_name)}</strong></span>" %>
+    <abbr class="updated" title="<%= thread.last_updated_at.xmlschema %>"><%= I18n.t 'txt.post_age', :when => time_ago_in_words(thread.last_updated_at), :default => "posted {{when}} ago" %></abbr>
+    <% if thread.last_user -%>
+    <%= I18n.t 'txt.by_user', :default => 'by {{user}}', :user => "<span class=\"author\"><strong class=\"fn\">#{h(thread.last_user.display_name)}</strong></span>" %>
     <% end -%>
-    <span><%= link_to I18n.t('txt.view', :default => 'view'), forum_topic_path(@forum, topic, :page => topic.last_page, :anchor => dom_id(topic.recent_post)) %></span>
+    <span><%= link_to I18n.t('txt.view', :default => 'view'), forum_thread_path(@forum, thread, :page => thread.last_page, :anchor => dom_id(thread.recent_post)) %></span>
   </td>
 </tr>
 <% end %>
 </table>
 
-<%= will_paginate @topics %>
+<%= will_paginate @threads %>
 
 <% if logged_in? %>
-  <p><%= link_to I18n.t('txt.new_topic', :default => 'New topic'), new_forum_topic_path(@forum), :class => "utility" %></p>
+  <p><%= link_to I18n.t('txt.new_thread', :default => 'New thread'), new_forum_thread_path(@forum), :class => "utility" %></p>
 <% end%>

@@ -120,10 +120,10 @@
       zero: "no voices"
       one: "1 voice"
       other: "{{num}} voices"
-    count_topics:
-      zero: "no topics"
-      one: "1 topic"
-      other: "{{num}} topics"
+    count_threads:
+      zero: "no threads"
+      one: "1 thread"
+      other: "{{num}} threads"
     count_posts:
       zero: "no posts"
       one: "1 post"

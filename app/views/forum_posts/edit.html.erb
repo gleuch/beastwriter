@@ -1,0 +1,15 @@
+<h1><%= I18n.t 'txt.views_posts.edit', :default => 'Edit Post' %></h1>
+
+<h2><%= link_to h(@post.thread.title), forum_thread_path(@post.forum, @post.thread) %></h2>
+
+<%= link_to(I18n.t('txt.views_posts.delete', :default => 'Delete post'), forum_thread_post_path(@post.forum, @post.thread, @post, :page => current_page), 
+      :class => "utility", :method => :delete, :confirm => I18n.t('txt.views_posts.delete_sure', :default => 'Delete this post forever?')) %>
+
+<%= error_messages_for :thread %>
+<% form_for :post, :html => { :method => :put }, 
+     :url  => forum_thread_post_path(@post.forum, @post.thread, @post, :page => current_page) do |f| -%>
+<p id="post_body"><%= f.text_area :body %></p>
+<p><%= submit_tag I18n.t('txt.views_posts.save', :default => 'Save post') %> 
+  <%= I18n.t 'txt.or', :default => 'or' %> 
+  <%= link_to I18n.t('txt.cancel', :default => 'cancel'), forum_thread_path(@post.forum, @post.thread, :page => current_page) %></p>
+<% end -%>

@@ -1,0 +1,10 @@
+<h1><%= I18n.t 'txt.views_threads.edit', :default => 'Edit Thread' %></h1>
+
+<%= error_messages_for :thread %>
+<% form_for :thread,
+     :url  => forum_thread_path(@forum, @thread),
+     :html => { :method => :put } do |f| -%>
+<%= render :partial => "form", :object => f %>
+<br />
+<%= submit_tag I18n.t('txt.save_changes', :default => 'Save changes') %> <%= I18n.t 'txt.or', :default => 'or' %> <%= link_to(I18n.t('txt.cancel', :default => 'Cancel'), forum_thread_path) %>
+<% end -%>

@@ -3,7 +3,7 @@ require 'model_stubbing'
 
 describe Forum do
   define_models do
-    model Topic do
+    model ForumThread do
       stub :sticky, :sticky => 1, :last_updated_at => current_time - 132.days
     end
   end
@@ -15,8 +15,8 @@ describe Forum do
     f.description_html.should == '<p>bar</p>'
   end
   
-  it "lists topics with sticky topics first" do
-    forums(:default).topics.should == [topics(:sticky), topics(:other), topics(:default)]
+  it "lists threads with sticky threads first" do
+    forums(:default).threads.should == [threads(:sticky), threads(:other), threads(:default)]
   end
   
   it "lists posts by created_at" do
@@ -27,8 +27,8 @@ describe Forum do
     forums(:default).recent_post.should == posts(:default)
   end
   
-  it "finds most recent topic" do
-    forums(:default).recent_topic.should == topics(:other)
+  it "finds most recent thread" do
+    forums(:default).recent_thread.should == threads(:other)
   end
   
   it "finds ordered forums" do

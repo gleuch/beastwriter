@@ -1,0 +1,15 @@
+development: &local  
+
+  site_name:      'My First Site'
+  site_tagline:   "This would be your site's tagline."
+
+
+production:
+  <<: *local
+
+
+staging:
+  <<: *local
+
+test:
+  <<: *local

@@ -7,7 +7,6 @@ describe ForumsController, "GET #index" do
 
   before do
     login_as :default
-    current_site :default
     @controller.stub!(:admin_required).and_return(true)
     session[:forums_page] = {1 => 5}
     @forum_time = session[:forums] = {1 => 5.minutes.ago.utc}
@@ -32,13 +31,12 @@ describe ForumsController, "GET #show" do
   act! { get :show, :id => @forum.to_param }
 
   before do
-    current_site :default
     @forum  = forums(:default)
     @forum_page = session[:forums_page] = {@forum.id => 1}
     @forum_time = session[:forums]      = {@forum.id => Time.utc(2007, 1, 1)}
   end
   
-  it_assigns :topics, :forum, :session => {:forums_page => lambda { @forum_page }, :forums => lambda { @forum_time }}
+  it_assigns :threads, :forum, :session => {:forums_page => lambda { @forum_page }, :forums => lambda { @forum_time }}
   it_renders :template, :show
   
   it "sets session[:forums] if logged in" do
@@ -59,7 +57,7 @@ describe ForumsController, "GET #show" do
     
     act! { get :show, :id => @forum.to_param, :format => 'xml' }
 
-    it_assigns :topics => :undefined
+    it_assigns :threads => :undefined
     it_renders :xml
   end
 end
@@ -69,7 +67,6 @@ describe ForumsController, "GET #new" do
   act! { get :new }
   before do
     login_as :default
-    current_site :default
     @controller.stub!(:admin_required).and_return(true)
   end
 
@@ -94,7 +91,6 @@ describe ForumsController, "GET #edit" do
   
   before do
     login_as :default
-    current_site :default
     @forum  = forums(:default) 
     @controller.stub!(:admin_required).and_return(true)
   end
@@ -106,7 +102,6 @@ end
 describe ForumsController, "POST #create" do
   before do
     @attributes = {'name' => "Default"}
-    current_site :default
     login_as :default
     @controller.stub!(:admin_required).and_return(true)
   end
@@ -147,7 +142,6 @@ end
 describe ForumsController, "PUT #update" do
   before do
     login_as :default
-    current_site :default
     @attributes = {'name' => "Default"}
     @forum      = forums(:default)
     @controller.stub!(:admin_required).and_return(true)
@@ -192,8 +186,7 @@ describe ForumsController, "DELETE #destroy" do
   
   before do
     login_as :default
-    current_site :default
-    @forum      = forums(:default)
+    @forum = forums(:default)
     @controller.stub!(:admin_required).and_return(true)
   end
 

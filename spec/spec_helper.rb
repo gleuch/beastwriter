@@ -17,9 +17,4 @@ Spec::Runner.configure do |config|
   config.use_transactional_fixtures = true
   config.use_instantiated_fixtures  = false
   config.fixture_path = RAILS_ROOT + '/spec/fixtures/'
-
-  def current_site(site)
-    @controller.stub!(:current_site).and_return(@site = site ? sites(site) : nil)
-  end
-
 end

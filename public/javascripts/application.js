@@ -1,6 +1,6 @@
-var TopicForm = {
+var ThreadForm = {
   editNewTitle: function(txtField) {
-    $('new_topic').innerHTML = (txtField.value.length > 5) ? txtField.value : 'New Topic';
+    $('new_thread').innerHTML = (txtField.value.length > 5) ? txtField.value : 'New Thread';
   }
 }
 
@@ -16,12 +16,12 @@ var LoginForm = {
   }
 }
 
-var PostForm = {
+var ForumPostForm = {
 	postId: null,
 
 	reply: Behavior.create({
 		onclick:function() {
-    	PostForm.cancel();
+    	ForumPostForm.cancel();
     	$('reply').toggle();
     	$('post_body').focus();
 		}
@@ -34,14 +34,14 @@ var PostForm = {
 		},
 		onclick: function($super) {
 			$('edit-post-' + this.postId + '_spinner').show();
-			PostForm.clearPostId();
+			ForumPostForm.clearForumPostId();
 			return $super();
 		}
 	}),
 	
 	cancel: Behavior.create({
 		onclick: function() { 
-			PostForm.clearPostId(); 
+			ForumPostForm.clearForumPostId(); 
 			$('edit').hide()
 			$('reply').hide()
 			return false;
@@ -49,7 +49,7 @@ var PostForm = {
 	}),
 
   // sets the current post id we're editing
-  editPost: function(postId) {
+  editForumPost: function(postId) {
 		this.postId = postId;
     $('post_' + postId + '-row').addClassName('editing');
 		$('edit-post-' + postId + '_spinner').hide()
@@ -61,7 +61,7 @@ var PostForm = {
 
   // checks whether we're editing this post already
   isEditing: function(postId) {
-    if (PostForm.postId == postId.toString())
+    if (ForumPostForm.postId == postId.toString())
     {
       $('edit').show();
       $('edit_post_body').focus();
@@ -70,24 +70,24 @@ var PostForm = {
     return false;
   },
 
-  clearPostId: function() {
-    var currentId = PostForm.postId;
+  clearForumPostId: function() {
+    var currentId = ForumPostForm.postId;
     if(!currentId) return;
 
     var row = $('post_' + currentId + '-row');
     if(row) row.removeClassName('editing');
-		PostForm.postId = null;
+		ForumPostForm.postId = null;
   }
 }
 
 var RowManager = {
   addMouseBehavior : function(ele){
     ele.onmouseover = function(e){ 
-      ele.addClassName('topic_over'); 
+      ele.addClassName('thread_over'); 
     }
 
     ele.onmouseout = function(e){
-      ele.removeClassName('topic_over');
+      ele.removeClassName('thread_over');
     }
   }
 };
@@ -105,22 +105,22 @@ Event.addBehavior({
     RowManager.addMouseBehavior(this);
   },
           
-  'tr.topic' : function(){
+  'tr.thread' : function(){
     RowManager.addMouseBehavior(this);
   },
 
 	'tr.post': function() {
 		var postId = this.id.match(/^post_(\d+)-/)[1]
     var anchor = this.down(".edit a")
-    if(anchor) { PostForm.edit.attach(anchor, postId) };
+    if(anchor) { ForumPostForm.edit.attach(anchor, postId) };
     RowManager.addMouseBehavior(this);
 	},
 	
 	'#reply-link': function() {
-		PostForm.reply.attach(this)
+		ForumPostForm.reply.attach(this)
 	},
 	
 	'#reply-cancel': function() {
-		PostForm.cancel.attach(this)
+		ForumPostForm.cancel.attach(this)
 	}
 })

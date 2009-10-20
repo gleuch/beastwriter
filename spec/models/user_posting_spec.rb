@@ -1,79 +1,79 @@
 require File.dirname(__FILE__) + '/../spec_helper'
 
-module TopicCreatePostHelper
+module ForumThreadCreateForumPostHelper
   def self.included(base)
     base.define_models
     
     base.before do
       @user  = users(:default)
       @attributes = {:body => 'booya', :title => 'foo'}
-      @creating_topic = lambda { post! }
+      @creating_thread = lambda { post! }
     end
   
-    base.it "sets topic's last_updated_at" do
-      @topic = post!
-      @topic.should_not be_new_record
-      @topic.reload.last_updated_at.should == @topic.posts.first.created_at
+    base.it "sets thread's last_updated_at" do
+      @thread = post!
+      @thread.should_not be_new_record
+      @thread.reload.last_updated_at.should == @thread.posts.first.created_at
     end
   
-    base.it "sets topic's last_user_id" do
-      @topic = post!
-      @topic.should_not be_new_record
-      @topic.reload.last_user.should == @topic.posts.first.user
+    base.it "sets thread's last_user_id" do
+      @thread = post!
+      @thread.should_not be_new_record
+      @thread.reload.last_user.should == @thread.posts.first.user
     end
 
-    base.it "increments Topic.count" do
-      @creating_topic.should change { Topic.count }.by(1)
+    base.it "increments ForumThread.count" do
+      @creating_thread.should change { ForumThread.count }.by(1)
     end
     
-    base.it "increments Post.count" do
-      @creating_topic.should change { Post.count }.by(1)
+    base.it "increments ForumPost.count" do
+      @creating_thread.should change { ForumPost.count }.by(1)
     end
     
-    base.it "increments cached site topics_count" do
-      @creating_topic.should change { sites(:default).reload.topics_count }.by(1)
+    base.it "increments cached site forum_threads_count" do
+      @creating_thread.should change { sites(:default).reload.forum_threads_count }.by(1)
     end
     
-    base.it "increments cached forum topics_count" do
-      @creating_topic.should change { forums(:default).reload.topics_count }.by(1)
+    base.it "increments cached forum forum_threads_count" do
+      @creating_thread.should change { forums(:default).reload.forum_threads_count }.by(1)
     end
     
-    base.it "increments cached site posts_count" do
-      @creating_topic.should change { sites(:default).reload.posts_count }.by(1)
+    base.it "increments cached site forum_posts_count" do
+      @creating_thread.should change { sites(:default).reload.forum_posts_count }.by(1)
     end
     
-    base.it "increments cached forum posts_count" do
-      @creating_topic.should change { forums(:default).reload.posts_count }.by(1)
+    base.it "increments cached forum forum_posts_count" do
+      @creating_thread.should change { forums(:default).reload.forum_posts_count }.by(1)
     end
     
-    base.it "increments cached user posts_count" do
-      @creating_topic.should change { users(:default).reload.posts_count }.by(1)
+    base.it "increments cached user forum_posts_count" do
+      @creating_thread.should change { users(:default).reload.forum_posts_count }.by(1)
     end
   end
 
   def post!
-    @user.post forums(:default), new_topic(:default, @attributes).attributes.merge(:body => @attributes[:body])
+    @user.post forums(:default), new_thread(:default, @attributes).attributes.merge(:body => @attributes[:body])
   end
 end
 
 describe User, "#post for users" do  
-  include TopicCreatePostHelper
+  include ForumThreadCreateForumPostHelper
   
   it "ignores sticky bit" do
     @attributes[:sticky] = 1
-    @topic = post!
-    @topic.should_not be_sticky
+    @thread = post!
+    @thread.should_not be_sticky
   end
   
   it "ignores locked bit" do
     @attributes[:locked] = true
-    @topic = post!
-    @topic.should_not be_locked
+    @thread = post!
+    @thread.should_not be_locked
   end
 end
 
 describe User, "#post for moderators" do
-  include TopicCreatePostHelper
+  include ForumThreadCreateForumPostHelper
   
   before do
     @user.stub!(:moderator_of?).and_return(true)
@@ -81,19 +81,19 @@ describe User, "#post for moderators" do
   
   it "sets sticky bit" do
     @attributes[:sticky] = 1
-    @topic = post!
-    @topic.should be_sticky
+    @thread = post!
+    @thread.should be_sticky
   end
   
   it "sets locked bit" do
     @attributes[:locked] = true
-    @topic = post!
-    @topic.should be_locked
+    @thread = post!
+    @thread.should be_locked
   end
 end
 
 describe User, "#post for admins" do
-  include TopicCreatePostHelper
+  include ForumThreadCreateForumPostHelper
   
   before do
     @user.admin = true
@@ -101,53 +101,53 @@ describe User, "#post for admins" do
   
   it "sets sticky bit" do
     @attributes[:sticky] = 1
-    @topic = post!
-    @topic.should_not be_new_record
-    @topic.should be_sticky
+    @thread = post!
+    @thread.should_not be_new_record
+    @thread.should be_sticky
   end
   
   it "sets locked bit" do
     @attributes[:locked] = true
-    @topic = post!
-    @topic.should_not be_new_record
-    @topic.should be_locked
+    @thread = post!
+    @thread.should_not be_new_record
+    @thread.should be_locked
   end
 end
 
-module TopicUpdatePostHelper
+module ForumThreadUpdateForumPostHelper
   def self.included(base)
     base.define_models
     
     base.before do
       @user  = users(:default)
-      @topic = topics(:default)
+      @thread = threads(:default)
       @attributes = {:body => 'booya'}
     end
   end
   
   def revise!
-    @user.revise @topic, @attributes
+    @user.revise @thread, @attributes
   end
 end
 
-describe User, "#revise(topic) for users" do  
-  include TopicUpdatePostHelper
+describe User, "#revise(thread) for users" do  
+  include ForumThreadUpdateForumPostHelper
   
   it "ignores sticky bit" do
     @attributes[:sticky] = 1
     revise!
-    @topic.should_not be_sticky
+    @thread.should_not be_sticky
   end
   
   it "ignores locked bit" do
     @attributes[:locked] = true
     revise!
-    @topic.should_not be_locked
+    @thread.should_not be_locked
   end
 end
 
-describe User, "#revise(topic) for moderators" do
-  include TopicUpdatePostHelper
+describe User, "#revise(thread) for moderators" do
+  include ForumThreadUpdateForumPostHelper
   
   before do
     @user.stub!(:moderator_of?).and_return(true)
@@ -156,18 +156,18 @@ describe User, "#revise(topic) for moderators" do
   it "sets sticky bit" do
     @attributes[:sticky] = 1
     revise!
-    @topic.should be_sticky
+    @thread.should be_sticky
   end
   
   it "sets locked bit" do
     @attributes[:locked] = true
     revise!
-    @topic.should be_locked
+    @thread.should be_locked
   end
 end
 
-describe User, "#revise(topic) for admins" do
-  include TopicUpdatePostHelper
+describe User, "#revise(thread) for admins" do
+  include ForumThreadUpdateForumPostHelper
   
   before do
     @user.admin = true
@@ -176,13 +176,13 @@ describe User, "#revise(topic) for admins" do
   it "sets sticky bit" do
     @attributes[:sticky] = 1
     revise!
-    @topic.should be_sticky
+    @thread.should be_sticky
   end
   
   it "sets locked bit" do
     @attributes[:locked] = true
     revise!
-    @topic.should be_locked
+    @thread.should be_locked
   end
 end
 
@@ -191,48 +191,48 @@ describe User, "#reply" do
   
   before do
     @user  = users(:default)
-    @topic = topics(:default)
+    @thread = threads(:default)
     @creating_post = lambda { post! }
   end
   
-  it "doesn't post if topic is locked" do
-    @topic.locked = true; @topic.save
+  it "doesn't post if thread is locked" do
+    @thread.locked = true; @thread.save
     @post = post!
     @post.should be_new_record
   end
 
-  it "sets topic's last_updated_at" do
+  it "sets thread's last_updated_at" do
     @post = post!
-    @topic.reload.last_updated_at.should == @post.created_at
+    @thread.reload.last_updated_at.should == @post.created_at
   end
 
-  it "sets topic's last_user_id" do
-    Topic.update_all 'last_user_id = 3'
+  it "sets thread's last_user_id" do
+    ForumThread.update_all 'last_user_id = 3'
     @post = post!
-    @topic.reload.last_user.should == @post.user
+    @thread.reload.last_user.should == @post.user
   end
   
-  it "increments Post.count" do
-    @creating_post.should change { Post.count }.by(1)
+  it "increments ForumPost.count" do
+    @creating_post.should change { ForumPost.count }.by(1)
   end
   
-  it "increments cached topic posts_count" do
-    @creating_post.should change { topics(:default).reload.posts_count }.by(1)
+  it "increments cached thread forum_posts_count" do
+    @creating_post.should change { threads(:default).reload.forum_posts_count }.by(1)
   end
   
-  it "increments cached forum posts_count" do
-    @creating_post.should change { forums(:default).reload.posts_count }.by(1)
+  it "increments cached forum forum_posts_count" do
+    @creating_post.should change { forums(:default).reload.forum_posts_count }.by(1)
   end
   
-  it "increments cached site posts_count" do
-    @creating_post.should change { sites(:default).reload.posts_count }.by(1)
+  it "increments cached site forum_posts_count" do
+    @creating_post.should change { sites(:default).reload.forum_posts_count }.by(1)
   end
   
-  it "increments cached user posts_count" do
-    @creating_post.should change { users(:default).reload.posts_count }.by(1)
+  it "increments cached user forum_posts_count" do
+    @creating_post.should change { users(:default).reload.forum_posts_count }.by(1)
   end
 
   def post!
-    @user.reply topics(:default), 'duane, i think you might be color blind.'
+    @user.reply threads(:default), 'duane, i think you might be color blind.'
   end
 end

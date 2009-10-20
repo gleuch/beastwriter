@@ -1,9 +1,9 @@
 <% content_for :right do %>
 
-<h5><%= I18n.t 'txt.sidebar.beast_title', :default => 'What is Beast?' %></h5>
+<h5><%= I18n.t 'txt.sidebar.site_title', :default => 'What is Beast?' %></h5>
 
 <p>
-  <%= I18n.t 'txt.sidebar.beast_desc', :default => "A small, light-weight forum in Rails with a scary name and a goal of around 500 lines of code when we're done." %>
+  <%= I18n.t 'txt.sidebar.site_desc', :default => "A small, light-weight forum in Rails with a scary name and a goal of around 500 lines of code when we're done." %>
 </p>
 
 <% if admin? %>
@@ -15,9 +15,11 @@
 
 <h1 style="margin-top:0;"><%= I18n.t 'txt.forums', :default => 'Forums' %></h1>
 <p class="subtitle">
-<%= feed_icon_tag I18n.t('txt.recent_posts', :default => "Recent Posts"), posts_path(:format => 'atom') %>
-<%= I18n.t 'txt.count_topics', :count => current_site.topics.size, :num => number_with_delimiter(current_site.topics.size) %>,
-<%= I18n.t 'txt.count_posts',  :count => current_site.posts.size,  :num => number_with_delimiter(current_site.posts.size) %>
+<%= feed_icon_tag I18n.t('txt.recent_posts', :default => "Recent Posts"), posts_path(:format => 'rss') %>
+<% if false %>
+  <%= I18n.t 'txt.count_threads', :count => Forum.threads.size, :num => number_with_delimiter(Forum.threads.count) %>,
+  <%= I18n.t 'txt.count_posts',  :count => Forum.posts.size,  :num => number_with_delimiter(Forum.posts.count) %>
+<% end %>
 </p>
 
 <table border="0" cellspacing="0" cellpadding="0" class="wide forums">
@@ -38,8 +40,8 @@
     <td class="c2 vat">
       <%= link_to h(forum.name), forum_path(forum), :class => "title" %>
       <div class="posts">
-        <%= I18n.t 'txt.count_topics', :count => forum.topics.size, :num => number_with_delimiter(forum.topics.size) %>,
-        <%= I18n.t 'txt.count_posts', :count => forum.posts.size, :num => number_with_delimiter(forum.posts.size) %>
+        <%= I18n.t 'txt.count_threads', :count => forum.forum_threads_count, :num => number_with_delimiter(forum.forum_threads_count) %>,
+        <%= I18n.t 'txt.count_posts', :count => forum.forum_posts_count, :num => number_with_delimiter(forum.forum_posts_count) %>
       </div>
       <p class="desc"><%= forum.description_html %></p>
     </td>
@@ -51,7 +53,7 @@
       <% if forum.recent_post -%>
         <%= I18n.t 'txt.post_age', :when => time_ago_in_words(forum.recent_post.created_at), :default => "posted {{when}} ago" %><br />
         <strong><%= I18n.t 'txt.by_user', :default => 'by {{user}}', :user => "#{h(forum.recent_post.user.display_name)}" %></strong>
-        <span>(<%= link_to I18n.t('txt.view', :default => 'view'), forum_topic_path(forum, forum.recent_post.topic, :page => forum.recent_post.topic.last_page, :anchor => dom_id(forum.recent_post)) %>)</span>
+        <span>(<%= link_to I18n.t('txt.view', :default => 'view'), forum_thread_path(forum, forum.recent_post.thread, :page => forum.recent_post.thread.last_page, :anchor => dom_id(forum.recent_post)) %>)</span>
       <% end -%>
     </td>
   </tr>

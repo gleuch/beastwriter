@@ -209,10 +209,10 @@ hr
 
 #right hr { border-color:#bbb; }
 
-#monitor_topic { 
+#monitor_thread { 
   font-size: 12px; 
 }
-#monitor_topic .icon { 
+#monitor_thread .icon { 
   background-image:none; 
 }
 
@@ -570,10 +570,10 @@ table tr td
 	border:1px solid #ddd;
 }
 
-/* topics */
+/* threads */
 
 #forum_description,
-#topic_body
+#thread_body
 {
   width:99%;
 }
@@ -581,7 +581,7 @@ table tr td
 /* specific table styles */
 
 table.forums,
-table.topics
+table.threads
  { font-size:0.8em; }
 table.forums tr th { font-size:0.8em; }
 table.forums tr td .title {
@@ -630,25 +630,25 @@ table tr td.lp {
 table tr td.lp span { color:#666; }
 table tr td.lp span a { color:#369; }
 
-table.topics tr td.c1
+table.threads tr td.c1
  {	border-right:0; padding-right:2px; }
- table.topics tr td.c2
+ table.threads tr td.c2
   {	border-left:0; padding-left:2px; }
 
 
-table.topics tr td.c3 { border-left:0; }
+table.threads tr td.c3 { border-left:0; }
 
 table.forums tr td.c1 {	border-right:0; padding-right:5px; padding-top:7px; }
 table.forums tr td.c2 {	border-width:1px 0; padding-left:5px; }
 table.forums tr td.c3 {	border-left:0; padding-left:5px; }
 
 
-table.topics tr td.c2 small a,
+table.threads tr td.c2 small a,
 .crumbs small a
 { color:#666; }
-table.topics tr td.stat { font-size:0.9em; }
+table.threads tr td.stat { font-size:0.9em; }
 
-table.topics tr td .flag {
+table.threads tr td .flag {
   background:#333;
   color:white;
   padding:1px 5px;
@@ -820,7 +820,7 @@ table.posts tr.spacer td
 	margin:0.5em 0;	
 }
 
-.post .body p.topic
+.post .body p.thread
 {
   font-size:0.8em;
   font-weight:bold;
@@ -935,7 +935,7 @@ div.editbox ul.help { margin:0; }
 div.editbox ul.help {
   list-style-type:none; }
   
-#monitor_topic a
+#monitor_thread a
 {
   color: #666;
 }

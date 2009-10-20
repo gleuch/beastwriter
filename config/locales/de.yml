@@ -115,8 +115,8 @@
     users: Benutzer
     voice: Teilnehmer
     voices: Teilnehmer
-    topic: Thema
-    topics: Themen
+    thread: Thema
+    threads: Themen
     post: Beitrag
     posts: Beiträge
     views: aufgerufen
@@ -132,7 +132,7 @@
     user_since: Benutzer seit {{date}}
     monitored: monitored
     locked: gesperrt
-    locked_topic: Dieses Thema ist gesperrt.
+    locked_thread: Dieses Thema ist gesperrt.
 
     latest_post: Letzter Beitrag
     recent_activity: Neue Aktivitäten
@@ -142,9 +142,9 @@
     search_results_for_searchterm: "Suchergebnis für &raquo;{{searchterm}}&laquo;"
     goto_last_page: zur letzten Seite
 
-    new_topic: Neues Thema
-    post_topic: Thema starten
-    reply_to_topic: Neuen Beitrag zu diesem Thema schreiben
+    new_thread: Neues Thema
+    post_thread: Thema starten
+    reply_to_thread: Neuen Beitrag zu diesem Thema schreiben
 
     by_user: "von {{user}}"
     page_nr: "Seite {{nr}}"
@@ -171,8 +171,9 @@
     footer_message: Two's company. Three's a forum. More's a Beast.
 
     sidebar:
-      beast_title: "Was ist Beast?"
-      beast_desc: "Ein kleines, schlankes Forum mit einem furchterregenden Namen, basierend auf Ruby on Rails und dem Ziel, aus etwa 500 Zeilen Quelltext zu bestehen – wenn es mal fertig sein sollte. ;-)"
+      site_title: "Was ist Beast?"
+      site_tagline: "Dies wäre Ihrer Website Slogan."
+      site_desc: "Ein kleines, schlankes Forum mit einem furchterregenden Namen, basierend auf Ruby on Rails und dem Ziel, aus etwa 500 Zeilen Quelltext zu bestehen – wenn es mal fertig sein sollte. ;-)"
 
     admin:
       title: Administration
@@ -214,7 +215,7 @@
       one: "1 Teilnehmer"
       other: "{{num}} Teilnehmer"
 
-    count_topics:
+    count_threads:
       zero: "kein Thema"
       one: "1 Thema"
       other: "{{num}} Themen"
@@ -237,7 +238,7 @@
       site_host: Hostname
       create_new_site: Neue Seite anlegen
       new: Neue Seite
-      new_desc: Willkommen beim brandneuen Altered Beast Forum. Bitte gib Deiner Seite einen Namen!
+      new_desc: Willkommen beim brandneuen Beastwriter Forum. Bitte gib Deiner Seite einen Namen!
       edit: Seite editieren
 
     views_users:
@@ -280,18 +281,18 @@
       edit: Forum editieren
       unmoderated: "Das Forum ist unmoderiert.<br />Bitte verhalten Sie sich andern gegenüber höflich."
       new: Neues Forum
-      comma_locked_topic: ', dieses Thema ist gesperrt.'
+      comma_locked_thread: ', dieses Thema ist gesperrt.'
       recent_activity: Neue Aktivitäten
       no_recent_activity: Keine neuen Aktivitäten
 
-    views_topics:
+    views_threads:
       edit: Thema editieren
-      topic: Thema
+      thread: Thema
       body: Beitrag
       save_reply: Beitrag speichern
       delete_sure: "Dieses Thema wirklich löschen?"
-      topic_locked: Thema gesperrt
-      locked_topic: Dieses Thema ist gesperrt.
+      thread_locked: Thema gesperrt
+      locked_thread: Dieses Thema ist gesperrt.
 
     views_posts:
       edit: Beitrag editieren
