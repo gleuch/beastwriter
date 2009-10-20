@@ -1,0 +1,9 @@
+#footer
+  %p.disclaim
+    %strong= configatron.site_tagline || I18n.t('txt.site_tagline', :default => configatron.site_name)
+  - footers=[I18n.t('txt.footer_message', :default => "Two's company. Three's a forum. More's a Beast.")]
+  = footers[rand(footers.size)]
+  %p.credit
+    = I18n.t('txt.powered_by', :default => 'Powered by')
+    %a{:href => "http://github.com/gleuch/beastwriter"} Beastwriter
+    &copy; #{Time.now.year} #{configatron.site_name}

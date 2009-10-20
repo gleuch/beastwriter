@@ -2,17 +2,24 @@ class ForumPostsController < ApplicationController
   before_filter :find_parents
   before_filter :find_post, :only => [:edit, :update, :destroy]
 
-  # /posts
-  # /users/1/posts
-  # /forums/1/posts
-  # /forums/1/threads/1/posts
+
   def index
     @posts = @parent.posts.search(params[:q], :page => current_page)
     @users = @user ? {@user.id => @user} : User.index_from(@posts)
     respond_to do |format|
-      format.html # index.html.erb
-      format.atom # index.atom.builder
+      format.html
+      format.atom
       format.xml  { render :xml  => @posts }
+    end
+  end
+
+  def search
+    @posts = ForumPost.search(params[:q], :page => current_page)
+    @users = @user ? {@user.id => @user} : User.index_from(@posts)
+    respond_to do |format|
+      format.html { render :action => 'index'}
+      format.atom { render :action => 'index'}
+      format.xml  { render :xml  => @posts, :action => 'index' }
     end
   end
 
@@ -28,7 +35,7 @@ class ForumPostsController < ApplicationController
 
   def edit
     respond_to do |format|
-      format.html # edit.html.erb
+      format.html
       format.js
     end
   end

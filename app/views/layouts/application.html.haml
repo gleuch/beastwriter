@@ -1,0 +1,18 @@
+!!! Strict
+%html{html_attrs()}
+  = render :partial => 'layouts/chunks/template_header'
+  %body{:id => @controller.controller_name, :class => "#{@controller.controller_name}_#{@controller.action_name}"}
+
+    = render :partial => 'layouts/chunks/page_header'
+
+    #container.c
+      #content
+        = content_tag 'p', h(flash[:notice]), :class => 'notice' if flash[:notice]
+        = content_tag 'p', h(flash[:error]), :class => 'notice error' if flash[:error]
+        = yield
+
+      #right
+        = yield :right
+
+    = render :partial => 'layouts/chunks/page_footer'
+    = render :partial => 'layouts/chunks/template_footer'

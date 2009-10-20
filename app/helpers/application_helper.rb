@@ -70,6 +70,7 @@ module ApplicationHelper
   end
 
   def search_path(atom = false)
+    atom = false #disable for now : TODO : FIX!
     options = params[:q].blank? ? {} : {:q => params[:q]}
     prefix = 
       if @thread
@@ -84,7 +85,11 @@ module ApplicationHelper
       else
         :search
       end
-    atom ? send("#{prefix}_forum_posts_path", options.update(:format => :atom)) : send("#{prefix}_forum_posts_path", options)
+    begin
+      atom ? send("#{prefix}_forum_posts_path", options.update(:format => :atom)) : send("#{prefix}_forum_posts_path", options)
+    rescue
+      "#"
+    end
   end
 
 end

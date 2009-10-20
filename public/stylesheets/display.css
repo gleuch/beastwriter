@@ -6,6 +6,8 @@ body
 	font-family:Arial, Helvetica, sans-serif;
 }
 
+.c:after {content: "."; clear: both; display: block; visibility: hidden; height: 0;}
+
 a { color: #24b; }
 
 #container

@@ -22,15 +22,15 @@ class ApplicationController < ActionController::Base
   helper_method :current_page
 
 
-
+  # Checks specific roles
   def admin?; (logged_in? && current_user.has_role?(:admin)); end
   def staff?; (logged_in? && current_user.has_role?(:staff)); end
   helper_method :admin?, :staff?
 
+  # Specials for environments
   def dev?; ENV['RAILS_ENV'] == 'development'; end
   def prod?; ENV['RAILS_ENV'] == 'production'; end
-  alias :is_dev? :dev?
-  helper_method :is_dev?, :dev?, :prod?
+  helper_method :dev?, :prod?
 
 
 private

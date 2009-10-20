@@ -1,0 +1,18 @@
+#header.c
+  %ul#nav
+    %li= link_to I18n.t('txt.forums', :default => 'Forums'), forums_path, :rel => 'home'
+    %li= link_to I18n.t('txt.users', :default => 'Users'), users_path
+    %li#search
+      - form_tag search_posts_path, :method => 'get' do
+        = text_field_tag :q, params[:q], :size => 15, :id => :search_box
+    %li= link_to_function I18n.t('txt.search', :default => 'Search'), "#", :href => root_path, :id => 'search-link'
+
+    - if logged_in?
+      %li.login=  link_to current_user.display_name, user_path(current_user)
+      %li.logout= link_to I18n.t('txt.settings', :default => 'Settings'), user_settings_path
+      %li.logout= link_to I18n.t('txt.logout', :default => 'Logout'), logout_path(:to => CGI.escape(request.request_uri))
+    - else
+      %li= link_to I18n.t('txt.signup', :default => 'Signup'), signup_path(:to => CGI.escape(request.request_uri))
+      %li= link_to I18n.t('txt.login', :default => 'Login'), login_path(:to => CGI.escape(request.request_uri))
+
+  %h1= link_to configatron.site_name || I18n.t('txt.site_title', :default => 'Beastwriter'), root_path

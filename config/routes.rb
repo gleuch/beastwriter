@@ -7,7 +7,10 @@ ActionController::Routing::Routes.draw do |map|
   map.resource :session
   
 # User routes
-  map.resources :users, :member => { :suspend => [:put], :unsuspend => [:put], :purge => [:delete] }
+  map.resources :users, :member => { :suspend => [:put], :unsuspend => [:put], :purge => [:delete] } do |user|
+    user.resource :posts, :controller => 'forum_posts', :collection => {:search => :get}
+  end
+
   map.with_options :controller => 'users' do |user|
     user.register '/register', :action => 'create'
     user.signup '/signup', :action => 'new'
@@ -16,8 +19,6 @@ ActionController::Routing::Routes.draw do |map|
     # user.user_reset_password '/users/reset_password/:password_reset_code', :action => 'reset_password'
     # user.user_forgot_login '/users/forgot_login', :action => 'forgot_login'
     # user.user_clueless '/users/clueless', :action => 'clueless'
-
-    # user.user_clear_dismissals '/settings/clear_user_dismissals', :action => 'clear_dismissals'
 
     # user.user_update_email '/settings/account/email', :action => 'update_email', :panel => 'account', :conditions => {:method => [:post, :put]} #These were throwing errors due to duplication of required/optional
     # user.user_update_password '/settings/account/password', :action => 'update_password', :panel => 'account', :conditions => {:method => [:post, :put]}
@@ -44,15 +45,13 @@ ActionController::Routing::Routes.draw do |map|
 
 
 # Forum routes
-  map.resources :sites
   map.resources :forums do |forum|
     forum.resources :threads, :controller => 'forum_threads' do |thread|
-      thread.resources :posts, :controller => 'forum_posts'
+      thread.resources :posts, :controller => 'forum_posts', :collection => {:search => :get}
     end
-    forum.resources :posts, :controller => 'forum_posts'
+    forum.resources :posts, :controller => 'forum_posts', :collection => {:search => :get}
   end
-
-  map.resources :posts, :controller => 'forum_posts', :collection => {:search => :get}
+  map.search_posts '/forum/search.:format', :controller => 'forum_posts', :action => 'search'
 
 
 # Additional Routes

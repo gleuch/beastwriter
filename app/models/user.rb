@@ -87,7 +87,6 @@ class User < ActiveRecord::Base
   end
  
   def reply(thread, body)
-    p "*"*10
     returning thread.posts.build(:body => body) do |post|
       post.forum = thread.forum
       post.user = self
